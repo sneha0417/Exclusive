@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	
+
+	<package name="bankReceipt" extends="struts-default">
+			<action name="saveBankReceipt" class="com.finance.transactions.bankreceipt.ClsBankReceiptAction" method="saveAction">
+				<interceptor-ref name="params"/>
+				<result name="success" >bankReceipt.jsp</result>
+				<result name="fail">bankReceipt.jsp</result>
+			</action>
+				<action name="printBankReceipt" class="com.finance.transactions.bankreceipt.ClsBankReceiptAction" method="printAction">
+				<interceptor-ref name="params"/>
+				<!-- <result name="print">../../../../com/finance/bankVoucherPrint.jsp</result> -->
+				<result name="print">${url}</result>
+			</action>
+			<action name="printBankReceiptCheque" class="com.finance.transactions.bankreceipt.ClsBankReceiptAction" method="printChequeAction">
+				<interceptor-ref name="params"/>
+				<!-- <result name="print">../../../../com/finance/chequePrintingFormat.jsp</result> -->
+				<result name="print">${printurl}</result>
+			</action>
+		</package>	
+</struts>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	
+
+	<package name="pettyCash" extends="struts-default">
+			<action name="savePettyCash" class="com.finance.transactions.pettycash.ClsPettyCashAction" method="saveAction">
+				<interceptor-ref name="params"/>
+				<result name="success" >pettyCash.jsp</result>
+				<result name="fail">pettyCash.jsp</result>
+			</action>
+			
+			<action name="printPettyCashPayment" class="com.finance.transactions.pettycash.ClsPettyCashAction" method="printAction">
+				<interceptor-ref name="params"/>
+				<!-- <result name="print">../../../../com/finance/pettyCashVoucherPrint.jsp</result> -->
+				<result name="print">${url}</result>
+			</action>
+
+			<action name="PettyCashPrint" class="com.finance.transactions.pettycash.ClsPettyCashAction" method="jasperprintAction">
+				<interceptor-ref name="params"/>
+				<!-- <result name="print">../../../../com/finance/pettyCashVoucherPrint.jsp</result> -->
+				<!-- <result name="print">${url}</result> -->
+			</action>
+			
+		</package>	
+</struts>

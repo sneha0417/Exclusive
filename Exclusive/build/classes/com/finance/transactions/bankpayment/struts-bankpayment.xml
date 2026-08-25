@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	
+
+	<package name="bankPayment" extends="struts-default">
+			<action name="saveBankPayment" class="com.finance.transactions.bankpayment.ClsBankPaymentAction" method="saveAction">
+				<interceptor-ref name="params"/>
+				<result name="success" >bankPayment.jsp</result>
+				<result name="fail">bankPayment.jsp</result>
+			</action>
+			
+			<action name="printBankPayment" class="com.finance.transactions.bankpayment.ClsBankPaymentAction" method="printAction">
+				<interceptor-ref name="params"/>
+				<!-- <result name="print">../../../../com/finance/bankVoucherPrint.jsp</result> -->
+				<result name="print">${url}</result>
+			</action>
+			
+			<action name="printBankPaymentCheque" class="com.finance.transactions.bankpayment.ClsBankPaymentAction" method="printChequeAction">
+				<interceptor-ref name="params"/>
+				<!-- <result name="print">../../../../com/finance/chequePrintingFormat.jsp</result> -->
+				<result name="print">${printurl}</result>
+			</action>
+
+		    <action name="BankPaymentPrint" class="com.finance.transactions.bankpayment.ClsBankPaymentAction" method="jasperprintAction">
+				<interceptor-ref name="params"/>
+				<!-- <result name="print">../../../../com/finance/journalVoucherPrint.jsp</result> -->
+				<!-- <result name="print">${url}</result> -->
+			</action>
+			
+			 <action name="paymentauthform" class="com.finance.transactions.bankpayment.ClsBankPaymentAction" method="paymentprintAction">
+				<interceptor-ref name="params"/>
+				<result name="print">${url}</result>
+				<!-- <result name="print">../../../../com/finance/journalVoucherPrint.jsp</result> -->
+				<!-- <result name="print">${url}</result> -->
+			</action>
+
+		</package>	
+</struts>

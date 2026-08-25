@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	<package name="frmptm" extends="struts-default">
+	
+			<action name="saveptmAction" class="com.controlcentre.settings.productsettings.productmaster.ClsProductMasterAction" method="savetypeAction">
+				<interceptor-ref name="params"/>
+				<result name="success" >typeMaster.jsp</result>
+				<result name="fail">typeMaster.jsp</result>
+			</action>
+			
+			<action name="savepbmAction" class="com.controlcentre.settings.productsettings.productmaster.ClsProductMasterAction" method="savebrandAction">
+				<interceptor-ref name="params"/>
+				<result name="success" >brand.jsp</result>
+				<result name="fail">brand.jsp</result>
+			</action>
+			
+			<action name="savepmmAction" class="com.controlcentre.settings.productsettings.productmaster.ClsProductMasterAction" method="savemodelAction">
+				<interceptor-ref name="params"/>
+				<result name="success" >model.jsp</result>
+				<result name="fail">model.jsp</result>
+			</action>
+			
+			<action name="savepumAction" class="com.controlcentre.settings.productsettings.productmaster.ClsProductMasterAction" method="saveunitAction">
+				<interceptor-ref name="params"/>
+				<result name="success" >unit.jsp</result>
+				<result name="fail">unit.jsp</result>
+			</action>
+			
+			<action name="savepcmAction" class="com.controlcentre.settings.productsettings.productmaster.ClsProductMasterAction" method="savecategoryAction">
+				<interceptor-ref name="params"/>
+				<result name="success" >Category.jsp</result>
+				<result name="fail">Category.jsp</result>
+			</action>
+			
+			
+			<action name="savepscmAction" class="com.controlcentre.settings.productsettings.productmaster.ClsProductMasterAction" method="savesubcategoryAction">
+				<interceptor-ref name="params"/>
+				<result name="success" >SubCategory.jsp</result>
+				<result name="fail">SubCategory.jsp</result>
+			</action>
+			
+			
+			<action name="savedeptAction" class="com.controlcentre.settings.productsettings.productmaster.ClsProductMasterAction" method="savedeptAction">
+				<interceptor-ref name="params"/>
+				<result name="success" >deptMaster.jsp</result>
+				<result name="fail">deptMaster.jsp</result>
+			</action>
+			
+		</package>	
+</struts>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	
+
+	<package name="Purchase1" extends="struts-default">
+			<action name="savesrvsale" class="com.project.execution.ServiceSale.ClsServiceSaleAction" method="saveAction">
+				<interceptor-ref name="params"/>
+				<result name="success" >serviceSale.jsp</result>
+				<result name="fail">serviceSale.jsp</result>
+			</action>
+			
+		<!-- 	<action name="printniphs" class="com.project.execution.ServiceSale.ClsServiceSaleAction" method="printAction">
+				<interceptor-ref name="params"/>
+				<result name="print" >${url}</result>
+ 
+			</action> -->
+			<action name="PRINTServiceSale" class="com.project.execution.ServiceSale.ClsServiceSaleAction" method="printAction">
+				<interceptor-ref name="params"/>
+				<result name="print" >${url}</result>
+
+			</action>
+			
+			
+			
+		</package>	
+</struts>

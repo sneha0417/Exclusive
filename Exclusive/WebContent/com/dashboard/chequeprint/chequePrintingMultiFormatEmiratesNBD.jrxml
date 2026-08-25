@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2017-01-31T10:34:20 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="testchq" pageWidth="277" pageHeight="552" orientation="Landscape" columnWidth="277" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="30724ae0-1a2d-41f3-8964-4bda46fb5981">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="accountsstatementtype"/>
+	<property name="com.jaspersoft.studio.unit." value="cm"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="cm"/>
+	<parameter name="multichqprintsql" class="java.lang.String"/>
+	<parameter name="multichequeprintcount" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[$P!{multichqprintsql}]]>
+	</queryString>
+	<field name="chqno" class="java.lang.Integer"/>
+	<field name="chqdate" class="java.lang.String"/>
+	<field name="payto" class="java.lang.String"/>
+	<field name="amountinwords" class="java.lang.String"/>
+	<field name="amount" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="492">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="61" y="58" width="30" height="100" uuid="1e2f40c6-99fb-424b-8075-ade7d8f588fb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="Left">
+					<font fontName="Tahoma" size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{chqdate}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="95" y="40" width="30" height="430" uuid="0ea4e016-e873-4dd5-8091-49eda8a41e07"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="Left">
+					<font fontName="Tahoma" size="13"/>
+					<paragraph leftIndent="3" rightIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{payto}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="130" y="140" width="60" height="330" uuid="7e42be03-877b-4fcf-9fb7-67c9c2988ad5"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="Left">
+					<font fontName="Tahoma" size="13"/>
+					<paragraph leftIndent="3" rightIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{amountinwords}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="153" y="37" width="30" height="100" uuid="52ae8d49-526e-4319-964c-2a6fa992c81a"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="Left">
+					<font fontName="Tahoma" size="13"/>
+					<paragraph leftIndent="8" rightIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
+			</textField>
+			<break>
+				<reportElement x="0" y="2" width="277" height="1" uuid="24c6f26c-7d13-459c-aee1-e844bc6d35a0">
+					<property name="com.jaspersoft.studio.unit.y" value="cm"/>
+					<printWhenExpression><![CDATA[$F{chqno}<$P{multichequeprintcount}]]></printWhenExpression>
+				</reportElement>
+			</break>
+		</band>
+	</detail>
+</jasperReport>

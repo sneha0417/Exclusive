@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	
+
+	<package name="monthlypayrollposting" extends="struts-default">
+			<action name="saveDashboardMonthlyPayrollPosting" class="com.dashboard.humanresource.monthlypayrollposting.ClsMonthlyPayrollPostingAction" method="saveAction">
+				<interceptor-ref name="params"/>
+				<result name="success">monthlyPayrollPosting.jsp</result>
+				<result name="fail">monthlyPayrollPosting.jsp</result>
+				
+			</action>
+
+		</package>	
+</struts>

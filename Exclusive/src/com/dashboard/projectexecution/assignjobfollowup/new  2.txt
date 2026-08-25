@@ -1,0 +1,17 @@
+select count(*) as count,coalesce(a.name,'') status,a.srno doc_no
+from  cm_cuscallm m
+left join cm_serteamm sm on(m.empgroupid=sm.doc_no)
+left join cm_serteamd md on (md.rdocno=sm.doc_no and m.empid=md.empid)
+left join cm_cuscallstatus a on m.statusid=a.srno
+left join (select max(seqno) seqno,typeid
+from cm_cuscallstatus group by typeid) ss on ss.typeid=a.typeid
+where ss.seqno!=a.seqno  and m.date<='2018-12-05'  group by m.statusid
+union all select count(*) as count,'ALL' as status,0 doc_no
+from  cm_cuscallm m  left join cm_serteamm sm on(m.empgroupid=sm.doc_no)
+left join cm_serteamd md on (md.rdocno=sm.doc_no and m.empid=md.empid)
+left join cm_cuscallstatus a on m.statusid=a.srno
+left join (select max(seqno) seqno,typeid from cm_cuscallstatus group by typeid) ss on ss.typeid=a.typeid
+where ss.seqno!=a.seqno  and m.date<='2018-12-05';
+
+
+

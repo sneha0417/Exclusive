@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	
+
+	<package name="MonthlyPayroll" extends="struts-default">
+			<action name="saveMonthlyPayroll" class="com.humanresource.transactions.monthlypayroll.ClsMonthlyPayrollAction" method="saveAction">
+				<interceptor-ref name="params"/>
+				<result name="success">monthlyPayroll.jsp</result>
+				<result name="fail">monthlyPayroll.jsp</result>
+			</action>
+			
+			<action name="printMonthlyPayroll" class="com.humanresource.transactions.monthlypayroll.ClsMonthlyPayrollAction" method="printAction">
+				<interceptor-ref name="params"/>
+				<result name="print">${url}</result>
+			</action>
+			
+			<action name="printPaySlipViewer" class="com.humanresource.transactions.monthlypayroll.ClsMonthlyPayrollAction" method="printPaySlipAction">
+				<interceptor-ref name="params"/>
+				<result name="print">printPaySlip.jsp</result>
+			</action>
+			<action name="printMonthlyPayroll2" class="com.humanresource.transactions.monthlypayroll.ClsMonthlyPayrollAction" method="printAction2">
+				<interceptor-ref name="params"/>
+				<result name="print">${url}</result>     
+			</action> 
+			
+		</package>	
+</struts>
+

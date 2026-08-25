@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	
+
+	<package name="Purchaseret" extends="struts-default">
+			<action name="saveActionNipurchaseret" class="com.finance.nipurchase.nipurchasereturn.ClsnipurchaseReturnAction" method="saveAction">
+				<interceptor-ref name="params"/>
+				<result name="success" >nipurchasereturn.jsp</result>
+				<result name="fail">nipurchasereturn.jsp</result>
+			</action>
+			
+			<action name="printniphsret" class="com.finance.nipurchase.nipurchasereturn.ClsnipurchaseReturnAction" method="printAction">
+				<interceptor-ref name="params"/>
+				<result name="print" >${url}</result>
+
+			</action>
+			<action name="PRINTniphsret" class="com.finance.nipurchase.nipurchasereturn.ClsnipurchaseReturnAction" method="jasperprintAction">
+				<interceptor-ref name="params"/>
+				<!-- <result name="print" >niprint.jsp</result> -->
+
+			</action>
+			
+			
+			
+			
+		</package>	
+</struts>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	
+
+	<package name="damage" extends="struts-default">
+			<action name="saveActionDamage" class="com.controlcentre.masters.maintenancemaster.damage.ClsDamageAction" method="saveAction">
+				<interceptor-ref name="params"/>
+				<result name="success" >damage.jsp</result>
+				<result name="fail">damage.jsp</result>
+			</action>
+					</package>	
+</struts>

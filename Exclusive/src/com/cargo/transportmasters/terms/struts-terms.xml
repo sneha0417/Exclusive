@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+
+	<package name="terms11" extends="struts-default">
+			<action name="saveTerms11" class="com.cargo.transportmasters.terms.ClsTermsAction" method="saveAction">
+				<interceptor-ref name="params"/>
+				<result name="success" >terms.jsp</result>
+				<result name="fail">terms.jsp</result>
+			</action>
+					</package>	
+</struts>

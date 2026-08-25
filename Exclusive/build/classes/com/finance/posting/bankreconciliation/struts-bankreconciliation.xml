@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	
+
+	<package name="BankReconciliation" extends="struts-default">
+			<action name="saveBankReconciliation" class="com.finance.posting.bankreconciliation.ClsBankReconciliationAction" method="saveAction">
+				<interceptor-ref name="params"/>
+				<result name="success" >bankReconciliation.jsp</result>
+				<result name="fail">bankReconciliation.jsp</result>
+			</action>
+			
+			<action name="printBankReconciliation" class="com.finance.posting.bankreconciliation.ClsBankReconciliationAction" method="printAction">
+				<interceptor-ref name="params"/>
+				<result name="print">${url}</result>
+			</action>
+			
+		</package>	
+</struts>

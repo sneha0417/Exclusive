@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	
+
+	<package name="issue" extends="struts-default">
+			<action name="saveActiongins" class="com.sales.InventoryTransfer.goodsissuenote.ClsGoodsissuenoteAction" method="saveAction">
+				<interceptor-ref name="params"/>
+				<result name="success">goodsissuenote.jsp</result>
+				<result name="fail">goodsissuenote.jsp</result>
+			</action>
+			
+			
+ 	 	<action name="printGin" class="com.sales.InventoryTransfer.goodsissuenote.ClsGoodsissuenoteAction" method="printAction">
+			    <interceptor-ref name="params"/>
+			    <result name="print">gisprint.jsp</result>
+			</action>
+	 <action name="PRINTgin" class="com.sales.InventoryTransfer.goodsissuenote.ClsGoodsissuenoteAction" method="printAction">
+			    <interceptor-ref name="params"/>
+			    <result name="print" >${url}</result> 
+			</action>
+			
+			
+		</package>	
+		
+		
+		
+		
+</struts>

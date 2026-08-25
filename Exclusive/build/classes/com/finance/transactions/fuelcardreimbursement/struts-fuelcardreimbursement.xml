@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	
+
+	<package name="fuelCardReimbursement" extends="struts-default">
+			<action name="saveFuelCardReimbursement" class="com.finance.transactions.fuelcardreimbursement.ClsFuelCardReimbursementAction" method="saveAction">
+				<interceptor-ref name="params"/>
+				<result name="success">fuelCardReimbursement.jsp</result>
+				<result name="fail">fuelCardReimbursement.jsp</result>
+			</action>
+			
+			<action name="printFuelCardReimbursement" class="com.finance.transactions.fuelcardreimbursement.ClsFuelCardReimbursementAction" method="printAction">
+				<interceptor-ref name="params"/>
+				<result name="print">${url}</result>
+			</action>
+			
+		</package>	
+</struts>

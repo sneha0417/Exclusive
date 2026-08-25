@@ -1,0 +1,32 @@
+if(val>0)
+			 {
+				 temp="1";
+				 String userName="",Password="",host="",port="";
+				    Statement stmt1 = conn.createStatement();
+				    String strSql1 = "select email,mailpass,smtpserver,smtphostport  FROM my_user where doc_no='"+session.getAttribute("USERID").toString()+"'";
+//				      System.out.println("==strSql1===="+strSql1);
+				     ResultSet rs1 = stmt1.executeQuery(strSql1);
+				     while(rs1.next ()) {
+				       userName=rs1.getString("email");
+				       Password=ClsEncrypt.getInstance().decrypt(rs1.getString("mailpass"));
+				     host=rs1.getString("smtpserver");
+				     port=rs1.getString("smtphostport");
+				     }
+				     String recipient="",subject="";
+					 String message="Installation Email
+										Dear _____________ , we are please to inform you that our team of instaLlation will be at site on date _______. 
+										Kindly confirm your avaiablity
+										Thank and regards
+										QAF Team";
+				     Statement stmt2 = conn.createStatement();
+				     String strSql2 = "select msg,subject,toemail from gl_emailmsg where dtype='bqot'";
+				      ResultSet rs2 = stmt2.executeQuery(strSql2);
+				      while(rs2.next ()) {
+				        message=rs2.getString("msg");
+				        subject=rs2.getString("subject");
+				        recipient=rs2.getString("toemail");
+				      } 
+				    EmailUtility eut=new EmailUtility();
+				   // System.out.println("==strSql1===="+host+"======"+port+"======"+userName+"======"+Password+"======"+recipient+"======"+subject+"======"+message);
+				    eut.sendEmail(host, port, userName, Password, recipient,"",subject, message, null,"");
+			 }

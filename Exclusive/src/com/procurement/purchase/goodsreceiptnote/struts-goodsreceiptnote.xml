@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	
+
+	<package name="grn" extends="struts-default">
+			<action name="saveActionGdsrnote" class="com.procurement.purchase.goodsreceiptnote.ClsgoodsreceiptnoteAction" method="saveAction">
+				<interceptor-ref name="params"/>
+				<result name="success" >goodsrecieptmaster.jsp</result>
+				<result name="fail">goodsrecieptmaster.jsp</result>
+			</action>
+			
+		 	
+			<action name="printGrn" class="com.procurement.purchase.goodsreceiptnote.ClsgoodsreceiptnoteAction" method="printAction">
+			    <interceptor-ref name="params"/>
+			    <result name="print">grnprint.jsp</result>
+			</action> 
+			
+			
+			
+		</package>	
+		
+		
+		
+</struts>
+

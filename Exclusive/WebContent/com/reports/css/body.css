@@ -1,0 +1,70 @@
+body {
+	font: 10px Tahoma;
+	color: #404040;
+	background: #E0ECF8;
+	overflow:hidden;
+}
+fieldset 
+{
+ border:1px solid #BDBDBD; 
+}
+
+legend {
+  padding: 0.2em 0.5em;
+  color: #404040;
+  font-size: 8pt;
+  font-weight:bold;
+  text-align: left;
+  font: 13px  Tahoma;
+  
+  }
+  input[type="text"] {
+  	width:'40%';
+    height:15px;
+    font-size:10px;
+}
+  input[type="date"] {
+    width:'40%';
+    height:8px;
+    font-size:10px;
+}
+input:focus{
+background-color: #FFD6FF;
+}
+select:focus{
+ background-color: #FFD6FF;
+ 
+}
+textarea:focus{
+ background-color: #FFD6FF;
+}
+
+form label.error {
+	color:red;
+	font-weight:bold;
+}
+
+#search {
+    background-color: #E0ECF8;
+    font-size: 9px;
+}
+
+
+select{
+	width:'60%';
+	height:20px;
+    font-size:9px;
+}
+option{
+	height:12px;
+    font-size:9px;
+}
+input[type="email"] {
+	width:'70%';
+    height:15px;
+    font-size:10px;
+}
+
+label.mandatory{
+ color: #FF0000;
+}

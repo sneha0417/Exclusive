@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	
+
+	<package name="securitycheque" extends="struts-default">
+			<action name="saveSecurityCheque" class="com.finance.transactions.securitycheque.ClsSecurityChequeAction" method="saveAction">
+				<interceptor-ref name="params"/>
+				<result name="success" >securityCheque.jsp</result>
+				<result name="fail">securityCheque.jsp</result>
+			</action>
+			
+			<action name="securityChequeVoucherPrint" class="com.finance.transactions.securitycheque.ClsSecurityChequeAction" method="printAction">
+				<interceptor-ref name="params"/>
+				<!-- <result name="print">../../../../com/finance/securityChequeVoucher.jsp</result> -->
+				<result name="print">${url}</result>
+			</action>
+			
+			<action name="printSecurityCheque" class="com.finance.transactions.securitycheque.ClsSecurityChequeAction" method="printChequeAction">
+				<interceptor-ref name="params"/>
+				<!-- <result name="print">../../../../com/finance/chequePrintingFormat.jsp</result> -->
+				<result name="print">${printurl}</result>
+			</action>
+			
+		</package>	
+</struts>

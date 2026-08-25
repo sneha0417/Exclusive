@@ -1,0 +1,49 @@
+.detail {
+	color: black;
+	background-color: #ECF8E0;
+	width: 100%;
+	height: 28px;
+	font-family: Myriad Pro;
+	font-weight: bold;
+}
+
+.details {
+	color: black;
+	background-color: #ECF8E0;
+	width: 100%;
+	font-family: comic sans ms;
+}
+
+.branch {
+	color: black;
+	background-color: #ECF8E0;
+	width: 100%;
+	font-family: Tahoma;
+	font-size: 10px;
+}
+
+.icon {
+	width: 2.5em;
+	height: 2em;
+	border: none;
+	background-color: #ECF8E0;
+}
+
+.styled-select {
+	height: 20px;
+	overflow: hidden;
+	width: 90%;
+	background-color: #D1E0FF;
+	color: #000;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.styled-select select {
+	background: transparent;
+	border: none;
+	font-size: 10px;
+	height: 20px;
+	width: 100%;
+}

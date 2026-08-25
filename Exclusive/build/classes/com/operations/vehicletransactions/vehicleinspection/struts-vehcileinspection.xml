@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	
+
+	<package name="vehicleinspection" extends="struts-default">
+			<action name="saveVehicleInspection" class="com.operations.vehicletransactions.vehicleinspection.ClsVehicleInspectionAction" method="saveAction">
+				<interceptor-ref name="params"/>
+				<result name="success" >vehicleInspection.jsp</result>
+				<result name="fail">vehicleInspection.jsp</result>
+			</action>
+			<action name="inspectionPrint" class="com.operations.vehicletransactions.vehicleinspection.ClsVehicleInspectionAction" method="printAction">
+				<interceptor-ref name="params"/>
+				<result name="print">../../../../com/operations/vehicletransactions/vehicleinspection/vehInspPrint.jsp</result>
+			</action>
+		</package>
+		<package name="insp-FileUpload" extends="json-default">	
+			<action name="fileUploadInsp" class="com.operations.vehicletransactions.vehicleinspection.ClsInspAttach">
+				<param name="contentType">text/html</param>
+            <result type="json" name="success">  
+                <param name="contentType">text/html</param>  
+            </result>  
+            <result type="json" name="error">  
+                <param name="contentType">text/html</param>  
+            </result> 
+			</action>
+			<action name="inspectionDetails" class="com.operations.vehicletransactions.vehicleinspection.ClsVehicleInspectionAction" method="saveAction">
+			    <interceptor-ref name="params"/>
+			    <result name="success" >../../../../com/operations/vehicletransactions/vehicleinspection/vehicleInspection.jsp</result>
+			    <result name="fail">../../../../com/operations/vehicletransactions/vehicleinspection/vehicleInspection.jsp</result>
+   			</action>
+   			
+		</package>	
+</struts>

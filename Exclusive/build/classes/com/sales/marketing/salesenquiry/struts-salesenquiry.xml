@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	
+
+	<package name="salesEnquiry" extends="struts-default">
+			<action name="saveSalesEnquiry" class="com.sales.marketing.salesenquiry.ClsSalesEnquiryAction" method="saveEnquiryAction">
+				<interceptor-ref name="params"/>
+				<result name="success" >salesEnquiry.jsp</result>
+				<result name="fail">salesEnquiry.jsp</result>
+			</action>
+			
+			
+			
+			 	<action name="saveSalesEnquiryAction" class="com.sales.marketing.salesenquiry.ClsSalesEnquiryAction" method="printAction">
+			    <interceptor-ref name="params"/>
+			    <result name="print">enqprint.jsp</result>
+			</action>
+			
+		</package>	
+		
+		
+		
+</struts>

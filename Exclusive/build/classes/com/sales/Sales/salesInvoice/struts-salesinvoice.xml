@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	
+
+	<package name="SalesInvoice" extends="struts-default">
+			<action name="saveSalesInvoice" class="com.sales.Sales.salesInvoice.ClsSalesInvoiceAction" method="saveInvoiceAction">
+				<interceptor-ref name="params"/>
+				<result name="success" >cashinvoice.jsp</result>
+				<result name="fail">cashinvoice.jsp</result>
+			</action>
+			<action name="printinvcash" class="com.sales.Sales.salesInvoice.ClsSalesInvoiceAction" method="printAction">
+				<interceptor-ref name="params"/>
+				<result name="print" >${url}</result>
+				</action>	
+		</package>	
+		
+		<package name="SalesInvoicecr" extends="struts-default">
+			<action name="saveSalesInvoicecr" class="com.sales.Sales.salesInvoice.ClsSalesInvoiceAction" method="saveInvoiceAction">
+				<interceptor-ref name="params"/>
+				<result name="success" >creditinvoice.jsp</result>
+				<result name="fail">creditinvoice.jsp</result>
+			</action>
+			
+				<action name="printinvcredit" class="com.sales.Sales.salesInvoice.ClsSalesInvoiceAction" method="printAction">
+				<interceptor-ref name="params"/>
+				<result name="print" >invoiceprint.jsp</result>
+				</action>	
+		</package>		
+		
+</struts>

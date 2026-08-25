@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+
+	<package name="tourtype" extends="struts-default">
+			<action name="saveActionTourType" class="com.controlcentre.masters.relatedmaster.tourtype.ClsTourAction" method="saveAction">
+				<interceptor-ref name="params"/>
+				<result name="success" >tourtype.jsp</result>
+				<result name="fail">tourtype.jsp</result>
+			</action>
+					</package>	
+</struts>

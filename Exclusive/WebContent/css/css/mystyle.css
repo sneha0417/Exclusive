@@ -1,0 +1,44 @@
+<style type="text/css">
+body{
+	padding: 0px;
+    margin: 0px!important;
+	/* background: url("bg.jpg"); */
+}
+p{
+	font-family: "Myriad Pro";
+	font-weight: bold;
+	color: #555;
+}
+.content {
+   margin:0 auto;
+   height:560px;
+}
+.innerContent{
+	margin-right:90px;
+}
+.buttonStyle{
+    font-family: "Myriad Pro";
+	font-weight: bold;
+	font-size: 18px;
+	color: white;
+	background: #149BCC;
+	border:none;
+	padding:15px 10px;
+	height:52px;
+	width:300px;
+	cursor:pointer;
+}
+.loginTable{
+    background:rgba(255,255,255,0.6);
+	margin-top:200px;
+	padding:20px;
+}
+
+input{
+	border:1px solid #d5d5d5;
+	height:25px;
+	width:200px;
+	padding:5px 10px;
+	font-size:14px;
+}
+</style>

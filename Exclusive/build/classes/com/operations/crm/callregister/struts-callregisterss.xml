@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	
+
+	<package name="callRegisterss" extends="struts-default">
+			<action name="saveCallRegisterss" class="com.operations.crm.callregister.ClsCallRegisterAction" method="saveAction">
+				<interceptor-ref name="params"/>
+				<result name="success" >callRegister.jsp</result>
+				<result name="fail">callRegister.jsp</result>
+			</action>
+			
+			<action name="printCallRegister" class="com.operations.crm.callregister.ClsCallRegisterAction" method="printAction">
+				<interceptor-ref name="params"/>
+				<result name="print">${url}</result>
+			</action>
+			
+		</package>	
+</struts>

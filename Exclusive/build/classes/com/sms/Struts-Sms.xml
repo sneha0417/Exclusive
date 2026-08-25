@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+ 
+<struts>
+
+    <package name="Struts2Sms" extends="json-default">
+ 
+        <action name="doSendSms" class="com.sms.SmsAction"
+            method="doSendSms">                               
+           <!--  <result name="success" type="redirect">/Result3.jsp</result>
+            <result name="input">/Email.jsp</result> -->
+        </action>
+    </package>
+</struts>

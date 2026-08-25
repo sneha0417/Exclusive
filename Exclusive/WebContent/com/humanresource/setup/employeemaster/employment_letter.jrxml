@@ -1,0 +1,598 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2019-11-05T13:15:26 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="employment_letter" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1299a0df-b97a-4751-ac86-eb27efe667bb">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Aits03022019"/>
+	<parameter name="docno" class="java.lang.String"/>
+	<parameter name="imgheader" class="java.lang.String"/>
+	<parameter name="imgfooter" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select m.codeNo empid,coalesce(chk1.docIdnum,'')licenseno,coalesce(chk2.docidnum,'')passportno,round(sum(el.addition),2)salary,m.doc_no,dsg.desc1 designation,date_format(m.date,'%d-%m-%Y')date,m.name,date_format(m.dtjoin,'%d-%m-%Y')dtjoin, m.pmaddr, m.pmmob, m.city, m.state,n.nation,
+m.pincode from hr_empm m left join my_head h on m.acno=h.doc_no left join my_natm n on m.nationId=n.doc_no left join hr_setdesig dsg on m.desc_id=dsg.doc_no left join hr_setdept dep on m.dept_id=dep.doc_no
+left join hr_setpaycat cat on m.pay_catid=cat.doc_no left join my_brch b on m.brhid=b.doc_no left join my_locm l on l.brhid=b.doc_no left join hr_setagent ag on m.agent_id=ag.doc_no
+left join my_comp c on b.cmpid=c.doc_no left join (select rdocno,docidnum from hr_empdoc where docid=5 group by rdocno) chk1 on chk1.rdocno=m.doc_no
+left join (select rdocno,docidnum from hr_empdoc where docid=1 group by rdocno) chk2 on chk2.rdocno=m.doc_no
+left join hr_empsal el on el.rdocno=m.doc_no where m.doc_no=$P{docno};]]>
+	</queryString>
+	<field name="licenseno" class="java.lang.String"/>
+	<field name="passportno" class="java.lang.String"/>
+	<field name="salary" class="java.lang.String"/>
+	<field name="doc_no" class="java.lang.String"/>
+	<field name="date" class="java.lang.String"/>
+	<field name="name" class="java.lang.String"/>
+	<field name="dtjoin" class="java.lang.String"/>
+	<field name="pmaddr" class="java.lang.String"/>
+	<field name="pmmob" class="java.lang.String"/>
+	<field name="city" class="java.lang.String"/>
+	<field name="state" class="java.lang.String"/>
+	<field name="nation" class="java.lang.String"/>
+	<field name="designation" class="java.lang.String"/>
+	<field name="empid" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="80" splitType="Stretch">
+			<image scaleImage="FillFrame">
+				<reportElement x="2" y="0" width="550" height="80" uuid="afead43e-8cd5-4166-9779-1e5ba04a18af"/>
+				<imageExpression><![CDATA[$P{imgheader}]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="652" splitType="Stretch">
+			<frame>
+				<reportElement x="2" y="8" width="550" height="87" uuid="b902810c-aac5-4020-b115-11badd3c266c"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<line>
+					<reportElement x="333" y="0" width="1" height="87" uuid="5dd30ab6-c5f3-4925-8d61-bfc139ea766e"/>
+				</line>
+				<line>
+					<reportElement x="333" y="23" width="217" height="1" uuid="d736ef66-bfbe-496b-b720-30598948085f"/>
+				</line>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="338" y="4" width="81" height="16" uuid="358e0de1-a2a0-477e-b9c2-6f22c1da2a18"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Effective Date  :"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="419" y="4" width="123" height="16" uuid="a8332991-8ba2-4b82-a192-b9cdffa588b8"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dtjoin}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="338" y="26" width="100" height="16" uuid="2bab7249-3d21-4235-8e9f-6765e52bb95e"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Document Code :"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="338" y="44" width="100" height="16" uuid="ee68d0d1-9a55-4155-bb2b-e5ff262302d7"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+					<textFieldExpression><![CDATA["AITS-HRM-010"]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="333" y="63" width="217" height="1" uuid="9f01494f-4174-4361-89b7-b597ec7e0c56"/>
+				</line>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="336" y="66" width="75" height="19" uuid="cdcaec37-b675-4373-9069-e3a1c28f33e1"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Rev.#.01"]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="415" y="63" width="1" height="24" uuid="3d11e524-1c39-4aa1-bd12-25ad443a284e"/>
+				</line>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="419" y="66" width="125" height="19" uuid="454abb46-426b-42d8-96f9-22366132ceaf"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Ref # :AITS/HR/EL/"+$F{empid}+"/2019"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="48" y="28" width="172" height="19" uuid="c9a0ad3c-21d4-4187-b5ed-1de6a19c38f9"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["EMPLOYMENT LETTER"]]></textFieldExpression>
+				</textField>
+			</frame>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="10" y="103" width="40" height="20" uuid="54e439f8-fc73-4c24-888f-9720f297b068"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Date:"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="50" y="103" width="80" height="20" uuid="c7fafc34-27b9-451c-9390-64af55b54a5b"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="11" y="129" width="29" height="20" uuid="c4c5eb6e-c356-4eb9-acf2-6ef8c35e53ab"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA["TO "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="11" y="156" width="279" height="30" uuid="15237ea4-dd19-4028-abab-f0884b5ca563"/>
+				<textElement verticalAlignment="Top">
+					<font size="8"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{name}+"\n"+$F{pmaddr}+"\n"+"Phone:"+$F{pmmob}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="11" y="210" width="249" height="20" uuid="ca16fd98-0934-48d2-b188-27ae6d10d17d"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Dear Mr. "+$F{name}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="10" y="240" width="542" height="25" uuid="45646d66-fb63-4fbf-b176-96bbf4b22d60"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Further to our interview and to the discussions we had with you regarding your employment with us we are pleased to offer you the position of " +$F{designation}+ " with us. We trust that your knowledge, skills and experiences shall contribute to our most valuable assets."]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="10" y="264" width="542" height="26" uuid="05a17f43-8f10-40e9-92b2-ba78516c73bd"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA["As discussed during your interviews, you will report directly to the MD and others that may deem to be necessary to achieve the organizational objectives."]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="10" y="288" width="542" height="28" uuid="642188ad-a6fc-4b9f-a524-78adf827d206"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA["However you will also be required to focus on other areas of our operation, which may be ne-cessary for the control of our operations. A detailed job description of your position shall be available at the time of joining. "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="10" y="318" width="140" height="15" uuid="e1fbf6c2-6b07-42d2-af72-c8af9944f1f1"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA["1. DATE OF JOINING"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="10" y="334" width="541" height="40" uuid="e2f16fd6-41cf-497d-8718-9926fa049684"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Your date of work commencement shall be subject to the approval of your employment visa by the UAE labor ministry and passing the pre-employment medical examination as stipulated by the law. As part of the Company Policy, you are required to sign the Employee Confidential Agreement letter, which must be returned to us upon signing. "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="9" y="392" width="541" height="29" uuid="525bab5c-4351-460e-a12d-47111ea05e87"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Your monthly salary shall be  "+$F{salary}+"  AED all inclusive for the initial one year, there after a revision of your total package is available based on your performance. "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="11" y="375" width="140" height="15" uuid="623e7e7a-cd3c-4062-80a9-02f38acdb78d"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA["2. COMPENSATION"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="10" y="423" width="140" height="15" uuid="452ad75c-f8fc-49ab-a50d-d4339af30e6d"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA["3. OFFICE HOURS"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="10" y="440" width="541" height="30" uuid="69578f76-f499-4821-97c1-8d3d2d0f61af"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Office hours are weekdays between 8.00am and 5.30pm (Saturday to Thursday) with an unpaid lunch hour to be taken at a mutually agreed time. It should be understood that you might need to work outside these hours on occasions in order to need the objective of the organization."]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="10" y="472" width="140" height="15" uuid="4848bd61-f94d-4472-8534-8a16bef4655b"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA["4. PROBATION PERIOD "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="10" y="489" width="541" height="12" uuid="2bc071ac-a19b-431d-aba6-aadea9d7addf"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA["(a) A performance review will be undertaken during the initial six-month period prior to con-firmation of your ongoing full time employment."]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="10" y="503" width="541" height="21" uuid="e860047c-7ced-465b-96e2-82b3f2fa452c"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA["(b) This offer will be based on your work performance against the agreed criteria as per your job description. During this probationary period, “Our Team” will assist you, as necessary, to prove yourself suitable for the position."]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="10" y="526" width="541" height="15" uuid="3cd3e4a2-b909-465b-8263-01c0a97cc143"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA["(c) If you are unsuitable you will not be offered a full time position and your services will be terminated with a written notice."]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="11" y="543" width="140" height="15" uuid="4b4bdad1-eb57-415e-876c-77c1a3f6b89b"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA["5. TERMINATION"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="11" y="560" width="541" height="16" uuid="cb92ad12-55e1-4e9d-b449-2f7b6948f133"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA["During the probationary period, termination of employment can be effected by either party giv-ing one month notice in writing. "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="11" y="579" width="541" height="26" uuid="6abf88c6-cbf3-48df-9376-fbf54e1bb2b6"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Upon confirmation of your employment after the successful completion of probationary period, either party may terminate the contract of service by giving a 1-month notice or payment in lieu equivalent to 1 month’s gross salary."]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="11" y="607" width="541" height="25" uuid="2f0e5aae-9128-47dd-82c4-625027805562"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA["During the course of your employment, should your performance fail to meet the expectation of the company, you shall be provided with a written warning letter which will be monitored for a period in order to enhance the performance."]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="648">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="11" y="26" width="541" height="30" uuid="bd808d11-1ded-4be5-b208-e579f9706859"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Should you fail to improve, your services shall be terminated with immediate effect by charging all costs of your employment with us towards your account."]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="11" y="114" width="189" height="15" uuid="636e7116-e7b3-41fc-ada7-2b52c61d46c8"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA["6. LEAVES & PUBLIC HOLIDAYS "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="11" y="60" width="99" height="15" uuid="96527405-7250-44e5-9095-3f00287a795d"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA["ANNUAL LEAVE: "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="11" y="77" width="541" height="34" uuid="e4a74984-0dc0-4ec8-be1c-c177c2cdc989"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA["You are entitled to 30days paid annual leave, with a one way ticket to your home country at the completion of 12 months employment. Annual Leave will be taken at a mutually convenient time each year. It is company policy to ensure that annual leave does not accumulate beyond one year’s entitlement."]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="11" y="131" width="99" height="15" uuid="e00097c7-f1a2-4bdd-b4c3-43c53308d436"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA["SPECIAL LEAVE:"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="11" y="148" width="541" height="28" uuid="091774ae-1b57-417a-bd10-6c6ec594c597"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA["In special circumstances you may be granted leave on application to your manager. This leave is at the discretion of your manager and may be paid or unpaid depending on the circumstances.All leave types should be applied for on the appropriate leave applications and approved by your manager."]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="11" y="178" width="119" height="15" uuid="439c5854-a5d4-4a31-a564-15d5552d8e90"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA["PUBLIC HOLIDAYS:"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="10" y="195" width="541" height="18" uuid="774fd502-0499-426e-85e1-155c6c11baa9"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA["(a) You will be able to take all gazette public holidays without loss of pay."]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="10" y="215" width="541" height="18" uuid="fa3792c7-7243-4d26-be5d-8ad930b8c3cf"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA["(b) If required to work on a public holiday, you will be granted the equivalent time off or payment as agreed."]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="11" y="235" width="119" height="15" uuid="6275244c-8fd3-4a40-8449-554a457577b8"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA["7. MEDICAL BENEFITS "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="11" y="252" width="541" height="18" uuid="e2217466-2ab4-495c-a0b0-afed2f1e068d"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA["You are entitled for medical benefits which are in accordance to the company’s policy."]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="11" y="272" width="119" height="15" uuid="e3228c8a-1da4-407e-8b74-2d8703f5e7e4"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA["8. CONFIDENTIALITY  "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="11" y="289" width="541" height="37" uuid="4fa0f521-a87e-472a-ad72-881b8428298f"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA["In the course of your employment with company, you will have access to and will acquire knowledge of confidential and proprietary company information. This information includes, without limitation: marketing and strategies; customer names, needs, and other information; client potential; and other types of information which would place company at a competitive disadvantage if known by or revealed to competitors or customers."]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="11" y="328" width="541" height="33" uuid="430e4cf2-830e-41ec-b82f-d6058553c8ed"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA["You shall not, without the consent of the company, reveal, disclose or share information, which is deemed confidential, and trade secrets by the company to any third party. All assignments and tasks given to you by the company shall be deemed as strictly confidential. You shall not make use of the company’s information, tools, materials and property to accomplish other than work-related tasks."]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="11" y="363" width="541" height="26" uuid="6f39d375-2249-40e5-9c49-e92c8cff721b"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Please feel free to revert back to us on any questions about the offer. If you agree with all the terms and conditions, please sign   and return this letter to us."]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="11" y="392" width="79" height="15" uuid="9a99af48-5b26-4a7f-8246-2669a099b85c"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Sincerely,  "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="11" y="411" width="309" height="18" uuid="bfafbbc4-0305-4e82-a195-5f89590aca9f"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA["For & On Behalf Of AHMED ISHAQ TECHNICAL SERVICES LLC "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="11" y="429" width="109" height="42" uuid="2d1e9647-edb0-4c44-ba01-2efcc5c0ced9"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA["……………………….."]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="9" y="471" width="119" height="15" uuid="b4f6d196-2b3a-4ed5-b8a6-2ff199fbd8d4"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Authorized Signature "]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="523">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="11" y="64" width="119" height="15" uuid="03815037-feed-4984-acfc-6aee68b458d1"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA["CONFIDENTIALITY:  "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="10" y="84" width="541" height="36" uuid="963b9950-f446-4b70-adc9-02f7b074dfd3"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA["I Mr. "+$F{name}+" acknowledge that during the course of employment with “AHMED ISHAQ TECHNICAL SERVICES LLC” that I may become acquainted with or have access to the confidential information, and agree to maintain the confidence of the confidential information and to prevent its unauthorized disclosure to or use by any other person, firm or company. "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="11" y="122" width="540" height="18" uuid="aaeeb8fa-91f2-4c03-b928-a2e3708915e9"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA["I also agree to keep my employment arrangement, including salary details, confidential at all times."]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="11" y="142" width="540" height="18" uuid="88be159f-8a9b-4815-bb9b-b2514ca1b4b3"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Upon the termination of my employment for any cause or by any means whatsoever I shall not thereafter:"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="10" y="163" width="541" height="31" uuid="f32ea885-19dd-4cee-bad7-5dea40c2e04f"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA["1. Make public or divulge to any person the confidential information, any trade secrets including but not limited to any manuals, advertising, promotional data, and advisory memoranda or any information concerning the business, finances, dealings, transactions or affairs of 'AHMED ISHAQ TECHNICAL SERVICES LLC'."]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="10" y="196" width="541" height="16" uuid="5299537a-162d-43d5-9171-666f2b0345d4"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA["2. Advertise, publicize or permit the advertising or publicizing of the former connection of 'AHMED ISHAQ TECHNICAL SERVICES LLC'."]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="10" y="215" width="541" height="26" uuid="7efdfbc7-3cdf-4453-8113-d589e61e69a4"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA["3. Approach directly or indirectly any customers / clients of 'AHMED ISHAQ TECHNICAL SERVICES LLC' to influence it to cease carrying on business with 'AHMED ISHAQ TECHNICAL SERVICES LLC' or otherwise to entice it away from 'AHMED ISHAQ TECHNICAL SERVICES LLC'. "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="10" y="246" width="541" height="21" uuid="a3b69c93-da3a-4083-98d0-cd331289b094"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA["4. Do any act or thing which may impair or reduce AHMED ISHAQ TECHNICAL SERVICES LLC’s reputation standing in the eyes of the public or any of its customers; "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="10" y="269" width="541" height="18" uuid="8283fe49-8cd1-4f43-a5bd-2437648ccfe0"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA["5. Disclose the contents of any correspondence received by 'AHMED ISHAQ TECHNICAL SERVICES LLC' and "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="10" y="302" width="541" height="38" uuid="f9fdf58d-f1eb-461e-b474-d82a3edc5d1e"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA["6. In the course of and upon and following termination of employment, I, Mr. "+$F{name}+ ", will not copy or retain any material belonging to or in the possession of 'AHMED ISHAQ TECHNICAL SERVICES LLC' or make use of any confidential information, without the written consent of 'AHMED ISHAQ TECHNICAL SERVICES LLC' including: "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="31" y="343" width="249" height="18" uuid="d4b903aa-9979-439a-bfe5-e9af59ac963d"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA["a. Client names and addresses;  "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="31" y="363" width="499" height="18" uuid="86f64873-29f3-41b4-b8b3-ab459189de74"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA["b. Processes, methods, techniques or its contractors or agents, including the employees."]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="10" y="416" width="541" height="28" uuid="5398d2c8-3ba5-4798-9a67-e98a7beb13c7"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA["By accepting this offer, I also acknowledge and agree that I shall abide by the following terms and conditions, and that such terms and conditions are reasonable "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="370" y="480" width="119" height="15" uuid="530e8603-348e-4700-8588-3f6e6b38e885"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="360" y="497" width="48" height="15" uuid="ce0a19eb-85b7-4a38-b633-0c9dde60f883"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Date:  "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="d/MM/yyyy" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="408" y="497" width="100" height="15" uuid="865c9f16-f248-41fd-b321-e01e414d0a3e"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="10" y="384" width="541" height="25" uuid="e8afb0bd-a60e-44a6-87bd-e5b07ef9b7c1"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA["7. Will not work with competitors two years from the date of leaving AITS"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="70" splitType="Stretch">
+			<image scaleImage="FillFrame">
+				<reportElement x="2" y="0" width="550" height="68" uuid="59ae3cf3-0862-4a91-a490-3526a300629f"/>
+				<imageExpression><![CDATA[$P{imgfooter}]]></imageExpression>
+			</image>
+		</band>
+	</pageFooter>
+</jasperReport>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	 <constant name="struts.custom.i18n.resources" value="saveCostmaster" />
+
+	<package name="costcentermaster" extends="struts-default">
+			<action name="saveCostmaster" class="com.controlcentre.settings.costcentermaster.ClsCostCenterAction" method="saveAction">
+				<interceptor-ref name="params"/>
+				<result name="success" >costCentreMaster.jsp</result>
+				<result name="fail">costCentreMaster.jsp</result>
+			</action>
+			
+			
+		</package>	
+</struts>
+
+
+

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	
+
+	<package name="termloan" extends="struts-default">
+			<action name="saveTermloan" class="com.finance.transactions.termloanmaster.ClstermloanmasterAction" method="saveAction">
+				<interceptor-ref name="params"/>
+				<result name="success" >termloanmaster.jsp</result>
+				<result name="fail">termloanmaster.jsp</result>
+			</action>
+		 	<action name="printTermloan" class="com.finance.transactions.termloanmaster.ClstermloanmasterAction" method="printAction">
+			    <interceptor-ref name="params"/>
+			    <result name="print">termloanprint.jsp</result>
+			</action>  
+			
+		</package>	
+</struts>

@@ -1,0 +1,23 @@
+select concat('Dear',' ', (select refname from my_acbook where cldocno=CLDOCVal and dtype='CRM'),','
+,' we are please to inform you that our team of
+',
+
+'installation will be at site on date',' ',
+(select installdate from cm_srvcontrm where tr_no=contrtrno),' '
+'Kindly confirm your avaiablity
+ ') msg
+ 
+ select user_name from my_user where doc_no=userid
+ select date from cm_srvqotm where tr_no=qottrno
+  select doc_no from cm_srvqotm where tr_no=qottrno
+ 
+ 
+ The Quotation Document no - 38 has been declined for the customer - sudheesh dated:21-11-2018 by the user Super
+due to Not statisfied with the price (decline status) - remarks
+
+
+
+select concat('The Quotation Document no -',' ',( select doc_no from cm_srvqotm where tr_no=qottrno),' ','has been declined for the customer',' '
+,(select refname from my_acbook where cldocno=CLDOCVal and dtype='CRM'),' ','dated :',' ',(select date from cm_srvqotm where tr_no=qottrno),' ','by the user',(select user_name from my_user where doc_no=userid),' ',
+
+

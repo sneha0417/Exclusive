@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	
+
+	<package name="leasecdw" extends="struts-default">
+			<action name="saveLeaseCDW" class="com.controlcentre.masters.vehiclemaster.leasecdw.ClsLeaseCDWAction" method="saveAction">
+				<interceptor-ref name="params"/>
+				<result name="success" >leasecdw.jsp</result>
+				<result name="fail">leasecdw.jsp</result>
+			</action>
+					</package>	
+</struts>

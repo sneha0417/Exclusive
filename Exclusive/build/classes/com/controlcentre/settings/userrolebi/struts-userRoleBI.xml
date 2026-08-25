@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+
+	<package name="userrolebi" extends="struts-default">
+			<action name="saveUserRoleBIMaster" class="com.controlcentre.settings.userrolebi.ClsUserRoleBIAction" method="saveAction">
+				<interceptor-ref name="params"/>
+				<result name="success" >userRoleBIMaster.jsp</result>
+				<result name="fail">userRoleBIMaster.jsp</result>
+			</action>
+			
+		</package>	
+</struts>
+

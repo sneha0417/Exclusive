@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	
+
+	<package name="cinv" extends="struts-default">
+			<action name="saveinvs" class="com.nisales.cuttinginvoice.ClsCuttingInvoiceAction" method="saveAction">
+				<interceptor-ref name="params"/>
+				<result name="success" >cuttinginvoice.jsp</result>
+				<result name="fail">cuttinginvoice.jsp</result>
+			</action>
+			
+				<action name="printcutinv" class="com.nisales.cuttinginvoice.ClsCuttingInvoiceAction" method="printAction">
+				<result name="print" >${url}</result>
+			    </action>
+			
+		</package>	
+</struts>

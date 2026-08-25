@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	
+
+	<package name="chequeupdate" extends="struts-default">
+			<action name="printPaymentCheques" class="com.dashboard.accounts.chequeupdate.ClsChequeUpdateAction" method="printChequeAction">
+				<interceptor-ref name="params"/>
+				<!-- <result name="print">chequePrintingFormat.jsp</result> -->
+				<result name="print">${printurl}</result>
+			</action>
+			<action name="printMultiPaymentCheques" class="com.dashboard.accounts.chequeupdate.ClsChequeUpdateAction" method="printAction">
+				<interceptor-ref name="params"/>
+				<!-- <result name="print">chequePrintingMultiFormat.jsp</result> -->
+				<result name="print">${printurl}</result>
+			</action>
+		</package>	
+</struts>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+<constant name="struts.devMode" value="false" />
+	<package name="trfsetup" extends="struts-default">
+			<action name="saveTrfSetUp" class="com.finance.accountssetup.trfsetup.ClsTrfSetUpAction" method="saveAction">
+				<interceptor-ref name="params"/>
+				<result name="success">trfSetUp.jsp</result>
+				<result name="fail">trfSetUp.jsp</result>
+			</action>
+
+		</package>	
+		
+</struts>

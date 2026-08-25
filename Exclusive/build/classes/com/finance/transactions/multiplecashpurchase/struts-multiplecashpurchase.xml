@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	
+
+	<package name="MultipleCashPurchase" extends="struts-default">
+			<action name="saveMultipleCashPurchase" class="com.finance.transactions.multiplecashpurchase.ClsmultipleCashPurchaseAction" method="saveAction">
+				<interceptor-ref name="params"/>
+				<result name="success" >multipleCashPurchase.jsp</result>
+				<result name="fail">multipleCashPurchase.jsp</result>
+			</action>
+			
+			<action name="printMultipleCashPurchase" class="com.finance.transactions.multiplecashpurchase.ClsmultipleCashPurchaseAction" method="printAction">
+				<interceptor-ref name="params"/>
+				<!-- <result name="print">../../../../com/finance/pettyCashVoucherPrint.jsp</result> -->
+				<result name="print">${url}</result>
+			</action>
+
+			<action name="MultipleCashPurchasePrint" class="com.finance.transactions.multiplecashpurchase.ClsmultipleCashPurchaseAction" method="jasperprintAction">
+				<interceptor-ref name="params"/>
+				<!-- <result name="print">../../../../com/finance/pettyCashVoucherPrint.jsp</result> -->
+				<!-- <result name="print">${url}</result> -->
+			</action>
+			
+		</package>	
+</struts>

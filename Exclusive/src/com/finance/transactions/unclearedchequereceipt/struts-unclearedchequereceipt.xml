@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	
+
+	<package name="unclearedChequeReceipt" extends="struts-default">
+			<action name="saveUnclearedChequeReceipt" class="com.finance.transactions.unclearedchequereceipt.ClsUnclearedChequeReceiptAction" method="saveAction">
+				<interceptor-ref name="params"/>
+				<result name="success">unclearedChequeReceipt.jsp</result>
+				<result name="fail">unclearedChequeReceipt.jsp</result>
+			</action>
+			
+		   <action name="printUnclearedChequeReceipt" class="com.finance.transactions.unclearedchequereceipt.ClsUnclearedChequeReceiptAction" method="printAction">
+				<interceptor-ref name="params"/>
+				<!-- <result name="print">../../../../com/finance/unclearedChequeVoucherPrint.jsp</result> -->
+				<result name="print">${url}</result>
+			</action>
+			
+			<action name="printUnclearedChequeReceiptCheque" class="com.finance.transactions.unclearedchequereceipt.ClsUnclearedChequeReceiptAction" method="printChequeAction">
+				<interceptor-ref name="params"/>
+				<!-- <result name="print">../../../../com/finance/chequePrintingFormat.jsp</result> -->
+				<result name="print">${printurl}</result>
+			</action> 
+		</package>	
+</struts>

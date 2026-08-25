@@ -1,0 +1,16 @@
+[{
+"type": "GL",
+"accno": "123",
+"accname": "PETTY CASH",
+"category": "test",
+"product": "TEST",
+"description": "TEST",
+"qty": "2",
+"ordered": "1",
+"unitprice": "100",
+"total": "100",
+"discount%": "10",
+"discount": "15",
+"grtotal": "100",
+"remarks": "tested"
+}]

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	
+
+	<package name="ageingstatementreport" extends="struts-default">
+			
+			<action name="printAgeingOutstandingsStatementReport" class="com.dashboard.accounts.ageingstatementreport.ClsAgeingStatementReportAction" method="printAction">
+				<interceptor-ref name="params"/>
+			</action>
+				<action name="printCustomerConformatin" class="com.dashboard.accounts.ageingstatementreport.ClsAgeingStatementReportAction" method="printCustomerConformatnAction">
+				<interceptor-ref name="params"/>
+			</action>
+		</package>	
+</struts>

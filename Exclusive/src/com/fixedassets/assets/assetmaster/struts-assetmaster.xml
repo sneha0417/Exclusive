@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	
+
+	<package name="frmassetmastrer" extends="struts-default">
+			<action name="saveAssetmaster" class="com.fixedassets.assets.assetmaster.ClsAssetmasterAction" method="saveAction">
+				<interceptor-ref name="params"/>
+				<result name="success" >assetmaster.jsp</result>
+				<result name="fail">assetmaster.jsp</result>
+			</action>
+			<action name="printassetmaster" class="com.fixedassets.assets.assetmaster.ClsAssetmasterAction" method="PrintAction">
+				<interceptor-ref name="params"/>
+				<result name="success" >${url}</result>
+				
+			</action>
+			
+	</package>	
+</struts>

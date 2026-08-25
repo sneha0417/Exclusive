@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	 <constant name="struts.custom.i18n.resources" value="saveUserMaster" />
+	
+
+	<package name="usermaster" extends="struts-default">
+			<action name="saveUserMaster" class="com.controlcentre.settings.usermaster.ClsUserMasterAction" method="saveAction">
+				<interceptor-ref name="params"/>
+				<result name="success">userMaster.jsp</result>
+				<result name="fail">userMaster.jsp</result>
+			</action>
+			<action name="passChange" class="com.controlcentre.settings.usermaster.ClsUserMasterAction" method="changePassword">
+				<interceptor-ref name="params"/>
+				<result name="success">changePassword.jsp</result>
+				<result name="fail">changePassword.jsp</result>
+			</action>
+	
+			
+		</package>	
+</struts>
+

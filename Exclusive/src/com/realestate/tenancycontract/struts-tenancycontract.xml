@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+<constant name="struts.devMode" value="true" />
+	<package name="save122" extends="struts-default">
+		<action name="saveTenancyContract" class="com.realestate.tenancycontract.ClsTenancyContractAction" method="saveAction1">
+			<interceptor-ref name="params"/>
+			<result name="success" >tenancyContract.jsp</result>
+			<result name="fail">tenancyContract.jsp</result>
+		</action>
+		<action name="printTenancyContract" class="com.realestate.tenancycontract.ClsTenancyContractAction" method="printAction">
+			<interceptor-ref name="params"/>
+			<result name="print" >tenancyCtrtProformaInvPrint.jrxml</result>
+		</action>
+	</package>	
+</struts>

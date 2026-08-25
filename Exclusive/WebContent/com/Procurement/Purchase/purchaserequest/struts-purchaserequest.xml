@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	
+
+	<package name="purchaseRequest" extends="struts-default">
+			<action name="savepurreqdata" class="com.procurement.purchase.purchaserequest.ClsPurchaserequestAction" method="saveAction">
+				<interceptor-ref name="params"/>
+				<result name="success" >PurchaseRequest.jsp</result>
+				<result name="fail">PurchaseRequest.jsp</result>
+			</action>
+			
+ 	<action name="printPurreqAction" class="com.procurement.purchase.purchaserequest.ClsPurchaserequestAction" method="printAction">
+			    <interceptor-ref name="params"/>
+			    <result name="print">${url}</result>
+			</action>
+
+		<action name="PRINTPurreqAction" class="com.procurement.purchase.purchaserequest.ClsPurchaserequestAction" method="jasperprintAction">
+			    <interceptor-ref name="params"/>
+			  
+			</action>
+			
+			
+			
+		</package>	
+		
+		
+		
+</struts>

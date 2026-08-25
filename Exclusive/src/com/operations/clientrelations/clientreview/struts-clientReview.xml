@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	
+
+	<package name="clientreview" extends="struts-default">
+			<action name="saveClientReview" class="com.operations.clientrelations.clientreview.ClsClientReviewAction" method="saveAction">
+				<interceptor-ref name="params"/>
+				<result name="success" >clientReview.jsp</result>
+				<result name="fail">clientReview.jsp</result>
+			</action>
+			
+			<action name="clientReviewOutstandingsStatement" class="com.dashboard.client.paymentfollowup.ClsPaymentFollowUpAction" method="printAction">
+				<interceptor-ref name="params"/>
+				<result name="print">../../../dashboard/client/paymentfollowup/epicIndividualAgeingStatementPrint.jsp</result>
+			</action>
+			
+		</package>	
+</struts>

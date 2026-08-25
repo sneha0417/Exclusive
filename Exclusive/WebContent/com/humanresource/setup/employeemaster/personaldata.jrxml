@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2019-11-05T14:48:20 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="personaldata" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c2414388-f380-473c-894d-fe403f1d4ffe">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="aitsnew"/>
+	<parameter name="docno" class="java.lang.String"/>
+	<parameter name="imgheader" class="java.lang.String"/>
+	<parameter name="imgfooter" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select date_format(chk3.expdt,'%d-%m-%Y')visaexp,date_format(chk1.expdt,'%d-%m-%Y')passportexp,m.bloodgroup,m.mstatus,coalesce(chk2.docidnum,'')emiratesid,coalesce(chk1.docidnum,'')passportno,m.doc_no,dsg.desc1 designation,dep.desc1 department,cat.desc1 paycat,m.date,m.codeNo empid,m.name,date_format(m.dtjoin,'%d-%m-%Y')dtjoin, m.acno, m.acc_curid, round(m.costperhour,2) costperhour,round(m.travels,2) travels, m.pmaddr, m.pmmob, m.pmemail, m.city, m.state,
+m.pincode,date_format(m.dob,'%d-%m-%Y')dob,m.nationId, m.Gender, m.others,m.agent_id, coalesce(ag.desc1,'') agent_nm, m.bnk_acc_no, m.emp_id, m.brchname, m.ifsccode,h.account,h.description accountname,n.nation,qualification,
+b.tinno, b.branchname,c.company,c.address,c.tel,c.fax,l.loc_name location
+from hr_empm m left join my_head h on m.acno=h.doc_no
+left join my_natm n on m.nationId=n.doc_no
+left join hr_setdesig dsg on m.desc_id=dsg.doc_no
+left join hr_setdept dep on m.dept_id=dep.doc_no
+left join hr_setpaycat cat on m.pay_catid=cat.doc_no
+left join my_brch b on m.brhid=b.doc_no
+left join my_locm l on l.brhid=b.doc_no
+left join hr_setagent ag on m.agent_id=ag.doc_no
+left join (select rdocno,docidnum,expdt from hr_empdoc where docid=1 group by rdocno) chk1 on chk1.rdocno=m.doc_no
+left join (select rdocno,docidnum from hr_empdoc where docid=2 group by rdocno) chk2 on chk2.rdocno=m.doc_no
+left join (select rdocno,docidnum,expdt from hr_empdoc where docid=3 group by rdocno) chk3 on chk3.rdocno=m.doc_no
+left join my_comp c on b.cmpid=c.doc_no where m.doc_no=$P{docno};]]>
+	</queryString>
+	<field name="visaexp" class="java.lang.String"/>
+	<field name="passportexp" class="java.lang.String"/>
+	<field name="bloodgroup" class="java.lang.String"/>
+	<field name="mstatus" class="java.lang.String"/>
+	<field name="emiratesid" class="java.lang.String"/>
+	<field name="passportno" class="java.lang.String"/>
+	<field name="designation" class="java.lang.String"/>
+	<field name="name" class="java.lang.String"/>
+	<field name="dtjoin" class="java.lang.String"/>
+	<field name="pmaddr" class="java.lang.String"/>
+	<field name="pmmob" class="java.lang.String"/>
+	<field name="dob" class="java.lang.String"/>
+	<field name="empid" class="java.lang.String"/>
+	<field name="doc_no" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="86" splitType="Stretch">
+			<image scaleImage="FillFrame">
+				<reportElement x="1" y="3" width="550" height="70" uuid="b5de5082-5f6c-4b85-8fe8-fa93663f9f8e"/>
+				<imageExpression><![CDATA[$P{imgheader}]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="511" splitType="Stretch">
+			<frame>
+				<reportElement x="1" y="75" width="550" height="428" uuid="42bdb010-d96a-4026-a76e-8f186bd43f82"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="6" y="11" width="114" height="19" uuid="1e618f49-ae89-495c-8a54-df6834cc4159"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Name of the Employee"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="6" y="33" width="114" height="19" uuid="9f43b14e-9819-474e-b8c4-c88728c6a13a"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Designation"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="6" y="55" width="114" height="19" uuid="69b6905e-5a4e-4456-97cb-b0f8b3904c36"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Permanent Address"]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="0" y="112" width="550" height="1" uuid="3b1ee754-6f33-47d6-9dda-6f1f1823d8e4"/>
+				</line>
+				<line>
+					<reportElement x="122" y="0" width="1" height="110" uuid="3c98a662-193f-428d-a01b-a3378356710d"/>
+				</line>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="5" y="115" width="75" height="19" uuid="54377964-99f7-416a-a82f-14f1fa668dca"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Passport No"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="5" y="139" width="75" height="19" uuid="bfa2554d-af77-4e88-a7a1-051db8d5e482"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Contact No(s)"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="5" y="164" width="75" height="19" uuid="57ff8cbf-e9b3-43e8-89d2-5cd36691f967"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Emirates ID"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="5" y="189" width="75" height="19" uuid="b93bf3b5-d399-47de-8129-c10fe17c3676"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Date of Birth"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="283" y="115" width="67" height="19" uuid="48ca6a00-d69a-4b89-84ef-c70cd2118e2a"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Expiry Date"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="283" y="139" width="67" height="19" uuid="8bf01360-0d2d-4b05-9647-8472490b6de7"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Marital Status"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="283" y="164" width="67" height="19" uuid="4928205b-e1a1-491e-895c-39123af2b754"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Medical No"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="283" y="189" width="67" height="19" uuid="60f2350e-7db7-49bc-8f30-c65da0ecdd6c"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Blood Group"]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="0" y="211" width="550" height="1" uuid="d183c481-d6a4-4a25-b7a8-f9471e91b4b3"/>
+				</line>
+				<line>
+					<reportElement x="0" y="186" width="550" height="1" uuid="f388a26e-dadc-47cb-b548-9a6cc3001c6b"/>
+				</line>
+				<line>
+					<reportElement x="0" y="136" width="550" height="1" uuid="ff269ee3-6f92-4288-b91e-f52cab7aaaba"/>
+				</line>
+				<line>
+					<reportElement x="0" y="161" width="550" height="1" uuid="04ce1b0b-5d23-4036-85ce-b2d35a574303"/>
+				</line>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="5" y="214" width="115" height="19" uuid="69462e48-e83c-425d-ac8f-3e2c845cfa1e"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Qualification"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="5" y="239" width="115" height="19" uuid="a64e4356-2241-46c6-aff9-ca4811aa8929"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Total Work Experience"]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="0" y="236" width="550" height="1" uuid="b642e8f6-c2c1-4550-a6fb-4cee8ffca912"/>
+				</line>
+				<line>
+					<reportElement x="-1" y="261" width="550" height="1" uuid="e16050f8-664a-4801-a382-dc0306e0031d"/>
+				</line>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="4" y="264" width="116" height="19" uuid="cd0cd1b3-e74c-425c-b0b6-4c96857e14c0"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Last Worked Firm"]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="0" y="285" width="550" height="1" uuid="9548a006-d5ec-435d-87de-fe57cc36fb02"/>
+				</line>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="4" y="288" width="116" height="19" uuid="18b86bdd-0b6f-4fb5-a94c-4b839ebc40ca"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Current Salary "]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="0" y="310" width="550" height="1" uuid="48724711-f884-47ee-ab75-28101407caac"/>
+				</line>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="4" y="313" width="116" height="19" uuid="50df95bb-3219-4a42-aeb3-84103194a670"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Other Benefit"]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="0" y="336" width="550" height="1" uuid="93dde140-dd6b-4c95-9cef-4b187b2234a1"/>
+				</line>
+				<line>
+					<reportElement x="122" y="212" width="1" height="124" uuid="90440a81-ca36-4f85-ad4d-df4bda58149d"/>
+				</line>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="4" y="339" width="86" height="19" uuid="8858f650-9672-4b0c-8763-b2d9b0b5d6f1"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Join Date"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="4" y="360" width="86" height="19" uuid="0eb00a91-8cac-4708-acde-a49342effabb"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Employment No"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="284" y="339" width="96" height="19" uuid="99129031-a664-46b7-83fd-e246e3f279d5"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Profession on Visa"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="284" y="360" width="96" height="19" uuid="cff97a02-f362-4349-b389-0d32ea8f4923"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Visa Expiry Date"]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="0" y="382" width="550" height="1" uuid="56da8ad3-1476-4e3c-be2c-4a89f45428a0"/>
+				</line>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="4" y="385" width="76" height="19" uuid="724ba082-5742-4d8c-b741-fdf38f73802b"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Prepared By  :"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="284" y="385" width="76" height="19" uuid="65251ab8-f8ac-4557-bfa8-2596319b94d9"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9" isBold="true"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Approved By  :"]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="280" y="383" width="1" height="45" uuid="f4447804-ad6a-4fa7-a3a9-28ff61fe8780"/>
+				</line>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="80" y="115" width="200" height="19" uuid="e7a10db8-5498-4eeb-8752-6f30cebc7d77"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+					<textFieldExpression><![CDATA[": "+$F{passportno}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="80" y="139" width="200" height="19" uuid="59933c93-2b65-4a88-833b-6782ff7969ba"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+					<textFieldExpression><![CDATA[": "+$F{pmmob}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="80" y="164" width="200" height="19" uuid="76a2e596-66e8-4e64-9e95-e71b063149b4"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+					<textFieldExpression><![CDATA[": "+$F{emiratesid}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="80" y="189" width="200" height="19" uuid="4808d71e-75ac-4dab-9335-d3979ab231a8"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+					<textFieldExpression><![CDATA[": "+$F{dob}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="350" y="115" width="194" height="19" uuid="fb782794-336e-4c2d-868f-4d39efa71377"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+					<textFieldExpression><![CDATA[": "+$F{passportexp}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="350" y="139" width="194" height="19" uuid="8bd30909-788e-4977-8723-923a8a339d4f"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+					<textFieldExpression><![CDATA[": "+$F{mstatus}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="350" y="164" width="194" height="19" uuid="cb4d2bba-9070-491d-89ac-8799902bcba5"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+					<textFieldExpression><![CDATA[": "]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="350" y="189" width="194" height="19" uuid="c9552e55-15a0-45f9-9c71-33b8ac21c8fa"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+					<textFieldExpression><![CDATA[": "+$F{bloodgroup}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="90" y="339" width="180" height="19" uuid="98344067-9759-4f30-b97b-51c68c4483d0"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+					<textFieldExpression><![CDATA[": "+$F{dtjoin}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="90" y="360" width="180" height="19" uuid="2257dfde-d965-40d2-9596-74f51d2c7b89"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+					<textFieldExpression><![CDATA[": "+$F{empid}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="380" y="339" width="163" height="19" uuid="0285e6a2-d92e-4729-9441-c9dab24b5dd1"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+					<textFieldExpression><![CDATA[": "]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="380" y="360" width="163" height="19" uuid="70e79f11-250c-4c76-9473-742bed02f456"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+					<textFieldExpression><![CDATA[": "+$F{visaexp}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="130" y="11" width="400" height="18" uuid="b81c6b7d-6068-40cc-9255-e9896e37115b"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+					<textFieldExpression><![CDATA[": "+$F{name}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="130" y="33" width="400" height="19" uuid="60d7cd22-cf72-44f6-82cf-710f6f14c2e0"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+					<textFieldExpression><![CDATA[": "+$F{designation}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="130" y="55" width="390" height="55" uuid="c5d09ea0-8c05-4e48-bb38-50a003bc9ce2"/>
+					<textElement verticalAlignment="Top">
+						<font size="9"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+					<textFieldExpression><![CDATA[": "+$F{pmaddr}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="128" y="214" width="413" height="19" uuid="4eafb2aa-6f26-4ab6-9061-78f166581eaf"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="127" y="239" width="413" height="19" uuid="0c649609-0c21-46d3-8409-cb5df250cf04"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="127" y="264" width="413" height="19" uuid="79a95174-1c8d-437f-88c0-ac2e661bedb6"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="126" y="288" width="413" height="19" uuid="3bc24f2a-a600-4783-8ac6-57735ad59389"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="125" y="314" width="413" height="19" uuid="60372601-620a-462e-8f15-91c194317dd5"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement x="1" y="4" width="550" height="69" uuid="87b37d29-9e95-48bf-b4e0-e6236ea3843b"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<line>
+					<reportElement x="310" y="0" width="1" height="69" uuid="e19baadc-c468-47e1-b20a-a1e9dd79e10c"/>
+				</line>
+				<staticText>
+					<reportElement x="31" y="19" width="229" height="30" uuid="fbbb276c-84e8-4322-bf40-ebe3c91b9c6b"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Personal Data Form]]></text>
+				</staticText>
+				<line>
+					<reportElement x="311" y="21" width="239" height="1" uuid="1b6635a6-4a5d-44c3-9d41-6fda719e6c7b"/>
+				</line>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="313" y="3" width="67" height="14" uuid="be4069ee-eca5-4976-a826-16644f9eeb11"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Effective Date :"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="380" y="3" width="70" height="14" uuid="e52e5341-e28a-496d-b1fb-6b42af0898a8"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dtjoin}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="312" y="25" width="78" height="14" uuid="30649a00-aee5-43c3-8398-07f3ac4aec53"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Document Code :"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="391" y="25" width="100" height="14" uuid="7702042c-1f89-4d75-b8fc-e44a4e2ef8d9"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+					<textFieldExpression><![CDATA["AITS-HRM- 013"]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="310" y="42" width="240" height="1" uuid="c5d9ba22-ef3d-49ea-b63f-f2adaeaf1cc8"/>
+				</line>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="312" y="46" width="55" height="17" uuid="2ec376f9-82e2-420b-ae21-f880712a355d"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Rev.# 01"]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="372" y="42" width="1" height="27" uuid="cb1abcbf-fe08-491b-8019-ca15834e62fb"/>
+				</line>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="376" y="46" width="160" height="17" uuid="0ccf5e12-5e9e-411f-94e0-90508705f6b8"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Ref# :AITS/PDF/"+$F{empid}+"/2019"]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="87" splitType="Stretch">
+			<image scaleImage="FillFrame">
+				<reportElement x="1" y="7" width="549" height="77" uuid="093802c7-eb5c-49f3-9ca9-2913e97b0a04"/>
+				<imageExpression><![CDATA[$P{imgfooter}]]></imageExpression>
+			</image>
+		</band>
+	</pageFooter>
+</jasperReport>

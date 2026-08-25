@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	
+
+	<package name="SalesInvoiceReturn" extends="struts-default">
+			<action name="saveSalesInvoiceReturn" class="com.sales.Sales.salesInvoiceReturn.ClsSalesInvoiceReturnAction" method="saveInvoiceReturnAction">
+				<interceptor-ref name="params"/>
+				<result name="success" >cashinvoiceReturn.jsp</result>
+				<result name="fail">cashinvoiceReturn.jsp</result>
+			</action>
+			
+			<action name="printinvcashret" class="com.sales.Sales.salesInvoiceReturn.ClsSalesInvoiceReturnAction" method="printAction">
+				<interceptor-ref name="params"/>
+				<result name="print" >invreturnprint.jsp</result>
+				</action>
+			
+			
+		</package>	
+			<package name="SalesInvoiceReturns" extends="struts-default">
+			<action name="saveSalesInvoiceReturncr" class="com.sales.Sales.salesInvoiceReturn.ClsSalesInvoiceReturnAction" method="saveInvoiceReturnAction">
+				<interceptor-ref name="params"/>
+				<result name="success" >creditinvoiceReturn.jsp</result>
+				<result name="fail">creditinvoiceReturn.jsp</result>
+			</action>
+					
+				<action name="printinvcreditret" class="com.sales.Sales.salesInvoiceReturn.ClsSalesInvoiceReturnAction" method="printAction">
+				<interceptor-ref name="params"/>
+				<result name="print" >invreturnprint.jsp</result>
+				</action>
+			
+		</package>	
+		
+		
+		
+</struts>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	 <constant name="struts.custom.i18n.resources" value="servicetype" />
+
+	<package name="servicetype" extends="struts-default">
+			<action name="saveServicetype" class="com.controlcentre.settings.servicetype.ClsServiceTypeAction" method="saveAction">
+				<interceptor-ref name="params"/>
+				<result name="success">surveytype.jsp</result>
+				<result name="fail">surveytype.jsp</result>
+			</action>
+			 
+		</package>	
+</struts>

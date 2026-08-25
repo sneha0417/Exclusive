@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	
+
+	
+	<package name="issuereturn" extends="struts-default">
+			<action name="saveActionginsreturn" class="com.sales.InventoryTransfer.goodsissuenotereturn.ClsGoodsissuenotereturnAction" method="saveAction">
+				<interceptor-ref name="params"/>
+				<result name="success">goodsissuenotereturn.jsp</result>
+				<result name="fail">goodsissuenotereturn.jsp</result>
+			</action>
+			
+			
+	<action name="printGIR" class="com.sales.InventoryTransfer.goodsissuenotereturn.ClsGoodsissuenotereturnAction" method="printAction">
+			   <interceptor-ref name="params"/>
+			    <result name="print" >${url}</result> 
+			</action>
+			 
+			
+			
+		</package>		
+		
+</struts>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	
+
+	<package name="Purchaseinvret" extends="struts-default"> 
+			<action name="saveActionpurInvret" class="com.procurement.purchase.purchaseinvoicereturn.ClspurchaseinvoicereturnAction" method="saveAction">
+				<interceptor-ref name="params"/>
+				<result name="success" >purchseinvoicereturnmaster.jsp</result>
+				<result name="fail">purchseinvoicereturnmaster.jsp</result>
+			</action>
+			
+ 
+			<action name="printpurchaseReturn" class="com.procurement.purchase.purchaseinvoicereturn.ClspurchaseinvoicereturnAction" method="printAction">
+			    <interceptor-ref name="params"/>
+			    <result name="print">purchasereturnprint.jsp</result>
+			</action> 
+			
+			
+			
+		</package>	
+		
+		
+		
+</struts>
+

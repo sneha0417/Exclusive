@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	
+
+	<package name="serviceReport" extends="struts-default">
+			<action name="saveServiceReport" class="com.project.execution.serviceReport.ClsServiceReportAction" method="saveAction">
+				<interceptor-ref name="params"/>
+				<result name="success">serviceReport.jsp</result>
+				<result name="fail">serviceReport.jsp</result>
+			</action>
+			
+			<action name="printServiceReportAMC" class="com.project.execution.serviceReport.ClsServiceReportAction" method="printAction">
+				<interceptor-ref name="params"/>
+				<!-- <result name="print">../../../../com/project/execution/serviceReport/ServiceReportAmc.jrxml</result> -->
+			</action>
+			
+			<action name="printServiceReportSJOB" class="com.project.execution.serviceReport.ClsServiceReportAction" method="printAction">
+				<interceptor-ref name="params"/>
+				<!-- <result name="print">../../../../com/project/execution/serviceReport/ServiceReportSJOB.jrxml</result> -->
+			</action>
+			
+			<action name="printServiceReportCREG" class="com.project.execution.serviceReport.ClsServiceReportAction" method="printAction">
+				<interceptor-ref name="params"/>
+				<!-- <result name="print">../../../../com/project/execution/serviceReport/ServiceReportCREG.jrxml</result> -->
+			</action>
+			
+		</package>	
+</struts>

@@ -1,0 +1,55 @@
+<%@ taglib prefix="s" uri="/struts-tags" %>
+<!DOCTYPE html>
+<html>
+<% String contextPath=request.getContextPath();%>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GatewayERP(i)</title>
+<!--<link rel="stylesheet" type="text/css" href="<%=contextPath%>/css/body.css">-->
+<script>
+
+</script>
+</head>
+<body onload="" bgcolor="white">
+<div id="mainBG" class="homeContent" data-type="background">
+ 
+<form>
+ <div style="background-color:white;">
+<table width="100%" class="normaltable" border="0">
+  <tr>
+    <td width="30%" rowspan="7"><img src="<%=contextPath%>/icons/epic.jpg" width="200" height="78"  alt=""/></td>
+    <td width="44%" rowspan="2">&nbsp;</td>
+    <td width="26%"><font size="2"><label id="lblbranch" name="lblbranch" ><s:property value="lblbranch"/></label></font></td>
+  </tr>
+<tr>
+</tr>
+<tr>
+    <td rowspan="3" align="center"><b><font size="4"><label id="lblprintname" name="lblprintname"><s:property value="lblprintname"/></label></font></b></td>
+      <td><b><label id="lblbranchaddress" name="lblbranchaddress"><s:property value="lblbranchaddress"/></label></b></td>
+  </tr>
+  <tr>
+    <td align="left"><b>Tel :</b>&nbsp;<label id="lblbranchtel" name="lblbranchtel"><s:property value="lblbranchtel"/></label></td>
+  </tr>
+  <tr>
+    <td align="left"><b>Fax :</b>&nbsp;<label name="lblbranchfax" id="lblbranchfax" ><s:property value="lblbranchfax"/></label></td>
+  </tr>
+  <tr>
+    <td rowspan="2" align="center"><b><font size="2"><label id="lblprintname1" name="lblprintname1"><s:property value="lblprintname1"/></label></font></b></td>
+    <td align="left">&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="left"><b>TRN :</b>&nbsp;<label id="lblcomptrn" name="lblcomptrn" ><s:property value="lblcomptrn"/></label></td>
+  </tr>
+  <tr>
+    <td colspan="3"><hr noshade size=1 width="100%"></td>
+  </tr>
+   <tr>
+    <td colspan="3"></td></tr></table></div>
+
+</form>
+</div>
+
+</body>
+</html>

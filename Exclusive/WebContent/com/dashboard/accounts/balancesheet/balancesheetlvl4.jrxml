@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2019-02-10T16:43:40 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="blncesheettestt" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2682e676-cbab-4486-bfe1-f07f4ab56317">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="deilamiblncsheet"/>
+	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Dataset1" uuid="82e1c579-d24b-4b4c-bbed-8ec1b93f5c37">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="deilamiblncsheet"/>
+		<queryString>
+			<![CDATA[select @i:=@i+1 id,k.description,CONVERT(if(k.grpamt=0,'',round(k.grpamt,2)),CHAR(100)) grpamt,CONVERT(if(k.netamt=0,'',round(k.netamt,2)),CHAR(100)) netamt,CONVERT(if(k.childamt=0,'',round(k.childamt,2)),CHAR(100)) childamt,CONVERT(if(k.subchildamt=0,'',round(k.subchildamt,2)),CHAR(100)) subchildamt,k.gp_id,k.ordno,CONVERT((case when k.ordno in (5,0,1) then 'null' else k.ordno end ),CHAR(100)) parentid,k.groupno,k.subac, CONVERT((case when k.ordno in (5,0,1) then 'Group II' when k.ordno=3 then 'Group I' when k.ordno=4 then 'Main' when k.ordno=6 then k.account else k.ordno       end),CHAR(100))  code from (select if(gtype='X',6,0) ORDNO,gp_id,0 den,0 groupNo, 0 subac,0 account,gp_desc description,if(gtype='X',@xwrk,0) dr,0 mainamt,0 agrpAmt,0 grpAmt,if(gtype='X',@xwrk,0) netAmt,0 childAmt,0 subchildAmt from gc_agrpd where gtype in('D','X') and gp_id<=17 UNION ALL Select 0 ORDNO,19 gp_id,0 den,0 groupNo, 0 subac,0 account,'PROFIT FOR THE PERIOD 01.01.2018 TO 10.02.2019' description,0 dr,0 mainamt,0 agrpAmt,0 grpAmt,sum(ldramount)*-1 netAmt,0 childAmt,0 subchildAmt from my_jvtran t,my_head h where t.status=3 and t.acno=h.doc_no and t.date between '2018-01-01' and '2019-02-10' and h.gr_type in (4,5) UNION ALL select @xlevel:=if(grpLevel is  null,0,if(gp_id is  null,1,if(den is  null,5,if(groupNo is  null,3,if(subac is  null,4,6))))) ordno,if(gp_id is  not null,gp_id,if(grpLevel=1,16,if(grpLevel=2,20,19))) gp_id,ifnull(den,0) den,ifnull(groupNo,0) groupNo,ifnull(subac,0) subac,accountno,if(gp_id is  null,if(grpLevel=1,'NET ASSET',' TOTAL EQUITY'),if(den is  null,M.GP_DESC,if(groupNo is  null,M.HEAD,if(subac is  null,m.grpHead,m.account)))) DESCRIPTION, @xdramt:=if(gp_id is null,dr*if(grpLevel=1,1,-1),dr*drsign) dr, 0 mainAmt,0 agrpAmt,if(@xlevel=4,@xdramt*1,0) grpAmt,if(@xlevel=5,@xdramt*1,if(@xlevel=1,@xdramt*1,0)) netAmt,if(@xlevel=3,@xdramt*1,0) childAmt,if(@xlevel=6,@xdramt*1,0) subchildAmt from (select a.doc_no subac,m.*,sum(ldramount) dr, @xwrk:=@xwrk+(if(gp_id between 12 and 14 and a.doc_no is not null,ldramount,0)) ldr,a.description account,a.account accountno,a.alevel sublevel,left(a.alevel,length(m.alevel)),concat(m.alevel,'.') from (select @xwrk:=0,if(g.gp_id<=15,1,if(g.gp_id<=18,2,3)) grplevel,g.gp_id,h.den,h.doc_no groupNo, g.gp_desc,p.head,h.description grpHead,concat(h.alevel,'.') alevel,length(h.alevel)  alen,g.id drsign from my_head h,my_agrp p,gc_agrpd g where grpno=0  and h.den=p.fi_id and p.gp_pr=g.gp_id and g.gtype='D' and gp_id<=17) m,my_head a,(SELECT 139 acno,139 account,sum(ldramount) ldramount  from my_jvtran t,my_head h where t.status=3 and t.acno=h.doc_no   and t.date<'2018-01-01' and h.gr_type>=4 UNION ALL Select 140 acno,140 account,sum(ldramount) ldramount from my_jvtran t,my_head h where t.status=3 and t.acno=h.doc_no  and gr_type>=4 and t.date between '2018-01-01' and '2019-02-10' and h.gr_type>=4 and t.trtype!=1 UNION ALL SELECT acno,h.account,sum(ldramount) ldramount from my_jvtran t,my_head h  where t.status=3 and t.acno=h.doc_no and gr_type<4 and t.date<='2019-02-10'  and !(t.dtype='YRC' and trtype=1)  group by t.acno ) t  where (m.groupNo=t.acno or left(a.alevel,m.alen+1)=m.alevel) and a.doc_no=t.acno group by  grplevel,gp_id,den,groupNo,subac with rollup) m,(SELECT @i:= 0) as i where grplevel is not null order by gp_id,den,ordno) k,(SELECT @i:= 0) as i where (k.netamt!=0 or k.grpamt!=0 or k.childamt!=0 or k.subchildamt!=0) order by gp_id,den,groupno,ordno;]]>
+		</queryString>
+		<field name="id" class="java.lang.Long"/>
+		<field name="description" class="java.lang.String"/>
+		<field name="grpamt" class="java.lang.String"/>
+		<field name="netamt" class="java.lang.String"/>
+		<field name="childamt" class="java.lang.String"/>
+		<field name="subchildamt" class="java.lang.String"/>
+		<field name="code" class="java.lang.Object"/>
+	</subDataset>
+	<subDataset name="Dataset2" uuid="c25ee126-6ace-4c73-891a-522578d49a79">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="deilamiblncsheet"/>
+		<queryString>
+			<![CDATA[select @i:=@i+1 id,k.description,CONVERT(if(k.grpamt=0,'',round(k.grpamt,2)),CHAR(100)) grpamt,CONVERT(if(k.netamt=0,'',round(k.netamt,2)),CHAR(100)) netamt,CONVERT(if(k.childamt=0,'',round(k.childamt,2)),CHAR(100)) childamt,CONVERT(if(k.subchildamt=0,'',round(k.subchildamt,2)),CHAR(100)) subchildamt,k.gp_id,k.ordno,CONVERT((case when k.ordno in (5,0,1) then 'null' else k.ordno end ),CHAR(100)) parentid,k.groupno,k.subac, CONVERT((case when k.ordno in (5,0,1) then 'Group II' when k.ordno=3 then 'Group I' when k.ordno=4 then 'Main' when k.ordno=6 then k.account else k.ordno       end),CHAR(100))  code from (select if(gtype='X',6,0) ORDNO,gp_id,0 den,0 groupNo, 0 subac,0 account,gp_desc description,if(gtype='X',@xwrk,0) dr,0 mainamt,0 agrpAmt,0 grpAmt,if(gtype='X',@xwrk,0) netAmt,0 childAmt,0 subchildAmt from gc_agrpd where gtype in('D','X') and gp_id<=17 UNION ALL Select 0 ORDNO,19 gp_id,0 den,0 groupNo, 0 subac,0 account,'PROFIT FOR THE PERIOD 01.01.2018 TO 10.02.2019' description,0 dr,0 mainamt,0 agrpAmt,0 grpAmt,sum(ldramount)*-1 netAmt,0 childAmt,0 subchildAmt from my_jvtran t,my_head h where t.status=3 and t.acno=h.doc_no and t.date between '2018-01-01' and '2019-02-10' and h.gr_type in (4,5) UNION ALL select @xlevel:=if(grpLevel is  null,0,if(gp_id is  null,1,if(den is  null,5,if(groupNo is  null,3,if(subac is  null,4,6))))) ordno,if(gp_id is  not null,gp_id,if(grpLevel=1,16,if(grpLevel=2,20,19))) gp_id,ifnull(den,0) den,ifnull(groupNo,0) groupNo,ifnull(subac,0) subac,accountno,if(gp_id is  null,if(grpLevel=1,'NET ASSET',' TOTAL EQUITY'),if(den is  null,M.GP_DESC,if(groupNo is  null,M.HEAD,if(subac is  null,m.grpHead,m.account)))) DESCRIPTION, @xdramt:=if(gp_id is null,dr*if(grpLevel=1,1,-1),dr*drsign) dr, 0 mainAmt,0 agrpAmt,if(@xlevel=4,@xdramt*1,0) grpAmt,if(@xlevel=5,@xdramt*1,if(@xlevel=1,@xdramt*1,0)) netAmt,if(@xlevel=3,@xdramt*1,0) childAmt,if(@xlevel=6,@xdramt*1,0) subchildAmt from (select a.doc_no subac,m.*,sum(ldramount) dr, @xwrk:=@xwrk+(if(gp_id between 12 and 14 and a.doc_no is not null,ldramount,0)) ldr,a.description account,a.account accountno,a.alevel sublevel,left(a.alevel,length(m.alevel)),concat(m.alevel,'.') from (select @xwrk:=0,if(g.gp_id<=15,1,if(g.gp_id<=18,2,3)) grplevel,g.gp_id,h.den,h.doc_no groupNo, g.gp_desc,p.head,h.description grpHead,concat(h.alevel,'.') alevel,length(h.alevel)  alen,g.id drsign from my_head h,my_agrp p,gc_agrpd g where grpno=0  and h.den=p.fi_id and p.gp_pr=g.gp_id and g.gtype='D' and gp_id<=17) m,my_head a,(SELECT 139 acno,139 account,sum(ldramount) ldramount  from my_jvtran t,my_head h where t.status=3 and t.acno=h.doc_no   and t.date<'2018-01-01' and h.gr_type>=4 UNION ALL Select 140 acno,140 account,sum(ldramount) ldramount from my_jvtran t,my_head h where t.status=3 and t.acno=h.doc_no  and gr_type>=4 and t.date between '2018-01-01' and '2019-02-10' and h.gr_type>=4 and t.trtype!=1 UNION ALL SELECT acno,h.account,sum(ldramount) ldramount from my_jvtran t,my_head h  where t.status=3 and t.acno=h.doc_no and gr_type<4 and t.date<='2019-02-10'  and !(t.dtype='YRC' and trtype=1)  group by t.acno ) t  where (m.groupNo=t.acno or left(a.alevel,m.alen+1)=m.alevel) and a.doc_no=t.acno group by  grplevel,gp_id,den,groupNo,subac with rollup) m,(SELECT @i:= 0) as i where grplevel is not null order by gp_id,den,ordno) k,(SELECT @i:= 0) as i where (k.netamt!=0 or k.grpamt!=0 or k.childamt!=0 or k.subchildamt!=0) order by gp_id,den,groupno,ordno;]]>
+		</queryString>
+		<field name="id" class="java.lang.Long"/>
+		<field name="description" class="java.lang.String"/>
+		<field name="grpamt" class="java.lang.String"/>
+		<field name="netamt" class="java.lang.String"/>
+		<field name="childamt" class="java.lang.String"/>
+		<field name="subchildamt" class="java.lang.String"/>
+		<field name="code" class="java.lang.Object"/>
+		<field name="gp_id" class="java.lang.String"/>
+		<field name="ordno" class="java.lang.Long"/>
+		<field name="parentid" class="java.lang.Object"/>
+		<field name="groupno" class="java.lang.Long"/>
+		<field name="subac" class="java.lang.Long"/>
+	</subDataset>
+	<parameter name="imgpath" class="java.lang.String"/>
+	<parameter name="compname" class="java.lang.String"/>
+	<parameter name="compaddress" class="java.lang.String"/>
+	<parameter name="printname" class="java.lang.String"/>
+	<parameter name="subprintname" class="java.lang.String"/>
+	<parameter name="comptel" class="java.lang.String"/>
+	<parameter name="compfax" class="java.lang.String"/>
+	<parameter name="printby" class="java.lang.String"/>
+	<parameter name="Fromdate" class="java.lang.String"/>
+	<parameter name="Todate" class="java.lang.String"/>
+	<parameter name="balancesheetqry" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select "name" as name;]]>
+	</queryString>
+	<field name="name" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="85" splitType="Stretch">
+			<image scaleImage="FillFrame" hAlign="Right">
+				<reportElement x="8" y="11" width="164" height="55" uuid="2f095dab-6319-48c2-a103-e53d29eaba8c">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<graphicElement fill="Solid"/>
+				<imageExpression><![CDATA[$P{imgpath}]]></imageExpression>
+			</image>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="178" y="13" width="167" height="28" uuid="f7ad7571-3ed7-4494-a7d9-f27d61d465d4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Balance Sheet"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="178" y="46" width="166" height="12" uuid="9c444dcd-45cc-4eca-a162-b69f4343deca"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{subprintname}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="357" y="6" width="190" height="16" uuid="e182c540-ff1c-4e74-8d82-2134320ceee3"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{compname}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="358" y="28" width="163" height="16" uuid="886d1889-fdc2-4e52-8d37-1500e633b87e">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{compaddress}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement positionType="Float" x="359" y="57" width="38" height="12" uuid="e01ec1ec-4b97-407c-947c-07ee7ddf4955">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Fax"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement positionType="Float" x="359" y="44" width="38" height="12" uuid="5990b478-c2e7-4386-9b57-caba324e82ed">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Tel"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="399" y="57" width="125" height="12" uuid="edb0896e-3413-431b-8e4f-3edde65b0720">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{compfax}==null ? ":  " : ": "+$P{compfax}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="399" y="44" width="125" height="12" uuid="1c1c928c-61be-457a-a45e-461fcc7137a8"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{comptel}==null ? ":  " : ": "+$P{comptel}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="126" splitType="Stretch">
+			<componentElement>
+				<reportElement x="0" y="31" width="540" height="60" uuid="560a4081-7c76-44e4-b9c1-1a421bb7c86b">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Dataset2" uuid="9cff7c90-4e8d-4124-8c13-f4ee1ae4d184">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="28" uuid="a6ec7135-24bf-405a-88ae-9f02d7ce233b">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="28" height="30" uuid="3d71f904-ef33-4dd9-ae3f-d7d35c363402"/>
+								<text><![CDATA[No.]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="28" height="30" uuid="b646dc94-29d5-4f47-a8e7-6c2a16793cee"/>
+								<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="152" uuid="78971d61-73d0-4bc6-96a2-67080f5438db">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="152" height="30" uuid="1f76e6ca-55c9-4344-b493-dca9b3425d3b"/>
+								<text><![CDATA[description]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="152" height="30" uuid="5175a683-f631-4337-84d0-ca0a3bcaef94"/>
+								<textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="70" uuid="99b6f9a6-6eaa-4fb5-9416-6d643561f66e">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="70" height="30" uuid="2960f2f2-efa8-4a6a-b38f-76cbd1aabd3a"/>
+								<text><![CDATA[Detail]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="70" height="30" uuid="171575a2-f613-47cc-ae34-0d136e063790"/>
+								<textFieldExpression><![CDATA[$F{grpamt}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="70" uuid="73482031-99cd-4098-b505-5c6e8be571ec">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="70" height="30" uuid="7aee2142-4fe4-4b5b-ac57-4f9d0a76c03a"/>
+								<text><![CDATA[Main]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="70" height="30" uuid="fdc24996-06e5-4e35-a69e-c7a4778c55ab"/>
+								<textFieldExpression><![CDATA[$F{netamt}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="78" uuid="919e2d75-85dc-4395-9756-2fd0ac489868">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="78" height="30" uuid="8e8868fd-801d-4141-b04a-7476f74e8d18"/>
+								<text><![CDATA[Group I]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="78" height="30" uuid="f722e15b-973b-4c41-b965-c64b1999e6d9"/>
+								<textFieldExpression><![CDATA[$F{childamt}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="72" uuid="3d9bf1fc-7e2a-4790-96ab-78d0b617b56d">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column6"/>
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="72" height="30" uuid="c8716e7b-9cc3-4469-b694-95604b01ca8b"/>
+								<text><![CDATA[Group II]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="72" height="30" uuid="1644e53a-0823-4657-914f-f26348d5852f"/>
+								<textFieldExpression><![CDATA[$F{subchildamt}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="70" uuid="3a333f94-72da-4afc-aeff-7beddc8e05d1">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column7"/>
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="70" height="30" uuid="b1782b5e-0806-4a3b-8fea-23d92cdb1192"/>
+								<text><![CDATA[code]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="70" height="30" uuid="22d097ec-4de0-476f-810a-52ab89a442b2"/>
+								<textFieldExpression><![CDATA[$F{code}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="68" splitType="Stretch">
+			<textField isBlankWhenNull="false">
+				<reportElement x="9" y="31" width="38" height="18" uuid="7f8d8338-6265-4651-ad19-798d4ffcdc0d">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Printed By"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="47" y="31" width="105" height="18" uuid="8e71c830-2de6-423f-8152-ff35c8ff3440"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{printby}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement x="157" y="10" width="250" height="18" uuid="66c73352-830c-41d5-b629-e6cee502136c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA["System Generated Document Signature & Stamp Not Required."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement x="207" y="27" width="148" height="10" uuid="cb52ed1d-50a9-471e-bc45-1a243059df38"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Powered by GATEWAY ERP"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="439" y="25" width="55" height="12" uuid="42d5aae5-a96f-400a-98de-8e306ff47b44">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="EEEEE dd MMMMM yyyy" isBlankWhenNull="true">
+				<reportElement x="410" y="36" width="114" height="15" isRemoveLineWhenBlank="true" forecolor="#1A1717" uuid="5787e83d-c323-414f-9d38-d3995af33149">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<printWhenExpression><![CDATA[$V{REPORT_COUNT}==1]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="5" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

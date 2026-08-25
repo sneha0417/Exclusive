@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Login V15</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://daneden.github.io/animate.css/animate.min.css">
+	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+	<link rel="stylesheet" href="css/util.css">
+	<style type="text/css">
+		@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro);
+		@import url(https://fonts.googleapis.com/css?family=Teko:700);
+		:root {
+	  		/*--main-bg-color:#5867dd;
+	  			rgba(88,103,221,1)
+	  		*/
+	  		--main-bg-color:#5867dd;
+	  		--main-sec-color:#fff;
+	  		--main-third-color:#000;
+		}
+		@font-face {
+			font-family: Poppins-Regular;
+		  	src: url('fonts/poppins/Poppins-Regular.ttf'); 
+		}
+		
+		@font-face {
+		  	font-family: Poppins-Medium;
+		  	src: url('fonts/poppins/Poppins-Medium.ttf'); 
+		}
+		
+		@font-face {
+		  	font-family: Montserrat-Medium;
+		  	src: url('fonts/montserrat/Montserrat-Medium.ttf'); 
+		}
+		
+		@font-face {
+		  	font-family: Montserrat-SemiBold;
+		  	src: url('fonts/montserrat/Montserrat-SemiBold.ttf'); 
+		}
+		* {
+			margin: 0px; 
+			padding: 0px; 
+			box-sizing: border-box;
+		}
+		html,body{
+			width:100%;
+			height:100%;
+			background-color:#E9E9E9;
+			font-family: Poppins-Regular, sans-serif;
+		}
+		.room-container{
+			background-color: #fff;
+			box-shadow: 0 9px 16px 0 rgba(153,153,153,.25);
+			padding: 20px;
+			display: inline-block;
+		}
+		.room-container.active{
+			background-color:var(--main-bg-color);
+		}
+		.room-container.active .roomname{
+			color: #fff;
+		}
+		.room-outer-container{
+			width: 100%;
+			background-color: transparent;
+			border:none;
+			outline: none;
+		}
+		.room-outer-container .outer-wrapper{
+			max-width: 100%;
+			overflow-x: auto;
+			scroll-behavior: smooth;
+			white-space: nowrap;
+			display: inline;
+			float: left;
+			background-color: transparent;
+			border:none;
+			outline: none;
+		}
+		.feature-container{
+			width: 100%;
+			max-height:400px;
+			overflow-y: auto;
+			scroll-behavior: smooth;
+		}
+		@media (max-width: 767px) {
+    		.custom-tabs.nav-pills > li {
+			    float:none;
+			    display:inline-block;
+			}	
+		}
+		
+	</style>
+</head>
+<body>
+	<div class="page-loader">
+		<button type="button" class="btn btn-brand"><i class="fa fa-circle-o-notch fa-spin fa-fw"></i> Loading</button>
+	</div>
+
+	<nav class="navbar navbar-default navbar-fixed-top custom-navbar">
+  		<div class="container-fluid">
+    		<div class="navbar-header">
+      			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        			<span class="icon-bar"></span>
+        			<span class="icon-bar"></span>
+        			<span class="icon-bar"></span> 
+      			</button>
+      			<a class="navbar-brand" href="#" style="padding-top: 2px;padding-bottom: 2px;padding-left: 15px;padding-right: 15px;">
+      				<span style="margin-right:10px;">
+      					<img alt="" src="images/exclusivelinks.png" style="width:auto; height: 100%;">
+      				</span>
+      			</a>
+    		</div>
+    		<div class="collapse navbar-collapse" id="myNavbar">
+      			<ul class="nav navbar-nav navbar-right">
+        			<li class="dropdown">
+        				<a class="dropdown-toggle user-dropdown" data-toggle="dropdown" href="#"><i class="fa fa-user"></i> <span class="user-dropdown-text">John Doe</span>
+        					<span class="caret"></span>
+        				</a>
+        				<ul class="dropdown-menu">
+          					<li><a href="#" onclick="location.replace('index.jsp');">Sign Out</a></li>
+          					<!-- <li><a href="#">Change Password</a></li> -->
+        				</ul>
+      				</li>
+      			</ul>
+    		</div>
+  		</div>
+	</nav>
+	<div class="container-fluid m-t-30 m-b-10">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<ul class="nav nav-pills custom-tabs nav-justified">
+    				<li class="active"><a data-toggle="pill" href="#menu0"><i class="fa fa-pencil p-r-5"></i>Inspection</a></li>
+		    		<li><a data-toggle="pill" href="#menu1"><i class="fa fa-repeat p-r-5"></i>Hand Over</a></li>
+		    		<li><a data-toggle="pill" href="#menu2"><i class="fa fa-rotate-left p-r-5"></i>Hand Back</a></li>
+  				</ul>
+			</div>
+		</div>
+		<div class="document-container">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<div class="search-container">
+						<input class="form-control" id="filterinput" type="text" placeholder="Search..">
+						<ul class="list-group" id="filterlist">
+    						<li class="list-group-item">
+    							<div class="row">
+    								<div class="col-xs-2">ID</div>
+    								<div class="col-xs-10">APT124521524</div>
+    							</div>
+    							<div class="row">
+    								<div class="col-xs-2">Property</div>
+    								<div class="col-xs-10">Dubai Marina, Marina Gate 2, 2802</div>
+    							</div>
+    							<div class="row">
+    								<div class="col-xs-2">Owner</div>
+    								<div class="col-xs-10">Martial Valery Zang / Simone Josiane Abah Batsi Epse Zang</div>
+    							</div>
+    							<div class="row">
+    								<div class="col-xs-2">Tenant</div>
+    								<div class="col-xs-10">Matthew James Howson</div>
+    							</div>
+    						</li>
+    						<li class="list-group-item">
+    							<div class="row">
+    								<div class="col-xs-2">ID</div>
+    								<div class="col-xs-10">APT1548245</div>
+    							</div>
+    							<div class="row">
+    								<div class="col-xs-2">Property</div>
+    								<div class="col-xs-10">Dubai Marina, Marina Gate 1, 2106</div>
+    							</div>
+    							<div class="row">
+    								<div class="col-xs-2">Owner</div>
+    								<div class="col-xs-10">Furqan Sarwar  </div>
+    							</div>
+    							<div class="row">
+    								<div class="col-xs-2">Tenant</div>
+    								<div class="col-xs-10">Stuart Brian Barnard  </div>
+    							</div>
+    						</li>
+    						<li class="list-group-item">
+    							<div class="row">
+    								<div class="col-xs-2">ID</div>
+    								<div class="col-xs-10">APT985785485</div>
+    							</div>
+    							<div class="row">
+    								<div class="col-xs-2">Property</div>
+    								<div class="col-xs-10">Town Square, Zahra Breeze 1A, 705</div>
+    							</div>
+    							<div class="row">
+    								<div class="col-xs-2">Owner</div>
+    								<div class="col-xs-10">Dawood Abdul Wahid Shaikh  </div>
+    							</div>
+    							<div class="row">
+    								<div class="col-xs-2">Tenant</div>
+    								<div class="col-xs-10">Ahmed Mohamedmirghani Tahir Faried  </div>
+    							</div>
+    						</li>
+    						<li class="list-group-item">
+    							<div class="row">
+    								<div class="col-xs-2">ID</div>
+    								<div class="col-xs-10">APT354785454</div>
+    							</div>
+    							<div class="row">
+    								<div class="col-xs-2">Property</div>
+    								<div class="col-xs-10">Jumeirah Golf Estate, Alandalus, Tower C</div>
+    							</div>
+    							<div class="row">
+    								<div class="col-xs-2">Owner</div>
+    								<div class="col-xs-10">Ramy Mohamed Kamal Ismail Kamal  </div>
+    							</div>
+    							<div class="row">
+    								<div class="col-xs-2">Tenant</div>
+    								<div class="col-xs-10">Georgina Taylor (JGE, Alandalus 206) </div>
+    							</div>
+    						</li>
+  						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="room-outer-container">
+			<div class="outer-wrapper p-t-10 p-b-20">
+				<div class="room-container text-center img-rounded active">
+					<img src="images/icons/map-marker.png" style="width: 40px;height: 40px;">
+					<p class="roomname">Entry</p>
+				</div>	
+				<div class="room-container text-center img-rounded" >
+					<img src="images/icons/map-marker.png" style="width: 40px;height: 40px;">
+					<p class="roomname">Kitchen</p>
+				</div>
+				<div class="room-container text-center img-rounded">
+					<img src="images/icons/map-marker.png" style="width: 40px;height: 40px;">
+					<p class="roomname">Living Room</p>
+				</div>
+				<div class="room-container text-center img-rounded">
+					<img src="images/icons/map-marker.png" style="width: 40px;height: 40px;">
+					<p class="roomname">Dining Room</p>
+				</div>
+				<div class="room-container text-center img-rounded">
+					<img src="images/icons/map-marker.png" style="width: 40px;height: 40px;">
+					<p class="roomname">Stairway &amp; Hall</p>
+				</div>
+				<div class="room-container text-center img-rounded">
+					<img src="images/icons/map-marker.png" style="width: 40px;height: 40px;">
+					<p class="roomname">Master Bedroom</p>
+				</div>
+			</div>
+		</div>
+		<div class="feature-container">
+			<div class="panel-group" id="accordion">
+	  			<div class="panel panel-default">
+	    			<div class="panel-heading">
+	      				<h4 class="panel-title">
+	        				<a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+	        				Ceiling</a>
+	      				</h4>
+	    			</div>
+	    			<div id="collapse1" class="panel-collapse collapse in">
+	      				<div class="panel-body">
+	      					<blockquote>
+	      						<small class="text-muted">This ceiling was broken on handing over,amount adjusted JVT#1254</small>
+  							</blockquote>
+	      					<input type="text" name="ceilingcomments" class="form-control" placeholder="Add your comments here">
+	      					<select class="cmbstatus" class="form-control" style="width: 100%;">
+	      						<option value="">--Select--</option>
+	      						<option value="1">Good</option>
+	      						<option value="2">Fair wear and tear</option>
+	      						<option value="3">Poorly maintained</option>
+	      						<option value="4">Missing</option>
+	      						<option value="5">Broken</option>
+	      						<option value="6">Damaged</option>
+	      						<option value="7">Scratched</option>
+	      						<option value="8">Dirty</option>
+	      						<option value="9">Stained</option>
+	      					</select>
+					    </div>
+	    			</div>
+	  			</div>
+	  			<div class="panel panel-default">
+	    			<div class="panel-heading">
+	      				<h4 class="panel-title">
+	        				<a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+	        				Walls and trim</a>
+	      				</h4>
+	    			</div>
+	    			<div id="collapse2" class="panel-collapse collapse in">
+	      				<div class="panel-body">
+	      					
+	      					<input type="text" name="ceilingcomments" class="form-control" placeholder="Add your comments here">
+	      					<select class="cmbstatus" class="form-control" style="width: 100%;">
+	      						<option value="">--Select--</option>
+	      						<option value="1">Good</option>
+	      						<option value="2">Fair wear and tear</option>
+	      						<option value="3">Poorly maintained</option>
+	      						<option value="4">Missing</option>
+	      						<option value="5">Broken</option>
+	      						<option value="6">Damaged</option>
+	      						<option value="7">Scratched</option>
+	      						<option value="8">Dirty</option>
+	      						<option value="9">Stained</option>
+	      					</select>
+					    </div>
+	    			</div>
+	  			</div>
+	  			<div class="panel panel-default">
+	    			<div class="panel-heading">
+	      				<h4 class="panel-title">
+	        				<a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+	        				Floor/Carpet</a>
+	      				</h4>
+	    			</div>
+	    			<div id="collapse3" class="panel-collapse collapse in">
+	      				<div class="panel-body">
+	      					<input type="text" name="ceilingcomments" class="form-control" placeholder="Add your comments here">
+	      					<select class="cmbstatus" class="form-control" style="width: 100%;">
+	      						<option value="">--Select--</option>
+	      						<option value="1">Good</option>
+	      						<option value="2">Fair wear and tear</option>
+	      						<option value="3">Poorly maintained</option>
+	      						<option value="4">Missing</option>
+	      						<option value="5">Broken</option>
+	      						<option value="6">Damaged</option>
+	      						<option value="7">Scratched</option>
+	      						<option value="8">Dirty</option>
+	      						<option value="9">Stained</option>
+	      					</select>
+					    </div>
+	    			</div>
+	  			</div>
+			</div>	
+			<div class="pull-right">
+				<button type="button" class="btn btn-default">Cancel</button>
+				<button type="button" class="btn btn-default btn-primary">Save Changes</button>
+			</div>
+		</div>
+	</div>
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('.cmbstatus').select2({
+				placeholder: "Select a state",
+    			allowClear: true
+			});
+			$("#filterinput").on("keyup", function() {
+    			var value = $(this).val().toLowerCase();
+    			$("#filterlist li").filter(function() {
+      				$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    			});
+  			});
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	 <constant name="struts.custom.i18n.resources" value="saveCountry" />
+
+	<package name="country" extends="struts-default">
+			<action name="saveCountry" class="com.controlcentre.settings.areamaster.country.ClsCountryAction" method="saveAction">
+				<interceptor-ref name="params"/>
+				<result name="success">country.jsp</result>
+				<result name="fail">country.jsp</result>
+			</action>
+			
+			 <action name="searchDetails" class="com.controlcentre.settings.areamaster.country.ClsCountryAction" method="searchDetails">
+				<interceptor-ref name="params"/>
+				<result name="success" >country.jsp</result>
+				<result name="fail">country.jsp</result>
+			</action>  
+		</package>	
+</struts>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	 
+	<package name="Appraisals" extends="struts-default">
+			<action name="saveAddDeduct" class="com.humanresource.transactions.additionanddeduction.ClsAdditionandDeductionAction" method="saveAction">
+				<interceptor-ref name="params"/>
+				<result name="success" >additionanddeduction.jsp</result>
+				<result name="fail">additionanddeduction.jsp</result>
+			</action>
+			<action name="printAddDeduct" class="com.humanresource.transactions.additionanddeduction.ClsAdditionandDeductionAction" method="PrintAction">
+				<interceptor-ref name="params"/>
+				<result name="success" >${url}</result>
+				
+			</action>
+	</package>	
+</struts>

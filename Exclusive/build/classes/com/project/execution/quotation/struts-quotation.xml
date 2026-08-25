@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	
+
+	<package name="savequotation" extends="struts-default">
+			<action name="saveQuotation" class="com.project.execution.quotation.ClsQuotationAction" method="saveQotAction">
+				<interceptor-ref name="params"/>
+				<result name="success" >quotation.jsp</result>
+				<result name="fail">quotation.jsp</result>
+			</action>
+			
+	<action name="printQuotation" class="com.project.execution.quotation.ClsQuotationAction" method="printAction">
+				<interceptor-ref name="params"/>
+				<result name="print" >${url}</result> 
+			</action>		
+			
+			<action name="printQuotationJasper" class="com.project.execution.quotation.ClsQuotationAction" method="printActionJasper">
+				
+			</action>	
+			
+		</package>	
+</struts>

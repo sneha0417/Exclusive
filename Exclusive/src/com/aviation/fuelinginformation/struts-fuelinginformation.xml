@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	<package name="fuelinginformation" extends="struts-default">
+
+		<action name="fuelinformation" class="com.aviation.fuelinginformation.ClsfuelingInformationAction" method="saveFuelInfo">
+		<interceptor-ref name="params"/>
+			<result name="success">fuelingInformation.jsp</result>
+			<result name="fail">fuelingInformation.jsp</result>
+		</action>
+		<action name="fuelinformationprint" class="com.aviation.fuelinginformation.ClsfuelingInformationAction" method="printAction">
+		<interceptor-ref name="params"/>
+			<!-- <result name="print">fuelingInformation.jrxml</result>  -->
+		</action>
+		
+
+	</package>
+</struts>
+

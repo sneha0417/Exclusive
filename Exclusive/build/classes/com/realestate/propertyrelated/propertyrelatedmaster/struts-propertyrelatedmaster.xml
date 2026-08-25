@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	
+
+	<package name="save1" extends="struts-default">
+			<action name="saveB1" class="com.realestate.propertyrelated.propertyrelatedmaster.ClsPropertyRelatedMasterAction" method="saveAction1">
+				<interceptor-ref name="params"/>
+				<result name="success" >building.jsp</result>
+				<result name="fail">building.jsp</result>
+			</action>
+			 
+		</package>	
+		
+			<package name="save2" extends="struts-default">
+			<action name="saveP1" class="com.realestate.propertyrelated.propertyrelatedmaster.ClsPropertyRelatedMasterAction" method="saveAction2">
+				<interceptor-ref name="params"/>
+				<result name="success" >typeMaster.jsp</result>
+				<result name="fail">typeMaster.jsp</result>
+			</action>
+			 	</package>
+			 			<package name="save3" extends="struts-default">
+			<action name="saveunitt" class="com.realestate.propertyrelated.propertyrelatedmaster.ClsPropertyRelatedMasterAction" method="saveAction3">
+				<interceptor-ref name="params"/>
+				<result name="success" >unittype.jsp</result>
+				<result name="fail">unittype.jsp</result>
+			</action>
+			 </package>
+			 
+			
+		
+</struts>

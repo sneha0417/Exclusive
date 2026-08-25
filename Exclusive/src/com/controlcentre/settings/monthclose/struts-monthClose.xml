@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	
+
+	<package name="monthclose" extends="struts-default">
+			<action name="saveMonthClose" class="com.controlcentre.settings.monthclose.ClsMonthCloseAction" method="saveAction">
+				<interceptor-ref name="params"/>
+				<result name="success" >monthClose.jsp</result>
+				<result name="fail">monthClose.jsp</result>
+			</action>
+					</package>	
+</struts>

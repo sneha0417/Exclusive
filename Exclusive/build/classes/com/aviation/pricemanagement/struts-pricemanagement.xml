@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	<package name="priceManagement" extends="struts-default">
+		<action name="savepriceManagemenet" class="com.aviation.pricemanagement.ClsPriceManagementAction" method="saveAction">
+			<interceptor-ref name="params"/>
+			<result name="success" >pricemanagement.jsp</result>
+			<result name="fail">pricemanagement.jsp</result>
+		</action>
+		<!-- <action name="printpriceManagemenet" class="com.aviation.pricemanagement.ClsPriceManagementAction" method="printAction">
+			<interceptor-ref name="params"/>
+			<result name="print" >${url}</result>
+		</action> -->
+	</package>	
+</struts>

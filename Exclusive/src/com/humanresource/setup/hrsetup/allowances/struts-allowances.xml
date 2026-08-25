@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	 
+	<package name="Allowance" extends="struts-default">
+			<action name="saveAllowance" class="com.humanresource.setup.hrsetup.allowances.ClsAllowancesAction" method="saveAction">
+				<interceptor-ref name="params"/>
+				<result name="success" >allowances.jsp</result>
+				<result name="fail">allowances.jsp</result>
+			</action>
+		
+			
+		</package>	
+</struts>

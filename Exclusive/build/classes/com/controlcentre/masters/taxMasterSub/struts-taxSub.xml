@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	<package name="taxsubMaster" extends="struts-default">
+
+		<action name="saveActionsubmaster" class="com.controlcentre.masters.taxMasterSub.ClsTaxsubAction" method="savetaxtMastersub">
+		<interceptor-ref name="params"/>
+			<result name="success">taxmastersubMaster.jsp</result>
+			<result name="fail">taxmastersubMaster.jsp</result>
+		</action>
+
+	</package>
+</struts>

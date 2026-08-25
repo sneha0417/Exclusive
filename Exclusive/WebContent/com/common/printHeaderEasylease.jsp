@@ -1,0 +1,45 @@
+<%@ taglib prefix="s" uri="/struts-tags" %>
+<!DOCTYPE html>
+<html>
+<% String contextPath=request.getContextPath();%>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GatewayERP(i)</title>
+ <link rel="stylesheet" type="text/css" href="<%=contextPath%>/css/body.css">
+<script>
+
+</script>
+</head>
+<body onload="" bgcolor="white">
+<div id="mainBG" class="homeContent" data-type="background">
+<table width="100%"> 
+	<tr><td height="21" colspan="3">&nbsp;</td></tr>
+	<tr><td width="23%" rowspan="7"><img src="<%=contextPath%>/icons/epic.jpg" width="200" height="91"  alt=""/></td>
+	  <td height="21">&nbsp;</td>
+	  <td align="left"><font size="2"><label id="lblcompname" name="lblcompname" ><s:property value="lblcompname"/></label></font></td>
+	</tr>
+	<tr>
+	  <td>&nbsp;</td>
+	  <td align="left"><label id="lblcompaddress" name="lblcompaddress"><s:property value="lblcompaddress"/></label></td>
+	</tr>
+	<tr>
+	  <td>&nbsp;</td>
+	  <td align="left"><b>Tel :</b>&nbsp;<label id="lblcomptel" name="lblcomptel"><s:property value="lblcomptel"/></label>&ensp;<b>Fax :</b>&nbsp;<label name="lblcompfax" id="lblcompfax" ><s:property value="lblcompfax"/></label></td>
+	</tr>
+	<tr>
+	  <td width="43%" rowspan="4" align="center" valign="middle"><b><font size="5"><label id="lblprintname" name="lblprintname"><s:property value="lblprintname"/></label></font></b></td>
+	  <td align="left"><b>E-Mail :</b>&nbsp;<label name="lblcompemail" id="lblcompemail" ><s:property value="lblcompemail"/></label></td>
+	</tr>
+        <tr>
+          <td><b>Website :</b>&nbsp;<label name="lblcompweb" id="lblcompweb" ><s:property value="lblcompweb"/></label></td>
+        </tr>
+<tr>
+     <td width="34%" rowspan="1"><b>TRN :</b>&nbsp;<label id="lblbranchtrno" name="lblbranchtrno" ><s:property value="lblbranchtrno"/></label></td>
+  </tr>
+  
+</table>
+</div>
+</body>
+</html>

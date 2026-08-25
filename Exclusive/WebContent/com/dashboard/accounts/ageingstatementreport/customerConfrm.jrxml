@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2017-08-29T15:41:02 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="customerConfrm" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ccb92f8f-dc79-494d-a395-1ad252dfcc90">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Energy"/>
+	<parameter name="to_address" class="java.lang.String"/>
+	<parameter name="aed_amount" class="java.lang.String"/>
+	<parameter name="date" class="java.lang.String"/>
+	<parameter name="upto_date" class="java.lang.String"/>
+	<parameter name="refname" class="java.lang.String"/>
+	<parameter name="fax" class="java.lang.String"/>
+	<parameter name="email" class="java.lang.String"/>
+	<parameter name="per_mob" class="java.lang.String"/>
+	<parameter name="imgsignature" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select 'name' as name;]]>
+	</queryString>
+	<field name="name" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="10" splitType="Stretch"/>
+	</pageHeader>
+	<detail>
+		<band height="720" splitType="Stretch">
+			<frame>
+				<reportElement positionType="Float" x="28" y="80" width="252" height="70" uuid="5122dda6-dc9d-4170-9185-7060a50b3a6b"/>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="5" y="2" width="245" height="11" uuid="24f830c6-e186-4d96-b841-20d29f8ed0b0">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textElement verticalAlignment="Top"/>
+					<textFieldExpression><![CDATA["To :"+"\n"+
+"\t"+$P{refname}+"\n"+
+"\t"+$P{to_address}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="false">
+					<reportElement positionType="Float" x="6" y="29" width="244" height="16" uuid="0cf575d4-198d-4021-a407-b7044583316b"/>
+					<textFieldExpression><![CDATA["\t"+$P{fax}==null || $P{fax}==""?"":"\tFax : "+$P{fax}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="5" y="15" width="245" height="14" uuid="52c37bfc-ccdb-4c3e-bf75-74645e045f3d"/>
+					<textFieldExpression><![CDATA[$P{per_mob}==null ||$P{per_mob}==""?"":"\tTel: "+$P{per_mob}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="false">
+					<reportElement positionType="Float" x="6" y="44" width="244" height="16" uuid="ca6dfaa2-08c2-428e-8ac9-56d52ee4a2a4"/>
+					<textFieldExpression><![CDATA["\t"+$P{email}==null || $P{email}==""?"":"\tEmail Id : "+$P{email}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement x="296" y="75" width="250" height="100" uuid="00710ac5-82d0-4235-8ae2-6991f588a958"/>
+				<textField>
+					<reportElement x="0" y="0" width="250" height="100" uuid="39bd94d0-e5af-402f-a290-2555f148c4a4"/>
+					<textFieldExpression><![CDATA["From:             TAJEER LEASING LLC \n"+
+"Address:\n"+
+	       "Al Fahim Group -Finance Department\n"+
+                       "P O Box  279\n"+ 
+	        "Abu Dhabi\n"+
+	        "United Arab Emirates\n"+
+	        "Tel:  02-6567000 Fax: 02-6567844 "]]></textFieldExpression>
+				</textField>
+			</frame>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="29" y="61" width="100" height="18" uuid="efb8f530-ef06-47fb-8806-f7f4777698b2"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Date  : "+$P{date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="34" y="5" width="512" height="30" uuid="bab7e517-1026-49b5-bbb7-1acb4faece04"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Accounts Receivable Balance Confirmation "]]></textFieldExpression>
+			</textField>
+			<frame>
+				<reportElement x="7" y="188" width="540" height="532" uuid="628b98e8-9d19-4067-9f16-0d396cde7891"/>
+				<textField>
+					<reportElement x="14" y="10" width="522" height="510" uuid="0c60bb5d-9020-43fc-8938-f0ae07c147d0">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textFieldExpression><![CDATA["Dear Sir / Madam \n"+"\n"+
+ 
+"This is not a request for payment, but only a request to confirm your balance with us as on\n"+  
+
+"If you already paid any amount/s after that date it might not be included in the balance shown hereunder. Please check the balance and acknowledge this letter and return the confirmation to our representative or fax it directly on our fax number 02-6567844. Also you can Email it to \n"+
+"\n"+
+"Your co-operation with this regard will be a highly appreciated in order to update our records and adjust differences, if any. In case your book of accounts shows a different balance, kindly attach the statement of account with the details of your balance. \n"+
+"Your balance as per our books is AED\n" +  
+"Thanking you, we appreciate your business. \n"+
+"Yours faithfully\n"+"\n"+
+
+" For: TAJEER LEASING LLC\n"+
+"\n"+
+"\n"+
+ "\n"+
+ "\n"+
+ "\n"+
+ "\n"+
+"Mohammad Al Darabseh Manager, \n"+
+"Credit Control - Finance\n"+
+ "Al Fahim Group - Head Office  \n"+
+"---------------------------------------------\n"+
+ "\n"+
+ "To: TAJEER LEASING LLC                                             From: \n"+
+"\n"+
+"\n"+             
+"\n"+
+"\n"+
+"\n"+
+"Signature & Seal : ------------------------------------------------------\n"+
+"\n"+
+"Name  :----------------------------------------------------\n"+
+"Title     :---------------------------------------------------------\n"+
+"\n"+
+"Date: ----/----/---- "]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="433" y="36" width="100" height="13" uuid="398f8d80-6325-4ec3-998e-60a9ee3004be"/>
+					<textFieldExpression><![CDATA[$P{upto_date}+" ."]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="249" y="86" width="100" height="13" uuid="c20e4f6a-3d16-493a-8c00-b6f85a62ba61"/>
+					<textFieldExpression><![CDATA[$P{upto_date}+" ."]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="202" y="143" width="100" height="22" uuid="93b57c40-bae5-4434-a2db-91de1c47a0bb"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$P{aed_amount}]]></textFieldExpression>
+				</textField>
+				<image scaleImage="FillFrame">
+					<reportElement positionType="Float" x="18" y="218" width="152" height="62" uuid="26329141-8581-4ef0-8131-75e96a08d4a8"/>
+					<imageExpression><![CDATA[$P{imgsignature}]]></imageExpression>
+				</image>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="296" y="346" width="234" height="20" uuid="d03bab5b-5455-432a-9144-1e9845960e50"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$P{refname}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="30" y="386" width="477" height="20" uuid="020f9475-2a70-4abe-94e1-faf075c1676f"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA["We hereby confirm that the balance of AED "+$P{aed_amount}+" due to TAJEER LEASING LLC as on "+ $P{upto_date}  +"  is correct. "]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="18" splitType="Stretch"/>
+	</pageFooter>
+</jasperReport>

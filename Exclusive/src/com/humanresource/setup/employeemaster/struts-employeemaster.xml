@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+<constant name="struts.devMode" value="false" />
+	<package name="employeemaster" extends="struts-default">
+			<action name="saveEmployeeMaster" class="com.humanresource.setup.employeemaster.ClsEmployeeMasterAction" method="saveAction">
+				<interceptor-ref name="params"/>
+				<result name="success" >employeeMaster.jsp</result>
+				<result name="fail">employeeMaster.jsp</result>
+			</action>
+			<action name="printEmployeeMasterJrxml" class="com.humanresource.setup.employeemaster.ClsEmployeeMasterAction" method="printAction">
+				<interceptor-ref name="params"/>
+			    <result name="print" >empMaster.jrxml</result>
+			</action>
+			<action name="employeeletter" class="com.humanresource.setup.employeemaster.ClsEmployeeMasterAction" method="printAction1">
+				<interceptor-ref name="params"/>
+			    <result name="print" >employment_letter.jrxml</result>
+			</action>
+			<action name="applicationform" class="com.humanresource.setup.employeemaster.ClsEmployeeMasterAction" method="printAction2">
+				<interceptor-ref name="params"/>
+			    <result name="print" >applicationform.jrxml</result>
+			</action>
+			<action name="personaldata" class="com.humanresource.setup.employeemaster.ClsEmployeeMasterAction" method="printAction3">
+				<interceptor-ref name="params"/>
+			    <result name="print" >personaldata.jrxml</result>
+			</action>
+			<action name="checklist" class="com.humanresource.setup.employeemaster.ClsEmployeeMasterAction" method="printAction4">
+				<interceptor-ref name="params"/>
+			    <result name="print" >checklist.jrxml</result>
+			</action>
+			<action name="confidentialagreement" class="com.humanresource.setup.employeemaster.ClsEmployeeMasterAction" method="printAction5">
+				<interceptor-ref name="params"/>
+			    <result name="print" >confidentialagreement.jrxml</result>
+			</action>
+			<action name="joiningletter" class="com.humanresource.setup.employeemaster.ClsEmployeeMasterAction" method="printAction6">
+				<interceptor-ref name="params"/>
+			    <result name="print" >joiningletter.jrxml</result>
+			</action>
+			<action name="perfevalreport" class="com.humanresource.setup.employeemaster.ClsEmployeeMasterAction" method="printAction7">
+				<interceptor-ref name="params"/>
+			    <result name="print" >perfevalreport.jrxml</result>
+			</action>
+		</package>	
+		
+</struts>

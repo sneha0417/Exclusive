@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	
+
+	<package name="ibBankReceipt" extends="struts-default">
+			<action name="saveIbBankReceipt" class="com.finance.interbranchtransactions.ibbankreceipt.ClsIbBankReceiptAction" method="saveAction">
+				<interceptor-ref name="params"/>
+				<result name="success">ibBankReceipt.jsp</result>
+				<result name="fail">ibBankReceipt.jsp</result>
+			</action>
+			
+			<action name="printIBBankReceipt" class="com.finance.interbranchtransactions.ibbankreceipt.ClsIbBankReceiptAction" method="printAction">
+				<interceptor-ref name="params"/>
+				<!-- <result name="print">../../../../com/finance/ibBankVoucherPrint.jsp</result> -->
+				<result name="print">${url}</result>
+			</action>
+			
+			<action name="printIBBankReceiptCheque" class="com.finance.interbranchtransactions.ibbankreceipt.ClsIbBankReceiptAction" method="printChequeAction">
+				<interceptor-ref name="params"/>
+				<!-- <result name="print">../../../../com/finance/chequePrintingFormat.jsp</result> -->
+				<result name="print">${printurl}</result>
+			</action>
+			
+		</package>	
+</struts>

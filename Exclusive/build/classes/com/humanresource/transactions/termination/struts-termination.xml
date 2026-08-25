@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	
+
+	<package name="termination" extends="struts-default">
+			<action name="saveTermination" class="com.humanresource.transactions.termination.ClsTerminationAction" method="saveAction">
+				<interceptor-ref name="params"/>
+				<result name="success">termination.jsp</result>
+				<result name="fail">termination.jsp</result>
+			</action>
+			
+			<action name="printTermination" class="com.humanresource.transactions.termination.ClsTerminationAction" method="printAction">
+				<interceptor-ref name="params"/>
+				<result name="print">${url}</result>
+			</action>
+			
+		</package>	
+</struts>
+

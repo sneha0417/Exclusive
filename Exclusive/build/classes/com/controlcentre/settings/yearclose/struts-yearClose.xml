@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	
+
+	<package name="yearclose" extends="struts-default">
+			<action name="saveYearClose" class="com.controlcentre.settings.yearclose.ClsYearcloseAction" method="saveAction">
+				<interceptor-ref name="params"/>
+				<result name="success" >yearClose.jsp</result>
+				<result name="fail">yearClose.jsp</result>
+			</action>
+					</package>	
+</struts>

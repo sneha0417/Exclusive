@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	
+
+	<package name="templatemaster" extends="struts-default">
+			<action name="saveTemplatemaster" class="com.project.execution.templatemaster.ClsTemplateAction" method="saveTemplateAction">
+				<interceptor-ref name="params"/>
+				<result name="success" >templatemaster.jsp</result>
+				<result name="fail">templatemaster.jsp</result>
+			</action>
+
+		<action name="printestimation" class="com.project.execution.estimationnew.ClsEstimationAction" method="printAction">
+			    <interceptor-ref name="params"/>
+			    <result name="print" >${url}</result> 
+			</action>
+		
+		
+		</package>	
+</struts>

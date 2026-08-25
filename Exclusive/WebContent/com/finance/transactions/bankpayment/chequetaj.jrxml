@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2019-12-11T12:51:30 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="chequetaj" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a2d0a868-8ec3-4e84-b0a4-50f1975852d6">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="alfahim"/>
+	<parameter name="date" class="java.lang.String"/>
+	<parameter name="payto" class="java.lang.String"/>
+	<parameter name="amountinwords" class="java.lang.String"/>
+	<parameter name="amountinwords1" class="java.lang.String"/>
+	<parameter name="amount" class="java.lang.String"/>
+	<parameter name="paydocno" class="java.lang.String"/>
+	<parameter name="paydocdate" class="java.lang.String"/>
+	<parameter name="chqdate" class="java.lang.String"/>
+	<parameter name="chqno" class="java.lang.String"/>
+	<parameter name="rcptdate" class="java.lang.String"/>
+	<parameter name="rcptno" class="java.lang.String"/>
+	<parameter name="rcvdby" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select 'name' as name;]]>
+	</queryString>
+	<field name="name" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="771" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="63" y="120" width="369" height="19" uuid="cc2f4af8-ba13-4787-a717-59f5bc7a7e4e">
+					<property name="com.jaspersoft.studio.unit.y" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.x" value="cm"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Bottom" rotation="None">
+					<font fontName="Tahoma" size="10"/>
+					<paragraph leftIndent="3" rightIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{payto}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="383" y="72" width="87" height="20" uuid="4658ce64-39ec-45b2-8f17-a1b3436e4a89">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Bottom" rotation="None">
+					<font fontName="Tahoma" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{date}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="18" y="142" width="310" height="58" uuid="cb2ecc76-f7f8-4a61-9f76-35eb8cf1ac34">
+					<property name="com.jaspersoft.studio.unit.y" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None">
+					<font fontName="Tahoma" size="10"/>
+					<paragraph lineSpacing="Fixed" lineSpacingSize="28.5" leftIndent="3" rightIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{amountinwords}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="356" y="144" width="160" height="30" uuid="a9b032a2-62de-4825-ac9a-9485d58f3c03">
+					<property name="com.jaspersoft.studio.unit.x" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.y" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None">
+					<font fontName="Tahoma" size="13"/>
+					<paragraph leftIndent="8" rightIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{amount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="130" y="401" width="100" height="30" uuid="f1864043-132f-443d-a554-16aa4f01d7fb"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{paydocno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="417" y="402" width="100" height="30" uuid="c06c825f-e4da-4a46-bee7-06c2a4a33b9c"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{paydocdate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="417" y="371" width="100" height="26" uuid="65b03975-5c8d-443a-a7e8-5d3344e6726a"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="265" y="452" width="100" height="30" uuid="b8b2d786-b732-4c95-941b-67b5952fd501"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{amount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="491" width="369" height="30" uuid="2722f865-f42f-4b25-bb45-ac7ff3809ae6"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{payto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="140" y="525" width="309" height="67" uuid="2ab35f88-ce65-418a-8a44-57e9cda69b17"/>
+				<textElement verticalAlignment="Top"/>
+				<textFieldExpression><![CDATA[$P{amountinwords}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="425" y="700" width="100" height="21" uuid="e0adccd4-5085-4172-a582-63102cecce20"/>
+				<textFieldExpression><![CDATA[$P{rcptdate}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

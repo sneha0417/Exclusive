@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+ 
+<struts>
+    <constant name="struts.multipart.maxSize" value="10485760" /> <!-- 10 MB -->
+ 
+    <package name="Struts2Email" extends="json-default">
+        <!-- <global-results>
+            <result name="error">/Error1.jsp</result>
+        </global-results>
+        <global-exception-mappings>
+            <exception-mapping exception="java.lang.Exception"
+                result="error" />
+        </global-exception-mappings> -->
+ 
+        <action name="doSendEmail" class="com.email.SendEmailAction"
+            method="doSendEmail">
+ 			<result type="json" name="success">  
+                <param name="contentType">text/html</param>  
+            </result>  
+            <result type="json" name="error">  
+                <param name="contentType">text/html</param>  
+            </result>
+            <!-- SMTP configuration -->
+            <!-- <param name="host">smtp.gmail.com</param>
+            <param name="port">587</param> -->
+            
+            <!-- End of SMTP configuration -->
+ 
+            <interceptor-ref name="fileUpload">
+                   <param name="allowedTypes">*/*</param> <!-- all file types -->
+                <param name="maximumSize">4194304</param> <!-- 4 MB -->
+              </interceptor-ref>
+               
+              <interceptor-ref name="staticParams"/>
+              <interceptor-ref name="params"/>
+            <interceptor-ref name="validation" />
+            <interceptor-ref name="workflow" />
+            <interceptor-ref name="exception"/>
+                                           
+           <!--  <result name="success" type="redirect">/Result3.jsp</result>
+            <result name="input">/Email.jsp</result> -->
+        </action>
+    </package>
+</struts>

@@ -1,0 +1,87 @@
+<style>
+   table.table1{
+    font-family: Verdana, Tahoma, Arial, "Sans Serif", "Times New Roman";
+    font-size: 8pt;    
+    line-height: 1.4em;
+    font-style: normal;
+    border-collapse:collapse;
+}
+.table1 thead th{
+	font-family: Verdana, Tahoma, Arial, "Sans Serif", "Times New Roman";
+    font-size: 8pt; 
+    font-weight: bold;   
+    font-style: normal;
+    padding:.5%;
+    color:#303030;
+    text-shadow:.1% .1% .1% #f0f0f0;
+    border:.1% solid #808080;
+    border-bottom:.3% solid #808080;
+    background-color:#D0D0D0;
+    background:-webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0.02, rgb(208,208,208)),
+        color-stop(0.51, rgb(216,216,216)),
+        color-stop(0.87, rgb(224,224,224))
+        );
+    background: -moz-linear-gradient(
+        center bottom,
+        rgb(208,208,208) 2%,
+        rgb(216,216,216) 51%,
+        rgb(224,224,224) 87%
+        );
+    -webkit-border-top-left-radius:1%;
+    -webkit-border-top-right-radius:1%;
+    -moz-border-radius:2% 2% 0% 0%;
+    border-top-left-radius:2%;
+    border-top-right-radius:2%;
+}
+.table1 thead th:empty{
+    background:transparent;
+    border:none;
+}
+.table1 tbody th{
+	font-family: Verdana, Tahoma, Arial, "Sans Serif", "Times New Roman";
+    font-size: 8pt; 
+    font-weight: normal;   
+    font-style: normal;
+    color:#303030;
+    text-shadow:.1% .1% .1% #f0f0f0;
+    background-color:#D0D0D0;
+    border:.1% solid #808080;
+    border-right:.3% solid #808080;
+    padding:0% .1%;
+    background:-webkit-gradient(
+        linear,
+        left bottom,
+        right top,
+        color-stop(0.02, rgb(224,224,224)),
+        color-stop(0.51, rgb(216,216,216)),
+        color-stop(0.87, rgb(208,208,208))
+        );
+    background: -moz-linear-gradient(
+        left bottom,
+        rgb(224,224,224) 20%,
+        rgb(216,216,216) 51%,
+        rgb(208,208,208) 87%
+        );
+    -moz-border-radius:2% 0% 0% 2%;
+    -webkit-border-top-left-radius:2%;
+    -webkit-border-bottom-left-radius:2%;
+    border-top-left-radius:2%;
+    border-bottom-left-radius:2%;
+}
+
+.table1 tbody td{
+    padding:.5%;
+    text-align:center;
+    background-color:#E8E8E8;
+    border: .2% solid #E0E0E0;
+    -moz-border-radius:.2%;
+    -webkit-border-radius:.2%;
+    border-radius:.2%;
+    color:#666;
+    text-shadow:.1% .1% .1% #fff;
+}
+    </style>

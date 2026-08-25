@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+<package name="tobereleased" extends="struts-default">
+			<action name="saveReleaseDashBoard" class="com.dashboard.vehicle.tobereleased.ClsToBeReleasedAction" method="saveAction">
+				<interceptor-ref name="params"/>
+				<result name="success" >toBeReleased.jsp</result>
+				<result name="fail">toBeReleased.jsp</result>
+			</action>
+		</package>	
+</struts>

@@ -1,0 +1,18 @@
+{ text: 'SL#', sortable: false, filterable: false, editable: false,
+					    groupable: false, draggable: false, resizable: false,
+					    datafield: 'sl', columntype: 'number', width: '3%',
+					    cellsrenderer: function (row, column, value) {
+					        return "<center><div style='margin:4px;'>" + (value + 1) + "</div></center>"; 
+					    }  
+					  },
+					  
+					  
+					  
+					   .hidden-scrollbar { 
+    overflow: auto; 
+    
+    height: 560px; 
+ } 
+ 
+ 
+select  m.DOC_NO,m.DATE,m.refNo,c.refname client,m.calledBy,concat(m.callDate,':',m.callTime) calleddt,m.description,m.userId,m.brhid from in_callregm m left join my_acbook c on  c.cldocno=m.cldocno where m.status=3;

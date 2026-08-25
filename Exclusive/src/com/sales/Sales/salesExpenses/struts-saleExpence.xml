@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	
+
+	<package name="SaleExp" extends="struts-default"> 
+			<action name="saveSaleExp" class="com.sales.Sales.salesExpenses.ClsExpAction" method="saveAction">
+				<interceptor-ref name="params"/>
+				<result name="success" >saleExpense.jsp</result>
+				<result name="fail">saleExpense.jsp</result>
+			</action>
+			
+		 
+			
+		</package>	
+		
+		
+		
+</struts>
+

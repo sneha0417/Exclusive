@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	<package name="tarifmgmt" extends="struts-default">
+			<action name="saveTariffManagement" class="com.controlcentre.masters.tarifmgmt.ClsTarifAction" method="saveAction">
+				<interceptor-ref name="params"/>
+				<result name="success" >tarifMgmt.jsp</result>
+				<result name="fail">tarifMgmt.jsp</result>
+			</action>
+	<action name="tarifPrint" class="com.controlcentre.masters.tarifmgmt.ClsTarifAction" method="printAction">
+				<interceptor-ref name="params"/>
+				<result name="print">../../../../com/controlcentre/masters/tarifMgmt/tarifPrint.jsp</result>
+			</action>
+		</package>	
+</struts>
+

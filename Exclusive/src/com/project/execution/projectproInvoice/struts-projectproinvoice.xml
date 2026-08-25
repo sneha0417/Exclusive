@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	
+
+	<package name="projectproinvoice" extends="struts-default">
+			<action name="saveProjectProinvoice" class="com.project.execution.projectproInvoice.ClsProjectProInvoiceAction" method="saveAction">
+				<interceptor-ref name="params"/>
+				<result name="success" >invoice.jsp</result>
+				<result name="fail">invoice.jsp</result>
+			</action>
+			
+			<action name="printProforma" class="com.project.execution.projectproInvoice.ClsProjectProInvoiceAction" method="printAction">
+				<interceptor-ref name="params"/>
+				<result name="print" >${url}</result> 
+			</action>
+		
+		</package>	
+</struts>

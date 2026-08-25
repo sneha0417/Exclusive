@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"  
+"http://struts.apache.org/dtds/struts-2.0.dtd"> 
+<struts>  
+
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.multipart.maxSize" value="10380902" />
+	<package name="struts-FileUploads" extends="json-default">  
+		<action name="fileAttachActionmaster" class="com.common.ClsAttachmaster" method="executes">  
+			<result name="success">Attachmaster.jsp</result>
+			<result name="fail">Attachmaster.jsp</result>
+	    </action>  
+	</package>  
+</struts>      
+
+    
