@@ -1,41 +1,204 @@
-	<%@ taglib prefix="s" uri="/struts-tags" %>
-	<!DOCTYPE html>
+<%@ taglib prefix="s" uri="/struts-tags" %>
+<!DOCTYPE html>
 <html>
-
 <head>
-    <title>GatewayERP(i)</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <jsp:include page="../../../includes.jsp"></jsp:include>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GatewayERP(i)</title>
+<jsp:include page="../../../includes.jsp"></jsp:include>
 
-    <style>
-        form label.error {
-            color: red;
-            font-weight: bold;
-        }
-    </style>
-    <script type="text/javascript">
+<style>
+/* =========================================================
+SCOPED UI: Modern Layout (Matches Client Master)
+========================================================= */
+body {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    font-family: 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+    color: #222;
+    margin: 0;
+    padding: 24px 0;
+    box-sizing: border-box;
+    overflow-y: auto !important;
+}
+
+#mainBG {
+    background: #fff;
+    border-radius: 16px;
+    padding: 15px;
+    max-width: 100%;
+    margin: 0 auto;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+}
+
+.modern-ui {
+    font-family: Arial, sans-serif; 
+    color: #333;
+    font-size: 12px; 
+    padding: 5px 15px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.modern-ui form label.error {
+    color: red;
+    font-weight: bold;
+}
+
+/* Master Input Heights - Forced to 24px */
+.modern-ui input[type="text"],
+.modern-ui select { 
+    height: 24px !important; 
+    border: 1px solid #b8c6d8; 
+    border-radius: 3px; 
+    padding: 2px 6px;
+    font-size: 12px;
+    box-sizing: border-box; 
+    background-color: #fff; 
+    color: #333;
+    width: 100%;
+}
+
+.modern-ui input[type="text"]:focus,
+.modern-ui select:focus { 
+    border-color: #007bff; 
+    outline: none;
+}
+
+.modern-ui input[readonly],
+.modern-ui input:disabled,
+.modern-ui select:disabled { 
+    background-color: #f8f9fa; 
+    color: #6b7280;
+}
+
+/* Layout Utilities */
+.modern-ui .field-row { 
+    display: flex;
+    align-items: center; 
+    gap: 8px;
+    margin-bottom: 10px; 
+    flex-wrap: wrap;
+}
+
+.modern-ui .lbl-right { 
+    text-align: right; 
+    color: #444;
+    font-size: 12px; 
+    font-weight: bold;
+    white-space: nowrap; 
+    padding-right: 5px;
+}
+
+/* Middle Section Panels */
+.modern-ui .middle-panel {
+    border: 1px solid #c5d3e0; 
+    padding: 20px 10px 10px 10px; 
+    background: #ffffff; 
+    position: relative; 
+    border-radius: 4px; 
+    margin-bottom: 15px;
+    margin-top: 12px;
+}
+
+.modern-ui .middle-panel-title { 
+    position: absolute; 
+    top: -12px;
+    left: 10px; 
+    background: #ffffff; 
+    padding: 0 8px; 
+    color: #0056b3;
+    font-weight: bold; 
+    font-size: 14px; 
+    border-left: 3px solid #0056b3;
+    z-index: 2; 
+    line-height: normal; 
+}
+
+/* Custom UI Buttons matching 24px height */
+.modern-ui .myButton {
+    height: 24px !important;
+    line-height: 22px !important;
+    padding: 0 12px;
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+    border-radius: 3px;
+    cursor: pointer;
+    text-shadow: none;
+    transition: all 0.2s;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    border: none;
+    background: linear-gradient(135deg, #0b45a2 0%, #2563eb 100%);
+    color: #ffffff;
+    white-space: nowrap;
+}
+.modern-ui .myButton:hover { background: linear-gradient(135deg, #083a8a 0%, #1d4ed8 100%); }
+
+/* Search Icon Wrapper */
+.modern-ui .input-search-container {
+    position: relative;
+    display: flex;
+}
+.modern-ui .input-search-container input {
+    padding-right: 25px !important;
+}
+.modern-ui .magnifier-icon {
+    position: absolute;
+    right: 6px; 
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #64748b; 
+    z-index: 10;
+}
+.modern-ui .magnifier-icon:hover { color: #2563eb; }
+
+/* Grid Wrappers */
+.modern-ui .grid-container {
+    border: 1px solid #c5d3e0;
+    border-radius: 4px;
+    background: #fff;
+    overflow: hidden;
+}
+
+/* Scrollbar Logic */
+.hidden-scrollbar {
+    overflow-y: auto;
+    height: calc(100vh - 150px);
+    padding-right: 5px;
+}
+.hidden-scrollbar::-webkit-scrollbar { width: 6px; }
+.hidden-scrollbar::-webkit-scrollbar-thumb { background: #c5d3e0; border-radius: 3px; }
+</style>
+
+<script type="text/javascript">
         $(document).ready(function() {
             getAccountTypeEntity();
             checkEdit();
-            /* Date */
-            $("#nipurchasedate").jqxDateTimeInput({
-                width: '125px',
-                height: '15px',
-                formatString: "dd.MM.yyyy"
-            });
-            $("#contractfromdate").jqxDateTimeInput({
-                width: '125px',
-                height: '15px',
-                formatString: "dd.MM.yyyy"
-            });
-            $("#contracttodate").jqxDateTimeInput({
-                width: '125px',
-                height: '15px',
-                formatString: "dd.MM.yyyy"
-            });
-            $('#nipurchasedate').on('change', function(event) {
+            
+            /* Formatted jqxDateTimeInput heights to match modern UI 24px */
+            $("#nipurchasedate").jqxDateTimeInput({ width: '120px', height: 24, formatString: "dd.MM.yyyy", theme: 'energyblue'});
+            $("#contractfromdate").jqxDateTimeInput({ width: '120px', height: 24, formatString: "dd.MM.yyyy", theme: 'energyblue'});
+            $("#contracttodate").jqxDateTimeInput({ width: '120px', height: 24, formatString: "dd.MM.yyyy", theme: 'energyblue'});
+            
+            /* force internal alignment AFTER render */
+            setTimeout(function () {
+                $("#nipurchasedate, #contractfromdate, #contracttodate").find("input").css({
+                    "margin-top": "0px",
+                    "line-height": "24px",
+                    "font-size": "12px", 
+                    "font-family": "Arial, sans-serif", 
+                    "padding": "0 6px", 
+                    "box-sizing":"border-box"
+                });
+                $("#nipurchasedate, #contractfromdate, #contracttodate").find(".jqx-action-button").css({
+                    "top": "0px",
+                    "height": "24px"
+                });
+            }, 0);
 
+            $('#nipurchasedate').on('change', function(event) {
                 var maindate = $('#nipurchasedate').jqxDateTimeInput('getDate');
                 if ($("#mode").val() == "A" || $("#mode").val() == "E") {
                     funDateInPeriod(maindate);
@@ -52,6 +215,7 @@
                     x: 100,
                     y: 60
                 },
+                theme: 'energyblue',
                 keyboardCloseKey: 27
             });
             $('#accountSearchwindow').jqxWindow('close');
@@ -65,6 +229,7 @@
                     x: 500,
                     y: 60
                 },
+                theme: 'energyblue',
                 keyboardCloseKey: 27
             });
             $('#accounttypeSearchwindow').jqxWindow('close');
@@ -78,6 +243,7 @@
                     x: 700,
                     y: 60
                 },
+                theme: 'energyblue',
                 keyboardCloseKey: 27
             });
             $('#costtpesearchwndow').jqxWindow('close');
@@ -91,6 +257,7 @@
                     x: 800,
                     y: 60
                 },
+                theme: 'energyblue',
                 keyboardCloseKey: 27
             });
             $('#costcodesearchwndow').jqxWindow('close');
@@ -104,6 +271,7 @@
                     x: 450,
                     y: 40
                 },
+                theme: 'energyblue',
                 keyboardCloseKey: 27
             });
             $('#refnosearchwindow').jqxWindow('close');
@@ -117,6 +285,7 @@
                     x: 200,
                     y: 60
                 },
+                theme: 'energyblue',
                 keyboardCloseKey: 27
             });
             $('#nipurchslnosearch').jqxWindow('close');
@@ -144,6 +313,7 @@
 					x : 500,
 					y : 87
 				},
+				theme: 'energyblue',
 				showCloseButton : true,
 				keyboardCloseKey : 27
 			});
@@ -172,13 +342,6 @@
             x.onreadystatechange = function() {
                 if (x.readyState == 4 && x.status == 200) {
                     var items = x.responseText.trim();
-                    /*if (items == 1) {
-                        $("#typetd1").show();
-                        $("#typetd2").show();
-                    } else {
-                        $("#typetd1").hide();
-                        $("#typetd2").hide();
-                    }*/
                 }
             }
             x.open("GET", "getAccountTypeEntity.jsp", true);
@@ -243,7 +406,6 @@
         }
 
         function CashSearchContent(url) {
-            //alert(url);
             $.get(url).done(function(data) {
                 $('#accounttypeSearchwindow').jqxWindow('open');
                 $('#accounttypeSearchwindow').jqxWindow('setContent', data);
@@ -338,7 +500,7 @@
             var valtax = 0;
 		    for(var i=0 ; i < validrows.length ; i++){  
 		     	if(validrows[i].description!="" && validrows[i].description!="undefined" && validrows[i].description!=null && typeof(validrows[i].description)!="undefined"){
-		    	if(validrows[i].taxper != 5 && validrows[i].taxper != 0){    
+		     	if(validrows[i].taxper != 5 && validrows[i].taxper != 0){   
       		      valtax=1;
       		        }
 		     	}
@@ -356,7 +518,6 @@
                     .attr("name", "desctest" + i)
                     .attr("hidden", "true");
                 var aa = 0;
-                // alert(Math.round((rows[i].taxamount + Number.EPSILON) * 100) / 100);
                 newTextBox.val(rows[i].srno + "::" + rows[i].qty + " :: " + rows[i].description + " :: " + rows[i].unitprice + " :: " + rows[i].total + " :: " + rows[i].discount + " :: " + rows[i].nettotal + " :: " + rows[i].taxper + " :: " + rows[i].taxperamt + " :: " + Math.round((rows[i].taxamount + Number.EPSILON) * 100) / 100 + " :: " +  Math.round((rows[i].nuprice + Number.EPSILON) * 100) / 100 + " :: " + rows[i].costtype + " :: " + rows[i].costcode + " :: " + rows[i].remarks + " :: " + rows[i].headdoc + " :: " + aa + " :: " + rows[i].rowno + " :: ");
                 newTextBox.appendTo('form');
             }
@@ -380,8 +541,6 @@
 					}
             	}
             }
-           // alert(agentFlg);
-            //console.log(agentFlg);
 			if (!agentFlg) {
                 document.getElementById("errormsg").innerText = " Enter Commission % or Amount";
                 return 0;
@@ -549,7 +708,6 @@
             x.onreadystatechange = function() {
                 if (x.readyState == 4 && x.status == 200) {
                     var items = x.responseText;
-                    /*       $('#currate').val(items) ; */
 
                     funRoundRate(items, "currate");
 
@@ -608,7 +766,6 @@
             x.onreadystatechange = function() {
                 if (x.readyState == 4 && x.status == 200) {
                     var items = x.responseText.trim();
-                    //alert("items"+items);
                     if (parseInt(items) > 0) {
 
                         $('#termsval').val(1);
@@ -634,10 +791,8 @@
             x.onreadystatechange = function() {
                 if (x.readyState == 4 && x.status == 200) {
                     var items = x.responseText.trim();
-                    //alert("items"+items);
                     if (parseInt(items) > 0) {
                         $('#interdiv').hide();
-                        // $('#interstate').attr('disabled', false);
 
                     } else {
                         $('#interdiv').hide();
@@ -654,12 +809,6 @@
         }
 
         function setValues() {
-            /*  if(document.getElementById("interstate").checked=true){
-							   $('#interstate').val()=='1';
-						   }
-						   else{
-							   $('#interstate').val()=='0';
-						   } */
             funinterstate();
 
             $('#nipurchasedate').jqxDateTimeInput({
@@ -703,21 +852,21 @@
             if(document.getElementById("masterdoc_no").value!="" && document.getElementById("masterdoc_no").value!="0"){
 				var invtypedesc="";
 		       	if(parseInt($('#manual').val())==3){
-		        	invtypedesc="Invoice created from Inv Processing";
-		        }
-		        else if(parseInt($('#manual').val())==2){
-		        	invtypedesc="Invoice created from Tenancy Contract Posting";
-		        }
-		        else if(parseInt($('#manual').val())==1){
-		        	invtypedesc="Manual Invoice";
-		        }
-		        else if(parseInt($('#manual').val())==4){
-		        	invtypedesc="Invoice created from Maintenance Posting";
-		        }
-		        else{
-		        	invtypedesc="Imported Invoice";
-		        }
-		        $('#lblinvoicetype').text(invtypedesc);            	
+		       		invtypedesc="Invoice created from Inv Processing";
+		       	}
+		       	else if(parseInt($('#manual').val())==2){
+		       		invtypedesc="Invoice created from Tenancy Contract Posting";
+		       	}
+		       	else if(parseInt($('#manual').val())==1){
+		       		invtypedesc="Manual Invoice";
+		       	}
+		       	else if(parseInt($('#manual').val())==4){
+		       		invtypedesc="Invoice created from Maintenance Posting";
+		       	}
+		       	else{
+		       		invtypedesc="Imported Invoice";
+		       	}
+		       	$('#lblinvoicetype').text(invtypedesc);            	
             }
         }
         $(function() {
@@ -749,28 +898,26 @@
                 }
             });
         });
-        /*function diserror(){
-						   document.getElementById("errormsg").innerText="";
-					   } */
+
         function funPrintBtn() {
-						   if (($("#mode").val() == "view") && $("#masterdoc_no").val()!="") {
-								var url=document.URL;
-								var reurl;
-								if( url.indexOf('savePropertyInvoice') >= 0){
-									reurl=url.split("savePropertyInvoice");
-								}else {
-									reurl=url.split("propertyInvoice.jsp");
-								}
-								$("#docno").prop("disabled", false);                
-								var dtype=$('#formdetailcode').val();
-								var brhid=$("#brchName").val();
-								var win= window.open(reurl[0]+"printPropertyInvoice?docno="+document.getElementById("masterdoc_no").value+"&brhid="+brhid+"&dtype="+dtype+"&header=1","_blank","top=250,left=310,Width=800,Height=800,location=no,scrollbars=yes,toolbar=yes");
-								win.focus();
-							} 
-							else {
-								$.messager.alert('Message','Select a Document....!','warning');
-								return false;
-							}
+			   if (($("#mode").val() == "view") && $("#masterdoc_no").val()!="") {
+					var url=document.URL;
+					var reurl;
+					if( url.indexOf('savePropertyInvoice') >= 0){
+						reurl=url.split("savePropertyInvoice");
+					}else {
+						reurl=url.split("propertyInvoice.jsp");
+					}
+					$("#docno").prop("disabled", false);                
+					var dtype=$('#formdetailcode').val();
+					var brhid=$("#brchName").val();
+					var win= window.open(reurl[0]+"printPropertyInvoice?docno="+document.getElementById("masterdoc_no").value+"&brhid="+brhid+"&dtype="+dtype+"&header=1","_blank","top=250,left=310,Width=800,Height=800,location=no,scrollbars=yes,toolbar=yes");
+					win.focus();
+				} 
+				else {
+					$.messager.alert('Message','Select a Document....!','warning');
+					return false;
+				}
         }
 
         function PrintContent(url) {
@@ -808,152 +955,162 @@
     <div id="mainBG" class="homeContent" data-type="background">
         <form id="frmPropertyInvoice" action="savePropertyInvoice" method="post" autocomplete="off">
             <jsp:include page="../../../header.jsp" />
-            <fieldset style="margin-top:10px;">
-                <table width="100%">
-                    <tr>
-                        <td width="4%" align="right">Date</td>
-                        <td width="4%" align="left">
+            
+            <div class="modern-ui hidden-scrollbar">
+
+                <!-- General Info Panel -->
+                <div class="middle-panel">
+                    <span class="middle-panel-title">General Info</span>
+                    
+                    <div class="field-row">
+                        <label class="lbl-right" style="width:80px;">Date</label>
+                        <div style="width: 120px;">
                             <div id="nipurchasedate" name="nipurchasedate" value='<s:property value="nipurchasedate"/>'></div>
                             <input type="hidden" name="hidnipurchasedate" id="hidnipurchasedate" value='<s:property value="hidnipurchasedate"/>'>
-                        </td>
-                        <td align="right" width="5%">Ref Type</td>
-                        <td align="right" width="10%">
-                        	<select name="cmbreftype" id="cmbreftype" style="width:100%;" value='<s:property value="cmbreftype"/>'>
-                        		<!-- <option value="DIR">Direct</option> -->
-                        		<option value="TNC">Tenancy</option>
-                        		<option value="LES">Leasing</option>
-                        		<option value="SAL">Sales</option>
-                        	</select>
-                        </td>
+                        </div>
                         
-                        <td align="right" width="5%">Ref No</td>
-                        <td align="left" width="15%"><input type="text" name="refno" id="refno" style="width:90%;" value='<s:property value="refno"/>'></td>
-                        <td align="right" width="5%">Curr</td>
-                        <td align="left" width="10%">
-                        	<select name="cmbcurr" id="cmbcurr" style="width:100%;" value='<s:property value="cmbcurr"/>' onload="getRatevalue(this.value);">
-                                <option value="-1">--Select--</option>
-                            </select>
-                            <input type="hidden" id="hidcmbcurr" name="hidcmbcurr" value='<s:property value="hidcmbcurr"/>' />
-                            <input type="hidden" name="refslno" id="refslno" value='<s:property value="refslno"/>'>
-                        </td>
-                        <td width="10%" align="right">Rate</td>
-                        <td width="8%" align="left"><input type="text" style="width:99%;" name="currate" id="currate" value='<s:property value="currate"/>'></td>
-                        <!-- <td width="10%"></td> -->
-                        <td width="30%" align="left" colspan="3"><label name="lblinvoicetype" id="lblinvoicetype"><s:property value="lblinvoicetype"/></label></td>
+                        <label class="lbl-right" style="width:80px; margin-left: 15px;">Ref Type</label>
+                        <select name="cmbreftype" id="cmbreftype" style="width:120px;" value='<s:property value="cmbreftype"/>'>
+                            <option value="TNC">Tenancy</option>
+                            <option value="LES">Leasing</option>
+                            <option value="SAL">Sales</option>
+                        </select>
+                        
+                        <label class="lbl-right" style="width:80px; margin-left: 15px;">Ref No</label>
+                        <input type="text" name="refno" id="refno" style="width:150px;" value='<s:property value="refno"/>'>
+                        
+                        <label class="lbl-right" style="width:80px; margin-left: auto;">Doc No.</label>
+                        <input type="text" name="docno" id="docno" style="width:120px;" tabindex="-1" value='<s:property value="docno"/>' readonly="readonly">
+                    </div>
+                    
+                    <div class="field-row">
+                        <label class="lbl-right" style="width:80px;">Curr</label>
+                        <select name="cmbcurr" id="cmbcurr" style="width:120px;" value='<s:property value="cmbcurr"/>' onload="getRatevalue(this.value);">
+                            <option value="-1">--Select--</option>
+                        </select>
+                        <input type="hidden" id="hidcmbcurr" name="hidcmbcurr" value='<s:property value="hidcmbcurr"/>' />
+                        <input type="hidden" name="refslno" id="refslno" value='<s:property value="refslno"/>'>
+                        
+                        <label class="lbl-right" style="width:80px; margin-left: 15px;">Rate</label>
+                        <input type="text" name="currate" id="currate" style="width:120px; text-align:right;" value='<s:property value="currate"/>'>
+                        
+                        <label name="lblinvoicetype" id="lblinvoicetype" style="margin-left:auto; font-weight:bold; color:#0056b3;"><s:property value="lblinvoicetype"/></label>
+                    </div>
 
-                        <td width="13%" align="right">Doc No </td>
-                        <td width="13%">
-                            <input type="text" name="docno" id="docno" tabindex="-1" value='<s:property value="docno"/>' readonly="readonly">
-                        </td>
-                    </tr>
+                    <div class="field-row">
+                        <label class="lbl-right" style="width:80px;">Type</label>
+                        <select name="cmbtype" id="cmbtype" style="width:120px;" value='<s:property value="cmbtype"/>'>
+                            <option value="AR">AR</option>
+                            <option value="AP">AP</option>
+                            <option value="GL">GL</option>
+                        </select>
+                        
+                        <label class="lbl-right" style="width:80px; margin-left: 15px;">Account</label>
+                        <input type="hidden" name="acctype" id="acctype" value='<s:property value="acctype"/>'>
+                        
+                        <div class="input-search-container" style="width: 150px;">
+                            <input type="text" name="nipuraccid" id="nipuraccid" value='<s:property value="nipuraccid"/>' placeholder="Press F3" onKeyDown="getaccountdetails(event);">
+                            <svg class="magnifier-icon" onclick="if($('#mode').val()!='view'){ $('#accountSearchwindow').jqxWindow('open'); accountSearchContent('accountDetailsFromSearch.jsp?type='+$('#cmbtype').val()); }" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                        </div>
+                        <input type="text" id="puraccname" name="puraccname" style="flex:1; max-width:400px; margin-left:8px;" value='<s:property value="puraccname"/>' readonly tabindex="-1">
+                    </div>
+                    
+                    <div class="field-row">
+                        <label class="lbl-right" style="width:80px;">Billing Name</label>
+                        <input type="text" name="billingname" id="billingname" style="flex:1; max-width:400px;" value='<s:property value="billingname"/>'>
+                        
+                        <label class="lbl-right" style="width:80px; margin-left: 15px;">Billing TRN</label>
+                        <input type="text" name="billingtrn" id="billingtrn" style="flex:1; max-width:250px;" value='<s:property value="billingtrn"/>'>
+                    </div>
 
-                    <tr>
-                        <td width="3.1%" align="right" id="typetd1">Type</td>
-                        <td width="4%" align="left" id="typetd2">
-                            <select name="cmbtype" id="cmbtype" style="width:68%;" value='<s:property value="cmbtype"/>'>
-                                <option value="AR">AR</option>
-                                <option value="AP">AP</option>
-                                <option value="GL">GL</option>
-                            </select>
-                        </td>
+                    <div class="field-row">
+                        <label class="lbl-right" style="width:80px;">Owner</label>
+                        <input type="text" name="owner" id="owner" style="flex:1; max-width:300px;" value='<s:property value="owner"/>'>
+                        
+                        <label class="lbl-right" style="width:80px; margin-left: 15px;">Property</label>
+                        <input type="text" name="property" id="property" style="flex:1; max-width:300px;" value='<s:property value="property"/>'>
+                    </div>
 
-                        <td width="3.1%" align="right">Account</td>
-                        <td colspan="5" width="13%" align="left">
-                            <input type="hidden" name="acctype" id="acctype" value='<s:property value="acctype"/>'>
-                            <input type="text" name="nipuraccid" id="nipuraccid" value='<s:property value="nipuraccid"/>' placeholder="Press F3 To Search" style="width:20%;" onKeyDown="getaccountdetails(event);">
-                            <input type="text" id="puraccname" name="puraccname" value='<s:property value="puraccname"/>' style="width:78%;">
-                        </td>
-                        <td colspan="7" rowspan="3">
-                        	<div id="agentdiv"><jsp:include page="agentGrid.jsp"></jsp:include></div>
-                        </td>
-                    </tr>
-                    <tr>
-                    	<td align="right">Billing Name</td>
-                    	<td colspan="4"><input type="text" name="billingname" id="billingname" value='<s:property value="billingname"/>' style="width:99%;"></td>
-                    	<td align="right">Billing TRN</td>
-                    	<td colspan="2"><input type="text" name="billingtrn" id="billingtrn"  value='<s:property value="billingtrn"/>' style="width:99%;"></td>
-                    </tr>
-                    <tr>
-                        <td align="right" width="4.7%">Description</td>
-                        <td colspan="7" align="left">
-                            <input type="text" name="purdesc" id="purdesc" value='<s:property value="purdesc"/>' style="width:99.4%;">
-                        </td>
-                    </tr>
-                    <tr>
-                    	<td align="right">Owner</td>
-                    	<td colspan="3" align="left"><input type="text" name="owner" id="owner" value='<s:property value="owner"/>' style="width:100%;"></td>
-                    	<td align="right">Property</td>
-                    	<td colspan="4" align="left"><input type="text" name="property" id="property" value='<s:property value="property"/>'  style="width:100%;"></td>
-                    	<td align="right">From Date</td>
-                    	<td align="left"><div id="contractfromdate" name="contractfromdate" value='<s:property value="contractfromdate"/>'></div></td>
-                    	<td align="right">To Date</td>
-                    	<td align="left"><div id="contracttodate" name="contracttodate"  value='<s:property value="contracttodate"/>'></div></td>
-                    	<td align="right">Rent/Sale Value</td>
-                    	<td align="left"><input type="text" name="rentsalevalue" id="rentsalevalue" value='<s:property value="rentsalevalue"/>' style="text-align:right;" onkeypress="javascript:return isNumber (event,id)" onblur="funRoundAmt(value,id);"></td>
-                    </tr>
-                </table>
-
-            </fieldset>
-            <br>
-            <fieldset>
-
-                <div id="nipurdetails">
-                    <jsp:include page="descgridDetails.jsp"></jsp:include>
+                    <div class="field-row" style="margin-bottom:0;">
+                        <label class="lbl-right" style="width:80px;">From Date</label>
+                        <div style="width: 120px;">
+                            <div id="contractfromdate" name="contractfromdate" value='<s:property value="contractfromdate"/>'></div>
+                        </div>
+                        
+                        <label class="lbl-right" style="width:80px; margin-left: 15px;">To Date</label>
+                        <div style="width: 120px;">
+                            <div id="contracttodate" name="contracttodate"  value='<s:property value="contracttodate"/>'></div>
+                        </div>
+                        
+                        <label class="lbl-right" style="width:120px; margin-left: auto;">Rent/Sale Value</label>
+                        <input type="text" name="rentsalevalue" id="rentsalevalue" style="width:120px; text-align:right;" value='<s:property value="rentsalevalue"/>' onkeypress="javascript:return isNumber (event,id)" onblur="funRoundAmt(value,id);">
+                    </div>
+                    
+                </div>
+                
+                <div class="middle-panel" style="margin-bottom: 15px;">
+                    <div class="field-row" style="margin-bottom:0;">
+                        <label class="lbl-right" style="width:80px; align-self:flex-start; padding-top:4px;">Description</label>
+                        <textarea name="purdesc" id="purdesc" style="flex:1; height:40px;" rows="2"><s:property value="purdesc"/></textarea>
+                    </div>
                 </div>
 
-            </fieldset>
-            <input type="hidden" id="masterdoc_no" name="masterdoc_no" value='<s:property value="masterdoc_no"/>' />
+                <div style="display:flex; gap:15px; margin-bottom: 15px;">
+                    <div class="middle-panel" style="flex:1.5; margin-bottom:0;">
+                        <span class="middle-panel-title">Details</span>
+                        <div id="nipurdetails" class="grid-container" style="border:none;">
+                            <jsp:include page="descgridDetails.jsp"></jsp:include>
+                        </div>
+                    </div>
 
-            <input type="hidden" id="termsval" name="termsval" value='<s:property value="termsval"/>' />
-			<input type="hidden" id="hidcmbreftype" name="hidcmbreftype" value='<s:property value="hidcmbreftype"/>' />
-            <input type="hidden" id="ordermasterdoc_no" name="ordermasterdoc_no" value='<s:property value="ordermasterdoc_no"/>' />
-            <input type="hidden" id="msg" name="msg" value='<s:property value="msg"/>' />
-            <input type="hidden" id="mode" name="mode" value='<s:property value="mode"/>' />
-            <input type="hidden" id="nettotal" name="nettotal" value='<s:property value="nettotal"/>' />
-            <input type="hidden" id="rowval" name="rowval" value='<s:property value="rowval"/>' />
-            <!-- for refno  slno set grid -->
-            <input type="hidden" id="accdocno" name="accdocno" value='<s:property value="accdocno"/>' />
-            <input type="hidden" id="descgridlenght" name="descgridlenght" value='<s:property value="descgridlenght"/>' />
-            <input type="hidden" id="cmbcurrval" name="cmbcurrval" value='<s:property value="cmbcurrval"/>' />
-            <input type="hidden" id="acctypeval" name="acctypeval" value='<s:property value="acctypeval"/>' />
-            <input type="hidden" id="reftypeval" name="reftypeval" value='<s:property value="reftypeval"/>' />
-			<input type="checkbox" id="interstate" name="interstate" value='<s:property value="interstate"/>' hidden="true"/>
-            <input type="hidden" id="deleted" name="deleted" value='<s:property value="deleted"/>' />
-            <input type="hidden" id="acctypegrid" name="acctypegrid" value='<s:property value="acctypegrid"/>' />
-            <input type="hidden" id="nidescdetailslenght" name="nidescdetailslenght" value='<s:property value="nidescdetailslenght"/>' />
-            <input type="hidden" id="costgropename" name="costgropename" value='<s:property value="costgropename"/>' />
-            <input type="hidden" id="tarannumber" name="tarannumber" value='<s:property value="tarannumber"/>' />
-            <input type="hidden" id="hidinterstate" name="hidinterstate" value='<s:property value="hidinterstate"/>' />
-            <input type="hidden" id="txtnontaxableentity" name="txtnontaxableentity" value='<s:property value="txtnontaxableentity"/>' />
-            <input type="hidden" id="taxpers" name="taxpers" value='<s:property value="taxpers"/>' />
-            <input type="hidden" id="taxperc" name="taxperc" value='<s:property value="taxperc"/>' />
-			<input type="hidden" id="agentrowlength" name="agentrowlength" value='<s:property value="agentrowlength"/>' />
-        	<input type="hidden" id="manual" name="manual" value='<s:property value="manual"/>' />
+                    <div class="middle-panel" style="flex:1; margin-bottom:0;">
+                        <span class="middle-panel-title">Agent Details</span>
+                        <div id="agentdiv" class="grid-container" style="border:none;">
+                            <jsp:include page="agentGrid.jsp"></jsp:include>
+                        </div>
+                    </div>
+                </div>
+
+            <!-- Hidden Properties Container -->
+            <div style="display:none;">
+                <input type="hidden" id="masterdoc_no" name="masterdoc_no" value='<s:property value="masterdoc_no"/>' />
+                <input type="hidden" id="termsval" name="termsval" value='<s:property value="termsval"/>' />
+                <input type="hidden" id="hidcmbreftype" name="hidcmbreftype" value='<s:property value="hidcmbreftype"/>' />
+                <input type="hidden" id="ordermasterdoc_no" name="ordermasterdoc_no" value='<s:property value="ordermasterdoc_no"/>' />
+                <input type="hidden" id="msg" name="msg" value='<s:property value="msg"/>' />
+                <input type="hidden" id="mode" name="mode" value='<s:property value="mode"/>' />
+                <input type="hidden" id="nettotal" name="nettotal" value='<s:property value="nettotal"/>' />
+                <input type="hidden" id="rowval" name="rowval" value='<s:property value="rowval"/>' />
+                <input type="hidden" id="accdocno" name="accdocno" value='<s:property value="accdocno"/>' />
+                <input type="hidden" id="descgridlenght" name="descgridlenght" value='<s:property value="descgridlenght"/>' />
+                <input type="hidden" id="cmbcurrval" name="cmbcurrval" value='<s:property value="cmbcurrval"/>' />
+                <input type="hidden" id="acctypeval" name="acctypeval" value='<s:property value="acctypeval"/>' />
+                <input type="hidden" id="reftypeval" name="reftypeval" value='<s:property value="reftypeval"/>' />
+                <input type="checkbox" id="interstate" name="interstate" value='<s:property value="interstate"/>' hidden="true"/>
+                <input type="hidden" id="deleted" name="deleted" value='<s:property value="deleted"/>' />
+                <input type="hidden" id="acctypegrid" name="acctypegrid" value='<s:property value="acctypegrid"/>' />
+                <input type="hidden" id="nidescdetailslenght" name="nidescdetailslenght" value='<s:property value="nidescdetailslenght"/>' />
+                <input type="hidden" id="costgropename" name="costgropename" value='<s:property value="costgropename"/>' />
+                <input type="hidden" id="tarannumber" name="tarannumber" value='<s:property value="tarannumber"/>' />
+                <input type="hidden" id="hidinterstate" name="hidinterstate" value='<s:property value="hidinterstate"/>' />
+                <input type="hidden" id="txtnontaxableentity" name="txtnontaxableentity" value='<s:property value="txtnontaxableentity"/>' />
+                <input type="hidden" id="taxpers" name="taxpers" value='<s:property value="taxpers"/>' />
+                <input type="hidden" id="taxperc" name="taxperc" value='<s:property value="taxperc"/>' />
+                <input type="hidden" id="agentrowlength" name="agentrowlength" value='<s:property value="agentrowlength"/>' />
+                <input type="hidden" id="manual" name="manual" value='<s:property value="manual"/>' />
+            </div>
+
+        </div>
         </form>
-        <div id="accountSearchwindow">
-            <div></div>
-        </div>
-        <div id="accounttypeSearchwindow">
-            <div></div>
-        </div>
-        <div id="costtpesearchwndow">
-            <div></div>
-        </div>
-        <div id="costcodesearchwndow">
-            <div></div>
-        </div>
-        <div id="refnosearchwindow">
-            <div></div>
-        </div>
-        <div id="nipurchslnosearch">
-            <div></div>
-        </div>
-        <div id="printWindow">
-            <div></div>
-        </div>
-        <div id="salespersonwindow">
-            <div></div>
-        </div>
+
+        <div id="accountSearchwindow"><div></div></div>
+        <div id="accounttypeSearchwindow"><div></div></div>
+        <div id="costtpesearchwndow"><div></div></div>
+        <div id="costcodesearchwndow"><div></div></div>
+        <div id="refnosearchwindow"><div></div></div>
+        <div id="nipurchslnosearch"><div></div></div>
+        <div id="printWindow"><div></div></div>
+        <div id="salespersonwindow"><div></div></div>
         
     </div>
 </body>

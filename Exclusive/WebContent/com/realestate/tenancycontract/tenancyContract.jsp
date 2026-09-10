@@ -16,8 +16,172 @@
     <meta charset="UTF-8">
     <title>GatewayERP(i)</title>
     <jsp:include page="../../../includes.jsp"></jsp:include>
-    <script type="text/javascript">
     
+<style>
+/* =========================================================
+SCOPED UI: Modern Layout (Matches Client Master)
+========================================================= */
+body {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    font-family: 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+    color: #222;
+    margin: 0;
+    padding: 24px 0;
+    box-sizing: border-box;
+    overflow-y: auto !important;
+}
+
+#mainBG {
+    background: #fff;
+    border-radius: 16px;
+    padding: 15px;
+    max-width: 100%;
+    margin: 0 auto;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+}
+
+.modern-ui {
+    font-family: Arial, sans-serif; 
+    color: #333;
+    font-size: 12px; 
+    padding: 5px 15px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.modern-ui form label.error {
+    color: red;
+    font-weight: bold;
+}
+
+/* Master Input Heights - Forced to 24px */
+.modern-ui input[type="text"],
+.modern-ui select { 
+    height: 24px !important; 
+    border: 1px solid #b8c6d8; 
+    border-radius: 3px; 
+    padding: 2px 6px;
+    font-size: 12px;
+    box-sizing: border-box; 
+    background-color: #fff; 
+    color: #333;
+    width: 100%;
+}
+
+.modern-ui input[type="text"]:focus,
+.modern-ui select:focus { 
+    border-color: #007bff; 
+    outline: none;
+}
+
+.modern-ui input[readonly],
+.modern-ui input:disabled,
+.modern-ui select:disabled { 
+    background-color: #f8f9fa; 
+    color: #6b7280;
+}
+
+/* Layout Utilities */
+.modern-ui .field-row { 
+    display: flex;
+    align-items: center; 
+    gap: 8px;
+    margin-bottom: 10px; 
+    flex-wrap: wrap;
+}
+
+.modern-ui .lbl-right { 
+    text-align: right; 
+    color: #444;
+    font-size: 12px; 
+    font-weight: bold;
+    white-space: nowrap; 
+    padding-right: 5px;
+}
+
+/* Middle Section Panels */
+.modern-ui .middle-panel {
+    border: 1px solid #c5d3e0; 
+    padding: 20px 10px 10px 10px; 
+    background: #ffffff; 
+    position: relative; 
+    border-radius: 4px; 
+    margin-bottom: 15px;
+    margin-top: 12px;
+}
+
+.modern-ui .middle-panel-title { 
+    position: absolute; 
+    top: -12px;
+    left: 10px; 
+    background: #ffffff; 
+    padding: 0 8px; 
+    color: #0056b3;
+    font-weight: bold; 
+    font-size: 14px; 
+    border-left: 3px solid #0056b3;
+    z-index: 2; 
+    line-height: normal; 
+}
+
+/* Custom UI Buttons matching 24px height */
+.modern-ui .myButton {
+    height: 24px !important;
+    line-height: 22px !important;
+    padding: 0 12px;
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+    border-radius: 3px;
+    cursor: pointer;
+    text-shadow: none;
+    transition: all 0.2s;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    border: none;
+    background: linear-gradient(135deg, #0b45a2 0%, #2563eb 100%);
+    color: #ffffff;
+    white-space: nowrap;
+}
+.modern-ui .myButton:hover { background: linear-gradient(135deg, #083a8a 0%, #1d4ed8 100%); }
+
+/* Search Icon Wrapper */
+.modern-ui .input-search-container {
+    position: relative;
+    display: flex;
+}
+.modern-ui .input-search-container input {
+    padding-right: 25px !important;
+}
+.modern-ui .magnifier-icon {
+    position: absolute;
+    right: 6px; 
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #64748b; 
+    z-index: 10;
+}
+.modern-ui .magnifier-icon:hover { color: #2563eb; }
+
+/* Grid Wrappers */
+.modern-ui .grid-container {
+    border: 1px solid #c5d3e0;
+    border-radius: 4px;
+    background: #fff;
+    overflow: hidden;
+}
+
+/* Scrollbar Logic */
+.hidden-scrollbar {
+    overflow-y: auto;
+    height: calc(100vh - 150px);
+    padding-right: 5px;
+}
+.hidden-scrollbar::-webkit-scrollbar { width: 6px; }
+.hidden-scrollbar::-webkit-scrollbar-thumb { background: #c5d3e0; border-radius: 3px; }
+</style>
+
+    <script type="text/javascript">
         var pdoc = '<%=pdocno%>';
         var mode1 = '<%=mod%>';
         var pname = '<%=pname%>';
@@ -27,7 +191,6 @@
 		}
         function FillDatafromAvailability() {
             if (mode1 == "A") {
-                //$('#mode').val(mode1);
                 $('#txtpropertydocno').val(pdoc);
                 $('#txtproperty').val(pname);
                 $('#tenancyContractDate').val(new Date());
@@ -35,9 +198,7 @@
                 $('#periodToDate').val(new Date());
                 $('#txtnotificationperiod').val('60');
                 $('#txtcontractperiod').val('1');
-                $('#periodToDate').jqxDateTimeInput({
-                    disabled: false
-                });
+                $('#periodToDate').jqxDateTimeInput({ disabled: false });
                 $("#termsOfContractGridId").jqxGrid('clear');
                 $("#termsOfContractGridId").jqxGrid('addrow', null, {});
                 $("#agentGridId").jqxGrid('clear');
@@ -46,9 +207,31 @@
                 $("#paymentDistributionGridId").jqxGrid('addrow', null, {});
                 $('#termsOfContractDiv').load("termsOfContractGrid.jsp?load=1");
             }
-
         }
         $(document).ready(function() {
+            
+             /* Formatted jqxDateTimeInput heights to match modern UI 24px */
+            $("#tenancyContractDate").jqxDateTimeInput({ width: '120px', height: 24, formatString: "dd.MM.yyyy", theme: 'energyblue' });
+            $("#periodFromDate").jqxDateTimeInput({ width: '120px', height: 24, formatString: "dd.MM.yyyy", theme: 'energyblue' });
+            $("#periodToDate").jqxDateTimeInput({ width: '120px', height: 24, formatString: "dd.MM.yyyy", theme: 'energyblue' });
+            
+            /* force internal alignment AFTER render */
+            setTimeout(function () {
+                $("#tenancyContractDate, #periodFromDate, #periodToDate").find("input").css({
+                    "margin-top": "0px",
+                    "line-height": "24px",
+                    "font-size": "12px", 
+                    "font-family": "Arial, sans-serif", 
+                    "padding": "0 6px", 
+                    "box-sizing":"border-box"
+                });
+                $("#tenancyContractDate, #periodFromDate, #periodToDate").find(".jqx-action-button").css({
+                    "top": "0px",
+                    "height": "24px"
+                });
+            }, 0);
+            
+            
         	 $('#printWindow').jqxWindow({width: '51%', height: '28%',  maxHeight: '70%' ,maxWidth: '51%' , title: 'Print',position: { x: 300, y: 87 } , theme: 'energyblue', showCloseButton: true, keyboardCloseKey: 27});
     		 $('#printWindow').jqxWindow('close');
         	$('#txtnumofcheque').change(function(){
@@ -82,7 +265,6 @@
 
             if ($('#propertydet').val() != '' || $('#propertydet').val() != 'undefined' || $('#propertydet').val() != null) {
                 var det = $('#propertydet').val().replace(/\n/g, "<br />");
-                //alert(det);	 
                 $('#propertydetail').html(det);
             }
             $('#btntenantmaster').click(function(){
@@ -132,40 +314,22 @@
         					if(mgmtfeevalue!="" && mgmtfeevalue!=null && mgmtfeevalue!="undefined" && typeof(mgmtfeevalue)!="undefined"){
         						if(parseFloat(mgmtfeevalue)>0.0){
         							$('#lblmgmtfeevalue').text(mgmtfeevalue);
-        							/* .attr('hidden',false); */
         							$('#txtmanagementval').val(mgmtfeevalue);
-        							/* $('#txtmanagementval').attr('hidden',true); */
         							$('#txtmanagementval').trigger('change');
         							$('#mgmtfeevalue').val(mgmtfeevalue);
         						}
         						else{
-        							/* $('#lblmgmtfeevalue').attr('hidden',true);
-        							$('#txtmanagementval').attr('hidden',false); */
         						}
         					}
         					$('#chktenancychequeowner').val(items.chktenancychequeowner);
         					setMgmtFee();
-        	        	} else {}
+        	            	} else {}
             		}
             		x.open("GET", "calculatePropDetails.jsp?propdocno="+propdocno, true);
             		x.send();
 				}
 			});
-            $("#tenancyContractDate").jqxDateTimeInput({
-                width: '125px',
-                height: '15px',
-                formatString: "dd.MM.yyyy"
-            });
-            $("#periodFromDate").jqxDateTimeInput({
-                width: '125px',
-                height: '15px',
-                formatString: "dd.MM.yyyy"
-            });
-            $("#periodToDate").jqxDateTimeInput({
-                width: '125px',
-                height: '15px',
-                formatString: "dd.MM.yyyy"
-            });
+
             $('#tenancyContractDate').on('change', function(event) {
                 var maindate = $('#tenancyContractDate').jqxDateTimeInput('getDate');
                 if ($("#mode").val() == "A" || $("#mode").val() == "E") {
@@ -178,10 +342,8 @@
                 maxHeight: '75%',
                 maxWidth: '50%',
                 title: ' Search',
-                position: {
-                    x: 500,
-                    y: 60
-                },
+                position: { x: 500, y: 60 },
+                theme: 'energyblue',
                 keyboardCloseKey: 27
             });
             $('#refnosearchwindow').jqxWindow('close');
@@ -191,10 +353,8 @@
                 maxHeight: '75%',
                 maxWidth: '50%',
                 title: ' Search',
-                position: {
-                    x: 500,
-                    y: 60
-                },
+                position: { x: 500, y: 60 },
+                theme: 'energyblue',
                 keyboardCloseKey: 27
             });
             $('#refnosearchwindow1').jqxWindow('close');
@@ -204,11 +364,8 @@
                 maxHeight: '70%',
                 maxWidth: '45%',
                 title: '  Search',
-                position: {
-                    x: 500,
-                    y: 87
-                },
-
+                position: { x: 500, y: 87 },
+                theme: 'energyblue',
                 showCloseButton: true,
                 keyboardCloseKey: 27
             });
@@ -234,20 +391,13 @@
         }
 
         function getTenant(event) {
-            /* if(event.keyCode==19)
-            	{ */
             refsearchContent2('tmainsearch.jsp');
-            //}
         }
 
         function refsearchContent2(url) {
-
             $('#refnosearchwindow1').jqxWindow('open');
-
             $.get(url).done(function(data) {
-                //alert(data);
                 $('#refnosearchwindow1').jqxWindow('setContent', data);
-
             });
         }
 
@@ -256,37 +406,22 @@
         }
 
         function refsearchContent1(url) {
-
             $('#refnosearchwindow').jqxWindow('open');
             $.get(url).done(function(data) {
-                //alert(data);
                 $('#refnosearchwindow').jqxWindow('setContent', data);
-
             });
         }
 
         function funReadOnly() {
             $('#frmTenancyContract input').attr('readonly', true);
             $('#frmTenancyContract select').attr('disabled', true);
-            $('#tenancyContractDate').jqxDateTimeInput({
-                disabled: true
-            });
-            $('#periodFromDate').jqxDateTimeInput({
-                disabled: true
-            });
-            $('#periodToDate').jqxDateTimeInput({
-                disabled: false
-            });
+            $('#tenancyContractDate').jqxDateTimeInput({ disabled: true });
+            $('#periodFromDate').jqxDateTimeInput({ disabled: true });
+            $('#periodToDate').jqxDateTimeInput({ disabled: false });
 
-            $("#termsOfContractGridId").jqxGrid({
-                disabled: true
-            });
-            $("#agentGridId").jqxGrid({
-                disabled: true
-            });
-            $("#paymentDistributionGridId").jqxGrid({
-                disabled: true
-            });
+            $("#termsOfContractGridId").jqxGrid({ disabled: true });
+            $("#agentGridId").jqxGrid({ disabled: true });
+            $("#paymentDistributionGridId").jqxGrid({ disabled: true });
             document.getElementById("formdet").innerText ="Tenancy Contract (TNC)";
             document.getElementById("formdetail").value = "Tenancy Contract";
             document.getElementById("formdetailcode").value = "TNC";
@@ -299,7 +434,6 @@
                 funCreateBtn();
                 $('#txtpropertydocno').val(pdoc);
                 $('#txtproperty').val(pname);
-
             }
         }
 
@@ -309,36 +443,19 @@
 
             $('#txttenant').attr('readonly', true);
             $('#txtproperty').attr('readonly', true);
-            $('#tenancyContractDate').jqxDateTimeInput({
-                disabled: false
-            });
-            $('#periodFromDate').jqxDateTimeInput({
-                disabled: false
-            });
-            $('#periodToDate').jqxDateTimeInput({
-                disabled: false
-            });
+            $('#tenancyContractDate').jqxDateTimeInput({ disabled: false });
+            $('#periodFromDate').jqxDateTimeInput({ disabled: false });
+            $('#periodToDate').jqxDateTimeInput({ disabled: false });
             $('#docno').attr('readonly', true);
-            $("#termsOfContractGridId").jqxGrid({
-                disabled: false
-            });
-            $("#agentGridId").jqxGrid({
-                disabled: false
-            });
-            $("#paymentDistributionGridId").jqxGrid({
-                disabled: false
-            });
-            $("#managementfeeGridId").jqxGrid({
-                disabled: false
-            });
+            $("#termsOfContractGridId").jqxGrid({ disabled: false });
+            $("#agentGridId").jqxGrid({ disabled: false });
+            $("#paymentDistributionGridId").jqxGrid({ disabled: false });
+            $("#managementfeeGridId").jqxGrid({ disabled: false });
 
             if ($("#mode").val() == "E") {
-                //  $("#termsOfContractGridId").jqxGrid('addrow', null, {});
                 $("#agentGridId").jqxGrid('addrow', null, {});
                 $("#paymentDistributionGridId").jqxGrid('addrow', null, {});
-                $('#periodToDate').jqxDateTimeInput({
-                    disabled: false
-                });
+                $('#periodToDate').jqxDateTimeInput({ disabled: false });
             }
 
             if ($("#mode").val() == "A") {
@@ -350,9 +467,7 @@
                 $('#txtnotificationperiod').val('90');
                 $('#txtcontractperiod').val('1');
 
-                $('#periodToDate').jqxDateTimeInput({
-                    disabled: false
-                });
+                $('#periodToDate').jqxDateTimeInput({ disabled: false });
 
                 $("#termsOfContractGridId,#managementfeeGridId").jqxGrid('clear');
                 $("#termsOfContractGridId").jqxGrid('addrow', null, {});
@@ -375,7 +490,6 @@
                 $('#txtadminfeeowner').val('0.00');
                 $('#txtownertotal').val('0.00');
                 $('#txtmngfeeinstmnt').val('1');
-
             }
 			
 			var renewalstatus='<%=renewalstatus%>';
@@ -404,7 +518,7 @@
                  		
         				document.getElementById("txtproperty").value = items.propname;
         				document.getElementById("txtpropertydocno").value = items.propdocno;
- 						var mngp=items.mgmtfeepercent;
+						var mngp=items.mgmtfeepercent;
        					$('#mgmtfeepercent').val(items.mgmtfeepercent);
         				$('#mgmtfeevalue').val(items.mgmtfeevalue);
         				var mgmtfeepercent=$('#mgmtfeepercent').val();
@@ -472,7 +586,7 @@
         }
 
         function funPrintBtn() {
-           
+            
             var print=$("#printchk").val();
             if(parseInt(print)==1){
             	  if (($("#mode").val() == "view") && $("#masterdoc_no").val()!="") {
@@ -555,8 +669,6 @@
         		}
         	
         	if(parseFloat(contractnettotal).toFixed(2)!=parseFloat(paymentdisttotal).toFixed(2)){
-        	//	$.messager.alert('Warning','Net total and payment distribution are not equal');
-        	//	return false;
         	}
         	
         	var mgmtnettotal=$('#mgmtnettotal').val();
@@ -600,8 +712,6 @@
             for (var m = 0; m < rows.length; m++) {
                 chkpaymentmode = $("#paymentDistributionGridId").jqxGrid('getcellvalue', m, 'paymentmethod');
                 chkpaidto = $("#paymentDistributionGridId").jqxGrid('getcellvalue', m, 'paidto');
-                ("paymentmode=" + chkpaymentmode);
-                (chkpaidto);
                 if (chkpaymentmode == "Cash" && chkpaidto == "Owner") {
                     $.messager.alert('warning', 'Please select Self when the payment mode is Cash');
                     return false;
@@ -619,24 +729,20 @@
             var cmbcontractperiod = document.getElementById("cmbcontractperiod").value;
             if (type == "") {
                 document.getElementById("errormsg").innerText = "Type is required ";
-
                 return 0;
             }
 
             if (txttenant == "") {
                 document.getElementById("errormsg").innerText = "Tenant is required ";
-
                 return 0;
             }
             if (txtproperty == "") {
                 document.getElementById("errormsg").innerText = "Property is required ";
-
                 return 0;
             }
 
             if (cmbcontractperiod == "") {
                 document.getElementById("errormsg").innerText = "Contract Period is required ";
-
                 return 0;
             }
             var txtcommisionval = document.getElementById("txtcommisionval").value;
@@ -772,9 +878,6 @@
                 $('#chkvatdistributed').prop('checked',true);
             }
             if (document.getElementById("masterdoc_no").value > 0) {
-                /*  document.getElementById("cmbtenancytype").value=document.getElementById("hidcmbtenancytype").value;
-
-		  document.getElementById("cmbcontractperiod").value=document.getElementById("hidcmbcontractperiod").value; */
                 funchkforedit();
                 $('#termsOfContractDiv').load("termsOfContractGrid.jsp?docno=" + document.getElementById("masterdoc_no").value);
                 $('#agentDiv').load("agentGrid.jsp?docno=" + document.getElementById("masterdoc_no").value);
@@ -800,13 +903,6 @@
                 document.getElementById("errormsg").innerText = "Period From is Mandatory.";
                 return 0;
             }
-            /* 	  		$('#periodToDate').jqxDateTimeInput({disabled: false});
-            	  	   if(inststartday>($('#periodToDate').jqxDateTimeInput('getDate'))){
-            			 	document.getElementById("errormsg").innerText="  Date Should be less than   Date.";
-            				$('#periodToDate').jqxDateTimeInput({disabled: true});
-            			 	return 0;
-            		   }
-            	  		$('#periodToDate').jqxDateTimeInput({disabled: true}); */
             document.getElementById("errormsg").innerText = "";
 
             var startdate = $('#periodFromDate').jqxDateTimeInput('getText');
@@ -1432,297 +1528,220 @@
       	}  
     </script>
 
-    <style>
-        .hidden-scrollbar {
-            overflow: auto;
-            height: 490px;
-        }
-        .user-details-container{
-        	border: 1px solid rgba(0,0,0,0.1);
-        	border-radius: 8px;
-        	padding-left: 10px;
-        	padding-top: 5px;
-        }
-    </style>
-
 </head>
 
-<body onload="setValues();funchkprintConfig();getTenancyTypes();" style="overflow: auto; height: 400px;">
+<body onload="setValues();funchkprintConfig();getTenancyTypes();">
     <div id="mainBG" class="homeContent" data-type="background">
         <form id="frmTenancyContract" action="saveTenancyContract" method="post" autocomplete="off">
             <jsp:include page="../../../header.jsp"></jsp:include>
-            <br />
-            <div class='hidden-scrollbar'>
-                <!-- <div  class='hidden-scrollbar'> -->
-                <div class="container-fluid">
-                    <div class="row">
-                        <!-- style="border-bottom:1px solid #ccc;margin-bottom:4px;" -->
-                        <div class="col-md-3">
-                            <div class="col-md-3">Doc No</div>
-                            <div class="col-md-9">
-                                <input type="text" id="docno" name="docno" style="width: 60%;" value='<s:property value="docno"/>' tabindex="-1" />
-                            </div>
+            <div class='modern-ui hidden-scrollbar'>
+                
+                <!-- Panel 1: General Info -->
+                <div class="middle-panel">
+                    <span class="middle-panel-title">General Info</span>
+                    <div class="field-row">
+                        <label class="lbl-right" style="width:80px;">Doc No</label>
+                        <input type="text" id="docno" name="docno" style="width:120px;" value='<s:property value="docno"/>' tabindex="-1" readonly />
+                        
+                        <label class="lbl-right" style="width:80px; margin-left:15px;">Date</label>
+                        <div style="width: 120px;">
+                            <div id="tenancyContractDate" name="tenancyContractDate" value='<s:property value="tenancyContractDate"/>'></div>
+                            <input type="hidden" id="hidtenancyContractDate" name="hidtenancyContractDate" value='<s:property value="hidtenancyContractDate"/>' />
                         </div>
-                        <div class="col-md-3">
-                            <div class="col-md-3">Date</div>
-                            <div class="col-md-9">
-                                <div id="tenancyContractDate" name="tenancyContractDate" value='<s:property value="tenancyContractDate"/>'></div>
-                                <input type="hidden" id="hidtenancyContractDate" name="hidtenancyContractDate" value='<s:property value="hidtenancyContractDate"/>' />
-                            </div>
+                        
+                        <label class="lbl-right" style="width:80px; margin-left:15px;">Type</label>
+                        <select id="cmbtenancytype" name="cmbtenancytype" style="width: 120px;" value='<s:property value="cmbtenancytype"/>'></select>
+                        <input type="hidden" id="hidcmbtenancytype" name="hidcmbtenancytype" value='<s:property value="hidcmbtenancytype"/>' />
+                        
+                        <div style="margin-left:auto; display:flex; gap:10px; align-items:center; background:#f4f4f4; padding:2px 10px; border-radius:4px;">
+                            <label name="lblcreatedby" id="lblcreatedby" style="font-weight:bold; color:#555; margin:0;"><s:property value="lblcreatedby"/></label>
+                            <label name="lblpostedby" id="lblpostedby" style="font-weight:bold; color:#555; margin:0;"><s:property value="lblpostedby"/></label>
                         </div>
-                        <div class="col-md-3">
-                            <div class="col-md-3">Type</div>
-                            <div class="col-md-9">
-                                <select id="cmbtenancytype" name="cmbtenancytype" style="width: 100%;" value='<s:property value="cmbtenancytype"/>'>
-                                    <!-- <option value="">--Select--</option>
-                                    <option value="1">Residence</option>
-                                    <option value="2">Commercial</option> -->
-                                </select>
-                                <input type="hidden" id="hidcmbtenancytype" name="hidcmbtenancytype" value='<s:property value="hidcmbtenancytype"/>' />
+                        
+                        <label style="margin-left:15px; display:flex; align-items:center; gap:4px; font-weight:bold; font-size:12px; cursor:pointer;">
+                            <input type="checkbox" name="chkvatdistributed" id="chkvatdistributed" onchange="setVatDist();" style="margin:0; width:auto; height:auto!important;" /> Multi Tax Invoice
+                        </label>
+                        <input type="hidden" id="hidchkvatdistributed" name="hidchkvatdistributed" value='<s:property value="hidchkvatdistributed"/>' />
+                    </div>
+                </div>
 
+                <!-- Panel 2: Tenant & Property Selection -->
+                <div style="display:flex; gap:15px; margin-bottom:15px;">
+                    <div class="middle-panel" style="flex:1; margin-bottom:0;">
+                        <span class="middle-panel-title">Tenant</span>
+                        <div class="field-row">
+                            <div class="input-search-container" style="width: 150px;">
+                                <input type="text" id="txttenant" name="txttenant" placeholder="Press F3" value='<s:property value="txttenant"/>' onkeydown="getTenant(event);" />
+                                <svg class="magnifier-icon" onclick="refsearchContent2('tmainsearch.jsp');" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                             </div>
+                            <button class="myButton" type="button" name="btntenantmaster" id="btntenantmaster" style="margin-left:10px;">Master</button>
+                            <input type="hidden" id="txttenantdocno" name="txttenantdocno" value='<s:property value="txttenantdocno"/>' />
                         </div>
-						<div class="col-md-3">
-							<div class="user-details-container">
-								<label name="lblcreatedby" id="lblcreatedby"><s:property value="lblcreatedby"/></label>
-								<label name="lblpostedby" id="lblpostedby"><s:property value="lblpostedby"/></label>
-							</div>
-							<input type="checkbox" name="chkvatdistributed" id="chkvatdistributed" onchange="setVatDist();"/>&nbsp;Multi Tax Invoice
-							<input type="hidden" id="hidchkvatdistributed" name="hidchkvatdistributed" value='<s:property value="hidchkvatdistributed"/>' />
+                        <div class="field-row" style="margin-bottom:0;">
+                            <span style="font-weight: 600; min-height: 50px; display:block;" id="tenantdetail"></span>
                         </div>
                     </div>
 
-                    <div class="row" style="padding: 1.5em 0;">
-
-                        <div class="col-md-5" style="border: 1px #ccc solid; height: 135px; padding-top: 1em;">
-                            <div class="col-md-1">Tenant</div>
-                            <div class="col-md-10">
-                                <input style="width:75%;" type="text" id="txttenant" name="txttenant" placeholder="Press F3 to Search" value='<s:property value="txttenant"/>' onkeydown="getTenant(event);" />
-                                <button class="myButton" type="button" name="btntenantmaster" id="btntenantmaster">Master</button>
-                                <input type="hidden" id="txttenantdocno" name="txttenantdocno" value='<s:property value="txttenantdocno"/>' />
-                                <br /> <span style="height: 50px; font-weight: 600;" id="tenantdetail">
-
-								</span>
+                    <div class="middle-panel" style="flex:1; margin-bottom:0;">
+                        <span class="middle-panel-title">Property</span>
+                        <div class="field-row">
+                            <div class="input-search-container" style="width: 150px;">
+                                <input type="text" id="txtproperty" name="txtproperty" placeholder="Press F3" value='<s:property value="txtproperty"/>' onkeydown="getProperty(event);" />
+                                <svg class="magnifier-icon" onclick="refsearchContent1('pmainsearch.jsp');" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                             </div>
-
+                            <label id="lblmanage" name="lblmanage" style="margin-left:10px; font-weight:bold;"><s:property value="lblmanage"/></label>
+                            <button class="myButton" type="button" name="btnpropertymaster" id="btnpropertymaster" style="margin-left:auto;">Master</button>
+                            <button class="myButton" type="button" name="btnpropertycalculate" id="btnpropertycalculate" style="margin-left:10px;">Calculate</button>
+                            <input type="hidden" id="txtpropertydocno" name="txtpropertydocno" value='<s:property value="txtpropertydocno"/>' />
                         </div>
-                        <div class="col-md-1"></div>
-
-                        <div class="col-md-6" style="border: 1px #ccc solid; height: 135px; padding-top: 1em;">
-
-                            <div class="col-md-1">Property</div>
-                            <div class="col-md-10">
-                                <input type="text" id="txtproperty" name="txtproperty" style="width: 50%;" placeholder="Press F3 to Search" value='<s:property value="txtproperty"/>' onkeydown="getProperty(event);" />
-                                <label id="lblmanage" name="lblmanage"><s:property value="lblmanage"/></label>
-                                <button class="myButton" type="button" name="btnpropertymaster" id="btnpropertymaster">Master</button>
-                                <button class="myButton" type="button" name="btnpropertycalculate" id="btnpropertycalculate">Calculate</button>
-                                <input type="hidden" id="txtpropertydocno" name="txtpropertydocno" value='<s:property value="txtpropertydocno"/>' />
-                                <br /> <span style="height: 50px; font-weight: 600;" id="propertydetail">
-
-								</span>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="row">
-
-                        <div class="col-md-5">
-                            <div class="col-md-3">Contract Period</div>
-                            <div class="col-md-9">
-                                <div class="col-md-6">
-                                    <select id="cmbcontractperiod" name="cmbcontractperiod" style="width: 100%;" onchange="funInsEndDate()" value='<s:property value="cmbcontractperiod"/>'>
-                                        <option value="">--Select--</option>
-                                        <option value="1">Years</option>
-                                        <option value="2">Months</option>
-                                        <option value="3">Days</option>
-                                    </select>
-                                    <input type="hidden" id="hidcmbcontractperiod" name="hidcmbcontractperiod" value='<s:property value="hidcmbcontractperiod"/>' />
-                                </div>
-                                <div class="col-md-6">
-                                    <input type="text" id="txtcontractperiod" name="txtcontractperiod" style="width: 100%; text-align: center;" onkeypress="isNumber(event);" onblur="funInsEndDate()" value='<s:property value="txtcontractperiod"/>' />
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="col-md-3">Period From</div>
-                            <div class="col-md-9">
-                                <div id="periodFromDate" name="periodFromDate" onchange="funInsEndDate()" value='<s:property value="periodFromDate"/>'></div>
-                                <input type="hidden" id="hidperiodFromDate" name="hidperiodFromDate" value='<s:property value="hidperiodFromDate"/>' />
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="col-md-3">To</div>
-                            <div class="col-md-9">
-                                <div id="periodToDate" name="periodToDate" value='<s:property value="periodToDate"/>'></div>
-                                <input type="hidden" id="hidPeriodToDate" name="hidPeriodToDate" value='<s:property value="hidPeriodToDate"/>' />
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="col-md-5">Notification Days</div>
-                            <div class="col-md-7">
-                                <input type="text" id="txtnotificationperiod" name="txtnotificationperiod" onkeypress="isNumber(event);" style="width: 60%; text-align: right;" value='<s:property value="txtnotificationperiod"/>' />
-                            </div>
+                        <div class="field-row" style="margin-bottom:0;">
+                            <span style="font-weight: 600; min-height: 50px; display:block;" id="propertydetail"></span>
                         </div>
                     </div>
+                </div>
 
-                    <div class="row">
-                        <table width="100%">
-                            <tr>
-                                <td width="50%">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">Terms of Contract</div>
-                                        <div class="panel-body">
-                                            <div id="termsOfContractDiv">
-                                                <jsp:include page="termsOfContractGrid.jsp"></jsp:include>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-3">Commission Fee%</div>
-                                                <div class="col-md-3">
-                                                    <input type="text" id="txtcommisionperc" name="txtcommisionperc" style="width: 100%; text-align: right;" onkeyup="calc_commision(this,event)" value='<s:property value="txtcommisionperc"/>' />
-                                                </div>
-                                                <div class="col-md-3">Commission Value</div>
-                                                <div class="col-md-3">
-                                                    <input type="text" id="txtcommisionval" name="txtcommisionval" style="width: 100%; text-align: right;" onkeypress="isNumber(event);" value='<s:property value="txtcommisionval"/>' onkeyup="calcCommissionPercent();"/>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-3">VAT Type</div>
-                                                <div class="col-md-3">
-                                                	<select name="cmbcommvattype" id="cmbcommvattype" value='<s:property value="cmbcommvattype"/>' onchange="funSetCommVAT();">
-                                                		<option value="">--Select--</option>
-                                                		<option value="Inclusive">Inclusive</option>
-                                                		<option value="Exclusive">Exclusive</option>
-                                                	</select>
-                                                	<input type="hidden" name="hidcmbcommvattype" id="hidcmbcommvattype" value='<s:property value="hidcmbcommvattype"/>'>  
-                                                </div>
-                                                <div class="col-md-3">VAT Amount</div>
-                                                <div class="col-md-3">
-                                                    <input type="text" id="commvatamount" name="commvatamount" style="width: 100%; text-align: right;" onkeypress="isNumber(event);" value='<s:property value="commvatamount"/>' readonly="readonly"/>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-offset-6 col-md-3">Net Total</div>
-                                                <div class="col-md-3">
-                                                	<input type="text" id="txtnettotal" name="txtnettotal" style="width: 100%; text-align: right;" onkeypress="isNumber(event);" value='<s:property value="txtnettotal"/>' />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td width="50%">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">From Owner</div>
-                                        <div class="panel-body">
-                                            <div class=" col-md-6">
-                                                <div class="row">
-                                                    <div class="col-md-7">Management Fee%</div>
-                                                    <div class="col-md-5" style="text-align:right;">
-                                                    	<!-- onkeypress="calc_manageval();" -->
-                                                        <input type="text" id="txtmanagementperc" name="txtmanagementperc" style="width: 100%; text-align: right;"  value='<s:property value="txtmanagementperc"/>' onchange="setMgmtFee();"/>
-                                                    	<label name="lblmgmtfeepercent" id="lblmgmtfeepercent" hidden="true" style="text-align:right;"></label>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-7">Management Fee Value</div>
-                                                    <div class="col-md-5"  style="text-align:right;">
-                                                        <input type="text" id="txtmanagementval" name="txtmanagementval" style="width: 100%; text-align: right;" value='<s:property value="txtmanagementval"/>'  onchange="setMgmtFee();"/>
-                                                    	<label name="lblmgmtfeevalue" id="lblmgmtfeevalue" hidden="true" style="text-align:right;"></label>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-7">Administration Fee</div>
-                                                    <div class="col-md-5">
-                                                    	<!-- onkeyup="calc_manageval();" -->
-                                                        <input type="text" id="txtadminfeeowner" name="txtadminfeeowner" style="width: 100%; text-align: right;"  value='<s:property value="txtadminfeeowner"/>'  onchange="setMgmtFee();"/>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-7">Total</div>
-                                                    <div class="col-md-5">
-                                                        <input type="text" id="txtownertotal" name="txtownertotal" style="width: 100%; text-align: right;" onkeypress="isNumber(event);" value='<s:property value="txtownertotal"/>' />
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-7">VAT Type</div>
-                                                    <div class="col-md-5">
-                                                        <select name="cmbmgmtvattype" id="cmbmgmtvattype" value='<s:property value="cmbmgmtvattype"/>' onchange="funSetMgmtVATType();" style="width:100%;">
-                                                        	<option value="">--Select--</option>
-                                                        	<option value="Inclusive">Inclusive</option>
-                                                        	<option value="Exclusive">Exclusive</option>
-                                                        </select>
-                                                        <input type="hidden" name="hidcmbmgmtvattype" id="hidcmbmgmtvattype" value='<s:property value="hidcmbmgmtvattype"/>'>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-7">VAT Amount</div>
-                                                    <div class="col-md-5">
-                                                        <input type="text" id="mgmtvatamount" name="mgmtvatamount" style="width: 100%; text-align: right;" value='<s:property value="mgmtvatamount"/>' readonly="readonly"/>
-                                                    </div>
-                                                </div>
-												<div class="row">
-                                                    <div class="col-md-7">Net Total</div>
-                                                    <div class="col-md-5">
-                                                        <input type="text" id="mgmtnettotal" name="mgmtnettotal" style="width: 100%; text-align: right;" onchange="LoadManagementfeeGrid()" value='<s:property value="mgmtnettotal"/>' />
-                                                    </div>
-                                                </div>                                                
-                                            </div>
-                                            <div class="row">
-                                                <div class=" col-md-6">
-                                                    <div class="col-md-4">Installments</div>
-                                                    <div class="col-md-5">
-                                                        <input type="text" id="txtmngfeeinstmnt" name="txtmngfeeinstmnt" style="width: 100%; text-align: right;" onchange="LoadManagementfeeGrid()" value='<s:property value="txtmngfeeinstmnt"/>' />
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div id="mngDiv">
-                                                        <jsp:include page="managementfeeGrid.jsp"></jsp:include>
-                                                    </div>
-                                                </div>
-                                            </div>
+                <!-- Panel 3: Contract Period -->
+                <div class="middle-panel">
+                    <span class="middle-panel-title">Contract Period</span>
+                    <div class="field-row" style="margin-bottom:0;">
+                        <label class="lbl-right" style="width:100px;">Period</label>
+                        <select id="cmbcontractperiod" name="cmbcontractperiod" style="width:100px;" onchange="funInsEndDate()" value='<s:property value="cmbcontractperiod"/>'>
+                            <option value="">--Select--</option>
+                            <option value="1">Years</option>
+                            <option value="2">Months</option>
+                            <option value="3">Days</option>
+                        </select>
+                        <input type="hidden" id="hidcmbcontractperiod" name="hidcmbcontractperiod" value='<s:property value="hidcmbcontractperiod"/>' />
+                        <input type="text" id="txtcontractperiod" name="txtcontractperiod" style="width:60px; text-align:center; margin-left:10px;" onkeypress="isNumber(event);" onblur="funInsEndDate()" value='<s:property value="txtcontractperiod"/>' />
+                        
+                        <label class="lbl-right" style="width:80px; margin-left:15px;">Period From</label>
+                        <div style="width:120px;">
+                            <div id="periodFromDate" name="periodFromDate" onchange="funInsEndDate()" value='<s:property value="periodFromDate"/>'></div>
+                            <input type="hidden" id="hidperiodFromDate" name="hidperiodFromDate" value='<s:property value="hidperiodFromDate"/>' />
+                        </div>
+                        
+                        <label class="lbl-right" style="width:40px; margin-left:15px;">To</label>
+                        <div style="width:120px;">
+                            <div id="periodToDate" name="periodToDate" value='<s:property value="periodToDate"/>'></div>
+                            <input type="hidden" id="hidPeriodToDate" name="hidPeriodToDate" value='<s:property value="hidPeriodToDate"/>' />
+                        </div>
 
-                                            <div id="agentDiv">
-                                                <jsp:include page="agentGrid.jsp"></jsp:include>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </td>
-                            </tr>
-                        </table>
+                        <label class="lbl-right" style="width:120px; margin-left:auto;">Notification Days</label>
+                        <input type="text" id="txtnotificationperiod" name="txtnotificationperiod" onkeypress="isNumber(event);" style="width:80px; text-align:right;" value='<s:property value="txtnotificationperiod"/>' />
                     </div>
+                </div>
 
-                    <div class="row">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">Payment Distribution</div>
-                            <div class="panel-body">
-                                <div class="row">
-                                    <div class=" col-md-6">
-                                        <div class="col-md-3">No. Of Cheque</div>
-                                        <div class="col-md-2">
-                                            <input type="text" id="txtnumofcheque" name="txtnumofcheque" style="width: 100%; text-align: center;" onkeypress="isNumber(event);" value='<s:property value="txtnumofcheque"/>' />
-                                        </div>
-                                        <div class="col-md-2">
-                                            <input type="button" class="btn btn-info" id="btnfillgrid" value="Fill" style="width: 100%;" onclick="fillgrid();">
-                                        </div>
-                                    </div>
+                <!-- Split layout for Terms and From Owner -->
+                <div style="display:flex; gap:15px; margin-bottom:15px;">
+                    <!-- Terms of Contract -->
+                    <div class="middle-panel" style="flex:1; margin-bottom:0;">
+                        <span class="middle-panel-title">Terms of Contract</span>
+                        <div id="termsOfContractDiv" class="grid-container" style="border:none; margin-bottom:10px;">
+                            <jsp:include page="termsOfContractGrid.jsp"></jsp:include>
+                        </div>
+                        <div class="field-row">
+                            <label class="lbl-right" style="width:120px;">Commission Fee %</label>
+                            <input type="text" id="txtcommisionperc" name="txtcommisionperc" style="width:80px; text-align:right;" onkeyup="calc_commision(this,event)" value='<s:property value="txtcommisionperc"/>' />
+                            
+                            <label class="lbl-right" style="width:120px; margin-left:15px;">Commission Value</label>
+                            <input type="text" id="txtcommisionval" name="txtcommisionval" style="width:100px; text-align:right;" onkeypress="isNumber(event);" value='<s:property value="txtcommisionval"/>' onkeyup="calcCommissionPercent();"/>
+                        </div>
+                        <div class="field-row">
+                            <label class="lbl-right" style="width:120px;">VAT Type</label>
+                            <select name="cmbcommvattype" id="cmbcommvattype" style="width:100px;" value='<s:property value="cmbcommvattype"/>' onchange="funSetCommVAT();">
+                                <option value="">--Select--</option>
+                                <option value="Inclusive">Inclusive</option>
+                                <option value="Exclusive">Exclusive</option>
+                            </select>
+                            <input type="hidden" name="hidcmbcommvattype" id="hidcmbcommvattype" value='<s:property value="hidcmbcommvattype"/>'>
+                            
+                            <label class="lbl-right" style="width:120px; margin-left:15px;">VAT Amount</label>
+                            <input type="text" id="commvatamount" name="commvatamount" style="width:100px; text-align:right;" onkeypress="isNumber(event);" value='<s:property value="commvatamount"/>' readonly="readonly"/>
+                        </div>
+                        <div class="field-row" style="margin-bottom:0; justify-content:flex-end;">
+                            <label class="lbl-right" style="width:120px;">Net Total</label>
+                            <input type="text" id="txtnettotal" name="txtnettotal" style="width:100px; text-align:right;" onkeypress="isNumber(event);" value='<s:property value="txtnettotal"/>' />
+                        </div>
+                    </div>
+                    
+                    <!-- From Owner -->
+                    <div class="middle-panel" style="flex:1; margin-bottom:0;">
+                        <span class="middle-panel-title">From Owner</span>
+                        <div class="field-row">
+                            <label class="lbl-right" style="width:140px;">Management Fee %</label>
+                            <input type="text" id="txtmanagementperc" name="txtmanagementperc" style="width:80px; text-align:right;" value='<s:property value="txtmanagementperc"/>' onchange="setMgmtFee();"/>
+                            <label name="lblmgmtfeepercent" id="lblmgmtfeepercent" hidden="true" style="text-align:right; font-weight:bold;"></label>
+                        </div>
+                        <div class="field-row">
+                            <label class="lbl-right" style="width:140px;">Management Fee Val</label>
+                            <input type="text" id="txtmanagementval" name="txtmanagementval" style="width:100px; text-align:right;" value='<s:property value="txtmanagementval"/>' onchange="setMgmtFee();"/>
+                            <label name="lblmgmtfeevalue" id="lblmgmtfeevalue" hidden="true" style="text-align:right; font-weight:bold;"></label>
+                        </div>
+                        <div class="field-row">
+                            <label class="lbl-right" style="width:140px;">Administration Fee</label>
+                            <input type="text" id="txtadminfeeowner" name="txtadminfeeowner" style="width:100px; text-align:right;" value='<s:property value="txtadminfeeowner"/>' onchange="setMgmtFee();"/>
+                        </div>
+                        <div class="field-row">
+                            <label class="lbl-right" style="width:140px;">Total</label>
+                            <input type="text" id="txtownertotal" name="txtownertotal" style="width:100px; text-align:right;" onkeypress="isNumber(event);" value='<s:property value="txtownertotal"/>' />
+                        </div>
+                        <div class="field-row">
+                            <label class="lbl-right" style="width:140px;">VAT Type</label>
+                            <select name="cmbmgmtvattype" id="cmbmgmtvattype" style="width:100px;" value='<s:property value="cmbmgmtvattype"/>' onchange="funSetMgmtVATType();">
+                                <option value="">--Select--</option>
+                                <option value="Inclusive">Inclusive</option>
+                                <option value="Exclusive">Exclusive</option>
+                            </select>
+                            <input type="hidden" name="hidcmbmgmtvattype" id="hidcmbmgmtvattype" value='<s:property value="hidcmbmgmtvattype"/>'>
+                        </div>
+                        <div class="field-row">
+                            <label class="lbl-right" style="width:140px;">VAT Amount</label>
+                            <input type="text" id="mgmtvatamount" name="mgmtvatamount" style="width:100px; text-align:right;" value='<s:property value="mgmtvatamount"/>' readonly="readonly"/>
+                        </div>
+                        <div class="field-row">
+                            <label class="lbl-right" style="width:140px;">Net Total</label>
+                            <input type="text" id="mgmtnettotal" name="mgmtnettotal" style="width:100px; text-align:right;" onchange="LoadManagementfeeGrid()" value='<s:property value="mgmtnettotal"/>' />
+                        </div>
+                        
+                        <div class="field-row" style="margin-bottom:0; align-items:flex-start;">
+                            <div style="flex:1; border-right:1px solid #c5d3e0; padding-right:10px;">
+                                <div class="field-row" style="margin-bottom:5px;">
+                                    <label class="lbl-right" style="width:80px;">Installments</label>
+                                    <input type="text" id="txtmngfeeinstmnt" name="txtmngfeeinstmnt" style="width:80px; text-align:right;" onchange="LoadManagementfeeGrid()" value='<s:property value="txtmngfeeinstmnt"/>' />
                                 </div>
-                                <div id="paymentDistributionDiv">
-                                    <jsp:include page="paymentDistributionGrid.jsp"></jsp:include>
+                                <div id="mngDiv" class="grid-container" style="border:none;">
+                                    <jsp:include page="managementfeeGrid.jsp"></jsp:include>
                                 </div>
-                                <div class="pull-right" style="margin-top:10px;">
-                                    Holding Security
-                                    <input type="text" name="holdingsecurity" id="holdingsecurity" value='<s:property value="holdingsecurity"/>' style="text-align:right;">
+                            </div>
+                            <div style="flex:1; padding-left:10px;">
+                                <div id="agentDiv" class="grid-container" style="border:none;">
+                                    <jsp:include page="agentGrid.jsp"></jsp:include>
                                 </div>
-
                             </div>
                         </div>
                     </div>
-					<input type="hidden" id="renewalstatus" name="renewalstatus" value='<s:property value="renewalstatus"/>' />
-					<input type="hidden" id="contractdocno" name="contractdocno" value='<s:property value="contractdocno"/>' />
+                </div>
+
+                <!-- Payment Distribution Panel -->
+                <div class="middle-panel">
+                    <span class="middle-panel-title">Payment Distribution</span>
+                    <div class="field-row">
+                        <label class="lbl-right" style="width:100px;">No. Of Cheque</label>
+                        <input type="text" id="txtnumofcheque" name="txtnumofcheque" style="width:80px; text-align:center;" onkeypress="isNumber(event);" value='<s:property value="txtnumofcheque"/>' />
+                        <button type="button" class="myButton" id="btnfillgrid" onclick="fillgrid();" style="margin-left:10px;">Fill</button>
+                        
+                        <label class="lbl-right" style="width:120px; margin-left:auto;">Holding Security</label>
+                        <input type="text" name="holdingsecurity" id="holdingsecurity" value='<s:property value="holdingsecurity"/>' style="width:120px; text-align:right;">
+                    </div>
+                    <div id="paymentDistributionDiv" class="grid-container" style="border:none;">
+                        <jsp:include page="paymentDistributionGrid.jsp"></jsp:include>
+                    </div>
+                </div>
+
+                <!-- Hidden inputs strictly grouped at the end -->
+                <div style="display:none;">
+                    <input type="hidden" id="renewalstatus" name="renewalstatus" value='<s:property value="renewalstatus"/>' />
+                    <input type="hidden" id="contractdocno" name="contractdocno" value='<s:property value="contractdocno"/>' />
                     <input type="hidden" id="mode" name="mode" value='<s:property value="mode"/>' />
                     <input type="hidden" id="deleted" name="deleted" value='<s:property value="deleted"/>' />
                     <input type="hidden" id="msg" name="msg" value='<s:property value="msg"/>' />
@@ -1735,26 +1754,17 @@
                     <input type="hidden" id="hidnettotal" name="hidnettotal" />
                     <input type="hidden" id="hidrent" name="hidrent" />
                     <input type="hidden" id="mngfeegridlen" name="mngfeegridlen" value='<s:property value="mngfeegridlen"/>' />
-					<input type="hidden" id="chktenancychequeowner" name="chktenancychequeowner" value='<s:property value="chktenancychequeowner"/>' />
-					<input type="hidden" id="mgmtfeepercent" name="mgmtfeepercent" value='<s:property value="mgmtfeepercent"/>' />
-					<input type="hidden" id="mgmtfeevalue" name="mgmtfeevalue" value='<s:property value="mgmtfeevalue"/>' />
-					<input type="hidden" id="printchk" name="printchk" value='<s:property value="printchk"/>' />
+                    <input type="hidden" id="chktenancychequeowner" name="chktenancychequeowner" value='<s:property value="chktenancychequeowner"/>' />
+                    <input type="hidden" id="mgmtfeepercent" name="mgmtfeepercent" value='<s:property value="mgmtfeepercent"/>' />
+                    <input type="hidden" id="mgmtfeevalue" name="mgmtfeevalue" value='<s:property value="mgmtfeevalue"/>' />
+                    <input type="hidden" id="printchk" name="printchk" value='<s:property value="printchk"/>' />
                 </div>
             </div>
         </form>
-        <div id="refnosearchwindow1">
-            <div></div>
-        </div>
-        <div id="refnosearchwindow">
-            <div></div>
-        </div>
-        <div id="salespersonwindow">
-            <div></div>
-        </div>
-<div id="printWindow">
-	<div></div><div></div>
-</div> 
+        
+        <div id="refnosearchwindow1"><div></div></div>
+        <div id="refnosearchwindow"><div></div></div>
+        <div id="salespersonwindow"><div></div></div>
     </div>
 </body>
-
 </html>

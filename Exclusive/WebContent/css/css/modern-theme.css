@@ -1,0 +1,562 @@
+/* ============================================================
+   modern-theme.css  –  INK IT ERP Global UI Modernisation
+   Drop this into includes.jsp and menu.jsp to skin the entire
+   application without touching any backend or JS logic.
+   ============================================================ */
+
+/* ---------- Google Font ---------- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* ---------- Design Tokens ---------- */
+:root {
+  --c-primary:       #2563eb;
+  --c-primary-h:     #1d4ed8;
+  --c-primary-light: #eff6ff;
+  --c-primary-ring:  rgba(37,99,235,0.14);
+  --c-bg:            #f1f5f9;
+  --c-surface:       #ffffff;
+  --c-border:        #e2e8f0;
+  --c-border-dark:   #cbd5e1;
+  --c-text:          #1e293b;
+  --c-text-muted:    #64748b;
+  --c-success:       #10b981;
+  --c-error:         #ef4444;
+  --c-warning:       #f59e0b;
+  --radius-sm:       4px;
+  --radius:          6px;
+  --radius-lg:       10px;
+  --shadow-sm:       0 1px 3px rgba(0,0,0,0.08);
+  --shadow:          0 4px 14px rgba(0,0,0,0.09);
+  --shadow-lg:       0 10px 40px rgba(0,0,0,0.13);
+}
+
+/* ---------- Base Typography ---------- */
+body,
+html,
+input,
+select,
+textarea,
+button,
+label,
+a,
+td,
+th,
+span,
+div,
+li,
+p {
+  font-family: 'Inter', 'Segoe UI', 'Roboto', Arial, sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--c-bg) !important;
+  color: var(--c-text) !important;
+}
+
+/* ---------- Scrollbar ---------- */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--c-bg); }
+::-webkit-scrollbar-thumb { background: var(--c-border-dark); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+/* ============================================================
+   FORM CONTROLS
+   ============================================================ */
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="number"],
+input[type="search"],
+input[type="tel"],
+input[type="url"],
+textarea {
+  border: 1.5px solid var(--c-border) !important;
+  border-radius: var(--radius) !important;
+  padding: 5px 9px !important;
+  background: var(--c-surface) !important;
+  color: var(--c-text) !important;
+  font-size: 12.5px !important;
+  height: auto !important;
+  transition: border-color 0.18s, box-shadow 0.18s !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus,
+input[type="search"]:focus,
+textarea:focus {
+  border-color: var(--c-primary) !important;
+  box-shadow: 0 0 0 3px var(--c-primary-ring) !important;
+}
+input[readonly],
+input[disabled],
+textarea[readonly],
+textarea[disabled] {
+  background: #f8fafc !important;
+  color: var(--c-text-muted) !important;
+  cursor: default !important;
+}
+
+select {
+  border: 1.5px solid var(--c-border) !important;
+  border-radius: var(--radius) !important;
+  padding: 4px 8px !important;
+  background: var(--c-surface) !important;
+  color: var(--c-text) !important;
+  font-size: 12.5px !important;
+  transition: border-color 0.18s !important;
+  appearance: auto !important;
+  cursor: pointer !important;
+}
+select:focus {
+  border-color: var(--c-primary) !important;
+  box-shadow: 0 0 0 3px var(--c-primary-ring) !important;
+  outline: none !important;
+}
+
+label {
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  color: var(--c-text) !important;
+}
+
+/* ============================================================
+   TABLES  (skip jqx grid internal tables)
+   ============================================================ */
+table:not([class*="jqx"]):not([class*="easyui"]) {
+  border-collapse: collapse !important;
+}
+table:not([class*="jqx"]):not([class*="easyui"]) th {
+  background: var(--c-primary) !important;
+  color: #fff !important;
+  font-weight: 600 !important;
+  font-size: 11.5px !important;
+  padding: 7px 10px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.4px !important;
+  border: none !important;
+}
+table:not([class*="jqx"]):not([class*="easyui"]) td {
+  padding: 6px 10px !important;
+  font-size: 12.5px !important;
+  color: var(--c-text) !important;
+  border-bottom: 1px solid var(--c-border) !important;
+  border-right: none !important;
+  border-left: none !important;
+}
+table:not([class*="jqx"]):not([class*="easyui"]) tr:nth-child(even) td {
+  background: #f8fafc !important;
+}
+table:not([class*="jqx"]):not([class*="easyui"]) tr:hover td {
+  background: var(--c-primary-light) !important;
+  transition: background 0.12s !important;
+}
+
+/* ============================================================
+   JQX GRID
+   ============================================================ */
+.jqx-grid {
+  border: 1px solid var(--c-border) !important;
+  border-radius: var(--radius) !important;
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif !important;
+  font-size: 12px !important;
+  box-shadow: var(--shadow-sm) !important;
+}
+.jqx-grid-column-header,
+.jqx-grid-column-header .jqx-widget-content {
+  background: linear-gradient(180deg, #f8fafc, #f1f5f9) !important;
+  color: var(--c-text) !important;
+  font-weight: 600 !important;
+  font-size: 11.5px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.4px !important;
+  border-bottom: 2px solid var(--c-border) !important;
+  border-right: 1px solid var(--c-border) !important;
+}
+.jqx-grid-cell,
+.jqx-grid-cell .jqx-grid-cell-value {
+  color: var(--c-text) !important;
+  font-size: 12px !important;
+  border-bottom: 1px solid #f1f5f9 !important;
+}
+.jqx-grid-cell-hover {
+  background: var(--c-primary-light) !important;
+}
+.jqx-grid-cell-selected,
+.jqx-fill-state-pressed,
+.jqx-fill-state-pressed.jqx-widget-content {
+  background: #dbeafe !important;
+  color: var(--c-text) !important;
+  border-color: #bfdbfe !important;
+}
+.jqx-grid-pager {
+  background: #f8fafc !important;
+  border-top: 1px solid var(--c-border) !important;
+}
+.jqx-grid-pager .jqx-button {
+  border-radius: var(--radius-sm) !important;
+  border: 1px solid var(--c-border) !important;
+}
+.jqx-grid-filter-row input[type="text"] {
+  height: 22px !important;
+  padding: 2px 6px !important;
+}
+
+/* ============================================================
+   JQX WINDOW / MODAL
+   ============================================================ */
+.jqx-window {
+  border: 1px solid var(--c-border) !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--shadow-lg) !important;
+  overflow: hidden !important;
+}
+.jqx-window-header,
+.jqx-window-header.jqx-widget-header {
+  background: linear-gradient(135deg, var(--c-primary), var(--c-primary-h)) !important;
+  color: #fff !important;
+  font-weight: 600 !important;
+  font-size: 13px !important;
+  padding: 10px 16px !important;
+  border: none !important;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0 !important;
+}
+.jqx-window-content,
+.jqx-window-content.jqx-widget-content {
+  background: var(--c-surface) !important;
+  padding: 16px !important;
+}
+.jqx-window .jqx-close-button {
+  color: rgba(255,255,255,0.8) !important;
+  filter: none !important;
+}
+.jqx-window .jqx-close-button:hover { color: #fff !important; }
+
+/* ---------- jqx date-time input ---------- */
+.jqx-datetimeinput,
+.jqx-datetimeinput.jqx-widget {
+  border: 1.5px solid var(--c-border) !important;
+  border-radius: var(--radius) !important;
+  background: var(--c-surface) !important;
+}
+.jqx-datetimeinput.jqx-fill-state-focused {
+  border-color: var(--c-primary) !important;
+  box-shadow: 0 0 0 3px var(--c-primary-ring) !important;
+}
+.jqx-datetimeinput .jqx-action-button {
+  background: #f8fafc !important;
+  border-left: 1px solid var(--c-border) !important;
+}
+
+/* ---------- jqx dropdown list ---------- */
+.jqx-dropdownlist-state-normal,
+.jqx-dropdownlist {
+  border: 1.5px solid var(--c-border) !important;
+  border-radius: var(--radius) !important;
+  background: var(--c-surface) !important;
+}
+.jqx-dropdownlist-state-focused {
+  border-color: var(--c-primary) !important;
+  box-shadow: 0 0 0 3px var(--c-primary-ring) !important;
+}
+
+/* ---------- jqx buttons ---------- */
+.jqx-button,
+.jqx-fill-state-normal.jqx-button {
+  border: 1px solid var(--c-border) !important;
+  background: var(--c-surface) !important;
+  color: var(--c-text) !important;
+  border-radius: var(--radius) !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  transition: all 0.18s !important;
+}
+.jqx-button:hover,
+.jqx-fill-state-hover.jqx-button {
+  background: var(--c-primary-light) !important;
+  border-color: var(--c-primary) !important;
+  color: var(--c-primary) !important;
+}
+.jqx-fill-state-pressed.jqx-button {
+  background: var(--c-primary) !important;
+  color: #fff !important;
+  border-color: var(--c-primary-h) !important;
+}
+
+/* ---------- jqx checkbox ---------- */
+.jqx-checkbox .jqx-checkbox-default {
+  border: 1.5px solid var(--c-border-dark) !important;
+  border-radius: 3px !important;
+  background: var(--c-surface) !important;
+}
+.jqx-checkbox .jqx-checkbox-default.jqx-fill-state-checked {
+  background: var(--c-primary) !important;
+  border-color: var(--c-primary) !important;
+}
+
+/* ---------- jqx tree ---------- */
+.jqx-tree-item-hover { background: var(--c-primary-light) !important; }
+.jqx-tree-item-selected { background: #dbeafe !important; color: var(--c-primary) !important; }
+
+/* ============================================================
+   EASYUI – TABS
+   ============================================================ */
+.tabs-container .tabs-header,
+.tabs-header {
+  background: var(--c-surface) !important;
+  border-bottom: 2px solid var(--c-border) !important;
+  padding: 0 4px !important;
+}
+.tabs-header .tabs li {
+  border-radius: var(--radius) var(--radius) 0 0 !important;
+  background: transparent !important;
+  border: 1px solid transparent !important;
+  margin-right: 2px !important;
+  transition: background 0.15s !important;
+}
+.tabs-header .tabs li a.tabs-inner {
+  color: var(--c-text-muted) !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  padding: 6px 14px !important;
+}
+.tabs-header .tabs li:hover a.tabs-inner {
+  color: var(--c-primary) !important;
+}
+.tabs-header .tabs li.tabs-selected {
+  background: var(--c-surface) !important;
+  border: 1px solid var(--c-border) !important;
+  border-bottom: 2px solid var(--c-primary) !important;
+  margin-bottom: -1px !important;
+}
+.tabs-header .tabs li.tabs-selected a.tabs-inner {
+  color: var(--c-primary) !important;
+  font-weight: 600 !important;
+}
+.tabs-header .tabs li .tabs-close {
+  opacity: 0.5 !important;
+  transition: opacity 0.15s !important;
+}
+.tabs-header .tabs li .tabs-close:hover { opacity: 1 !important; }
+
+/* ============================================================
+   EASYUI – MESSAGER / DIALOG
+   ============================================================ */
+.messager,
+.window {
+  border: 1px solid var(--c-border) !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--shadow-lg) !important;
+  overflow: hidden !important;
+}
+.messager .window-header,
+.window .window-header,
+.messager-header {
+  background: linear-gradient(135deg, var(--c-primary), var(--c-primary-h)) !important;
+  color: #fff !important;
+  font-weight: 600 !important;
+  font-size: 13px !important;
+  padding: 10px 16px !important;
+  border: none !important;
+}
+.messager .window-body,
+.messager-body {
+  background: var(--c-surface) !important;
+  padding: 20px !important;
+  font-size: 13px !important;
+  color: var(--c-text) !important;
+}
+.messager-icon {
+  font-size: 24px !important;
+}
+.dialog-button {
+  background: #f8fafc !important;
+  border-top: 1px solid var(--c-border) !important;
+  padding: 10px 16px !important;
+}
+.l-btn,
+a.l-btn {
+  background: var(--c-primary) !important;
+  border: none !important;
+  color: #fff !important;
+  border-radius: 20px !important;
+  padding: 6px 22px !important;
+  font-weight: 600 !important;
+  font-size: 12px !important;
+  cursor: pointer !important;
+  text-decoration: none !important;
+  transition: background 0.18s !important;
+  display: inline-block !important;
+  line-height: 1.5 !important;
+}
+.l-btn:hover,
+a.l-btn:hover {
+  background: var(--c-primary-h) !important;
+  color: #fff !important;
+}
+.l-btn-plain,
+a.l-btn-plain {
+  background: #f1f5f9 !important;
+  color: var(--c-text) !important;
+}
+.l-btn-plain:hover { background: var(--c-border) !important; }
+
+/* ============================================================
+   ACTION BAR BUTTONS (header.jsp  .action-btn)
+   ============================================================ */
+.action-btn {
+  background: var(--c-surface) !important;
+  border: 1.5px solid var(--c-border) !important;
+  color: var(--c-text) !important;
+  border-radius: 20px !important;
+  padding: 5px 14px !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  transition: all 0.18s !important;
+  box-shadow: var(--shadow-sm) !important;
+}
+.action-btn:hover {
+  background: var(--c-primary-light) !important;
+  border-color: var(--c-primary) !important;
+  color: var(--c-primary) !important;
+  box-shadow: var(--shadow) !important;
+}
+.action-btn:active {
+  transform: translateY(1px) !important;
+  box-shadow: none !important;
+}
+.action-btn svg {
+  width: 13px !important;
+  height: 13px !important;
+  fill: currentColor !important;
+}
+#btnSave.action-btn {
+  background: var(--c-primary) !important;
+  color: #fff !important;
+  border-color: var(--c-primary-h) !important;
+}
+#btnSave.action-btn:hover {
+  background: var(--c-primary-h) !important;
+}
+#btnDelete.action-btn {
+  color: var(--c-error) !important;
+  border-color: #fecaca !important;
+}
+#btnDelete.action-btn:hover {
+  background: #fef2f2 !important;
+  border-color: var(--c-error) !important;
+}
+
+/* ============================================================
+   HOME CONTENT WRAPPER
+   ============================================================ */
+#mainBG,
+.homeContent {
+  background: var(--c-bg) !important;
+  padding: 0 !important;
+}
+.HeadIcons,
+#full.HeadIcons {
+  background: var(--c-surface) !important;
+  border-bottom: 1px solid var(--c-border) !important;
+  box-shadow: var(--shadow-sm) !important;
+  border-radius: 0 !important;
+}
+.action-bar {
+  background: var(--c-surface) !important;
+  border-bottom: 1px solid var(--c-border) !important;
+  padding: 6px 14px !important;
+}
+
+/* ============================================================
+   FORM VALIDATION MESSAGES
+   ============================================================ */
+#errormsg {
+  color: var(--c-error) !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+}
+#savemsg {
+  color: var(--c-success) !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+}
+.validate-success {
+  border-color: var(--c-success) !important;
+}
+
+/* ============================================================
+   MISC HELPERS
+   ============================================================ */
+.my {
+  background: var(--c-primary) !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: 20px !important;
+  padding: 7px 22px !important;
+  font-weight: 600 !important;
+  font-size: 13px !important;
+  cursor: pointer !important;
+  transition: background 0.18s !important;
+}
+.my:hover { background: var(--c-primary-h) !important; }
+
+/* jqx-all overrides for energyblue theme */
+.jqx-widget-header,
+.jqx-widget-header.jqx-fill-state-normal {
+  background: linear-gradient(180deg, #f8fafc, #f1f5f9) !important;
+  border-color: var(--c-border) !important;
+  color: var(--c-text) !important;
+}
+.jqx-fill-state-hover:not(.jqx-button):not(.jqx-grid-cell) {
+  background: var(--c-primary-light) !important;
+}
+.jqx-menu-item-top {
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  color: var(--c-text) !important;
+  padding: 4px 10px !important;
+  border-radius: var(--radius-sm) !important;
+}
+.jqx-menu-item-top-hover,
+.jqx-menu-item-top-selected {
+  background: var(--c-primary-light) !important;
+  color: var(--c-primary) !important;
+}
+.jqx-menu-dropdown {
+  background: var(--c-surface) !important;
+  border: 1px solid var(--c-border) !important;
+  border-radius: var(--radius) !important;
+  box-shadow: var(--shadow) !important;
+}
+.jqx-menu-item {
+  font-size: 12px !important;
+  color: var(--c-text) !important;
+  padding: 5px 12px !important;
+  border-radius: var(--radius-sm) !important;
+}
+.jqx-menu-item-hover,
+.jqx-menu-item-selected {
+  background: var(--c-primary-light) !important;
+  color: var(--c-primary) !important;
+}
+
+/* ============================================================
+   CARD CONTAINERS (used in some dashboard/form pages)
+   ============================================================ */
+.card,
+.card-container {
+  border-radius: var(--radius-lg) !important;
+  border: 1px solid var(--c-border) !important;
+  box-shadow: var(--shadow-sm) !important;
+  background: var(--c-surface) !important;
+  padding: 16px !important;
+}

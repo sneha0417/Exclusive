@@ -1,113 +1,128 @@
-<%
-	String contextPath = request.getContextPath();
-%>
-<!DOCTYPE>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
 <head>
-
-<title>GatewayERP(i)</title>
+<% String contextPath=request.getContextPath(); %>
+<title>GatewayERP(i) - Property Related Master</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="../../../../css/main.css" rel="stylesheet" type="text/css" />
-<link href="../../../../css/body.css" media="screen" rel="stylesheet"
-	type="text/css" />
-<link href="../../../../css/myButton.css" rel="stylesheet"
-	type="text/css" />
+
 <jsp:include page="../../../../includes.jsp"></jsp:include>
+
 <style>
-
-.page-header {
-    /* padding-bottom: 9px; */
-    margin: 10px 0 10px !important;
-    border-bottom: 1px solid #eee !important;
-}
-#whole {
-	width: 100%;
-}
-
-#header {
-	background-color: #E0ECF8;
-	color: black;
-	text-align: left;
-	height: 7%;
-	width: 3% padding:0px;
+/* =========================================================
+   SCOPED UI: Master Layout (Sidebar + Content)
+========================================================= */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: #f4f7fb;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    overflow: hidden; /* Prevents double scrollbars */
 }
 
-#nav {
-	line-height: 30px;
-	background-color: #E0ECF8;
-	height: 90.5%;
-	width: 5%;
-	float: left;
-	position: absolute;
+/* Flexbox Container to hold Sidebar and iFrame side-by-side */
+.layout-wrapper {
+    display: flex;
+    width: 100%;
+    height: 100vh;
 }
 
-#comiframe {
-	float: right;
-	width: 98.5%;
-	height: 98%;
-	color: #eeeeee;
+/* Left Sidebar Panel */
+.sidebar {
+    width: 200px; /* Fixed width for the button column */
+    background-color: #f4f7fb;
+    padding: 15px;
+    display: flex;
+    flex-direction: column; /* Stacks buttons vertically */
+    gap: 10px; /* Perfect spacing between buttons */
+    box-sizing: border-box;
+    overflow-y: auto; /* Allows scrolling if screen is small */
+}
+
+/* Right Content Panel (iFrame Container) */
+.content-area {
+    flex-grow: 1; /* Fills all remaining space to the right */
+    background-color: #fff;
+    border-left: 1px solid #c5d3e0; /* Subtle divider line */
+    box-sizing: border-box;
+    height: 100%;
+    position: relative;
+}
+
+.content-area iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+}
+
+/* =========================================================
+   NEW UI BUTTON STYLING
+========================================================= */
+input[type="button"].myButton {
+    font-family: Tahoma, Geneva, sans-serif;
+    font-weight: 600;
+    font-size: 11px;
+    width: 100%; /* Forces buttons to stretch to sidebar width */
+    height: 38px;
+    padding: 8px 10px;
+    background: linear-gradient(135deg, #0b45a2 0%, #2563eb 100%);
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+    text-align: center;
+}
+
+input[type="button"].myButton:hover {
+    background: linear-gradient(135deg, #32cd32 0%, #2eb82e 100%); /* Parrot green shades */
+    box-shadow: 0 4px 12px rgba(50, 205, 50, 0.3);
+    transform: translateY(-1px);
 }
 </style>
+
 <script type="text/javascript">
 	$(document).ready(function() {
-		//document.getElementById("btnproject").disabled="true";
-		$('#branchid').val(window.parent.branchid.value);
+		$('#branchid').val(window.parent.branchid.value); 
 	});
-</script>
-<script type="text/javascript">
-	$(document).ready(function() {
-		//document.getElementById("btnproject").disabled="true";
-		$('#branchid').val(window.parent.branchid.value);
-	});
-</script>
-<style>
-.hidden-scrollbar {
-	overflow: auto;
-	height: 550px;
-}
-</style>
+</script> 
 </head>
+
 <body>
-	<div id="mainBG" class="homeContent" data-type="background">
-	<div class='hidden-scrollbar'>
-		<div class="page-header">
-			<h4>Property Related Master</h4>		 
-		</div>
-		<div class="row">
-			<div class="col-md-2" style="padding-right:0;">
-				<input type="button" name="btntype" class="btn btn-info"
-					value="Building" style="width: 100%; margin: 2px;"
-					onclick='document.getElementById("iframe2").src="<%=contextPath%>/com/realestate/propertyrelated/propertyrelatedmaster/building.jsp"'>
-				<br /> 
-				<input type="button" name="btnbrand" class="btn btn-info"
-					value="Property Type" style="width: 100%; margin: 2px;"
-					onclick='document.getElementById("iframe2").src="<%=contextPath%>/com/realestate/propertyrelated/propertyrelatedmaster/typeMaster.jsp"'>
-				<br /> 
-				<input type="button" name="btnbrand" class="btn btn-info"
-					value="Unit Type" style="width: 100%; margin: 2px;"
-					onclick='document.getElementById("iframe2").src="<%=contextPath%>/com/realestate/propertyrelated/propertyrelatedmaster/unittype.jsp"'>
-				<br /> 
-				<input type="hidden" id="formName" name="formName"
-					value="000" /> <input type="hidden" id="formCode" name="formCode"
-					value="COM" /> <input type="hidden" id="branchid" name="branchid"
-					value='' /> <input type="hidden" id="mode" name="mode" />
-			</div>
-			<div class="col-md-10">
-				<iframe width="100%" height="100%" id="iframe2" align="left"
-					frameborder="0" marginwidth="100%" scrolling="no"
-					src="<%=contextPath%>/com/realestate/propertyrelated/propertyrelatedmaster/building.jsp"></iframe>
-			</div>
-		</div>
-		<script>
-			function resizeIframeToFitContent(iframe) {
-				// This function resizes an IFrame object
-				// to fit its content.
-				// The IFrame tag must have a unique ID attribute.
-				iframe.height = document.frames[iframe.iframe2].document.body.scrollHeight;
-			}
-		</script>
-		</div>
-	</div>
+
+<!-- Hidden Fields Setup -->
+<input type="hidden" id="formName" name="formName" value='000'/>
+<input type="hidden" id="formCode" name="formCode" value='COM'/>
+<input type="hidden" id="branchid" name="branchid" value=''/>
+<input type="hidden" id="mode" name="mode" />
+
+<div class="layout-wrapper">
+
+    <!-- Left Sidebar for Navigation -->
+    <div class="sidebar">
+        <input type="button" name="btntype" class="myButton" value="BUILDING" 
+            onclick='document.getElementById("iframe2").src="<%=contextPath%>/com/realestate/propertyrelated/propertyrelatedmaster/building.jsp";'>
+            
+        <input type="button" name="btnbrand" class="myButton" value="PROPERTY TYPE" 
+            onclick='document.getElementById("iframe2").src="<%=contextPath%>/com/realestate/propertyrelated/propertyrelatedmaster/typeMaster.jsp";'>
+            
+        <input type="button" name="btnbrand" class="myButton" value="UNIT TYPE" 
+            onclick='document.getElementById("iframe2").src="<%=contextPath%>/com/realestate/propertyrelated/propertyrelatedmaster/unittype.jsp";'>
+    </div>
+
+    <!-- Right Content Area for Iframes -->
+    <div class="content-area">
+        <iframe id="iframe2" scrolling="yes" src="<%=contextPath%>/com/realestate/propertyrelated/propertyrelatedmaster/building.jsp"></iframe>
+    </div>
+
+</div>
+
 </body>
 </html>
