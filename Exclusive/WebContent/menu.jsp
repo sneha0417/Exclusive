@@ -18,7 +18,7 @@
 <jsp:include page="includes.jsp"></jsp:include>
 <link href='http://fonts.googleapis.com/css?family=Mr+Dafoe'
 	rel='stylesheet' type='text/css'>
-
+<link href="css/modern-theme.css" rel="stylesheet" type="text/css">
 <script type="text/javascript">
 
 

@@ -106,5 +106,6 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/main.js"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/exportExcel.js"></script>
+<link href="<%=contextPath%>/css/modern-theme.css" rel="stylesheet" type="text/css" />
 </head>
 </html>
