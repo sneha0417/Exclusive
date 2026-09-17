@@ -1,191 +1,156 @@
-<!DOCTYPE>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
 <head>
 <% String contextPath=request.getContextPath();%>
 <title>GatewayERP(i)</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="../../../../css/main.css" rel="stylesheet" type="text/css" />
-<link href="../../../../css/body.css" media="screen" rel="stylesheet" type="text/css" />
-<link href="../../../../css/myButton.css" rel="stylesheet" type="text/css"/>
+
 <jsp:include page="../../../../includes.jsp"></jsp:include>
+
 <style>
-
-
-
-#whole
-{
-width:100%;
-}
-#header
-{
-background-color: #E0ECF8;
-color:black;
-text-align:left;
-height:7%;
-width:3%
-padding:0px;
+/* =========================================================
+   SCOPED UI: Master Layout (Sidebar + Content)
+========================================================= */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: #f4f7fb;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    overflow: hidden; /* Prevents double scrollbars */
 }
 
-
-#nav
-{
-   line-height:30px;
-    background-color: #E0ECF8; 
-    height:50%;
-    width:15%;
-    float:left;
-    position:absolute;
-    
- /*    background-color:	#ffc0cb; */
-    
-    
+/* Flexbox Container to hold Sidebar and iFrame side-by-side */
+.layout-wrapper {
+    display: flex;
+    width: 100%;
+    height: 100vh;
 }
 
-#comiframe
-{
-float:right;
-width:93%;
-height:95%;
-color:#eeeeee;
+/* Left Sidebar Panel */
+.sidebar {
+    width: 200px; /* Fixed width for the button column */
+    background-color: #f4f7fb;
+    padding: 15px;
+    display: flex;
+    flex-direction: column; /* Stacks buttons vertically */
+    gap: 10px; /* Perfect spacing between buttons */
+    box-sizing: border-box;
+    overflow-y: auto; /* Allows scrolling if screen is small */
+}
 
+/* Right Content Panel (iFrame Container) */
+.content-area {
+    flex-grow: 1; /* Fills all remaining space to the right */
+    background-color: #fff;
+    border-left: 1px solid #c5d3e0; /* Subtle divider line */
+    box-sizing: border-box;
+    height: 100%;
+    position: relative;
 }
- 
- /*   .myButtons {
-	  -moz-box-shadow: 0px -2px 14px -7px #276873;
-	-webkit-box-shadow: 0px -2px 14px -7px #276873;  
-	box-shadow: 0px -2px 14px -7px #276873;
-	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #599bb3), color-stop(1, #408c99));
-	background:-moz-linear-gradient(top, #599bb3 5%, #408c99 100%);
-	background:-webkit-linear-gradient(top, #599bb3 5%, #408c99 100%);
-	background:-o-linear-gradient(top, #599bb3 5%, #408c99 100%);
-	background:-ms-linear-gradient(top, #599bb3 5%, #408c99 100%);
-	background:linear-gradient(to bottom, #599bb3 5%, #408c99 100%);
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#599bb3', endColorstr='#408c99',GradientType=0);
-	background-color:#599bb3;
-	-moz-border-radius:5px;
-	-webkit-border-radius:5px;
-	border-radius:5px;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:Verdana;
-	font-size:10px;
-	padding:5px 10px;
-	text-decoration:none;
-	   text-shadow:0px 1px 13px #3d768a;  
+
+.content-area iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
 }
-.myButtons:hover {
-	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #408c99), color-stop(1, #599bb3));
-	background:-moz-linear-gradient(top, #408c99 5%, #599bb3 100%);
-	background:-webkit-linear-gradient(top, #408c99 5%, #599bb3 100%);
-	background:-o-linear-gradient(top, #408c99 5%, #599bb3 100%);
-	background:-ms-linear-gradient(top, #408c99 5%, #599bb3 100%);
-	background:linear-gradient(to bottom, #408c99 5%, #599bb3 100%);
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#408c99', endColorstr='#599bb3',GradientType=0);
-	background-color:#408c99;
+
+/* =========================================================
+   NEW UI BUTTON STYLING
+========================================================= */
+input[type="button"].myButton {
+    font-family: Tahoma, Geneva, sans-serif;
+    font-weight: 600;
+    font-size: 11px;
+    width: 100%; /* Forces buttons to stretch to sidebar width */
+    height: 38px;
+    padding: 8px 10px;
+    background: linear-gradient(135deg, #0b45a2 0%, #2563eb 100%);
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+    text-align: center;
 }
-.myButtons:active {
-	position:relative;
-	top:1px;
-} 
-      */
- 
- 
-    .myButtons {
-	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #599bb3), color-stop(1, #408c99));
-	background:-moz-linear-gradient(top, #599bb3 5%, #408c99 100%);
-	background:-webkit-linear-gradient(top, #599bb3 5%, #408c99 100%);
-	background:-o-linear-gradient(top, #599bb3 5%, #408c99 100%);
-	background:-ms-linear-gradient(top, #599bb3 5%, #408c99 100%);
-	background:linear-gradient(to bottom, #599bb3 5%, #408c99 100%);
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#599bb3', endColorstr='#408c99',GradientType=0);
-	background-color:#599bb3;
-	-moz-border-radius:4px;
-	-webkit-border-radius:4px;
-	border-radius:4px;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:Verdana;
-	font-size:10px;
-	padding:4px 8px;
-	text-decoration:none;
+
+input[type="button"].myButton:hover {
+    background: linear-gradient(135deg, #32cd32 0%, #2eb82e 100%); /* Parrot green shades */
+    box-shadow: 0 4px 12px rgba(50, 205, 50, 0.3);
+    transform: translateY(-1px);
 }
-.myButtons:hover {
-	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #408c99), color-stop(1, #599bb3));
-	background:-moz-linear-gradient(top, #408c99 5%, #599bb3 100%);
-	background:-webkit-linear-gradient(top, #408c99 5%, #599bb3 100%);
-	background:-o-linear-gradient(top, #408c99 5%, #599bb3 100%);
-	background:-ms-linear-gradient(top, #408c99 5%, #599bb3 100%);
-	background:linear-gradient(to bottom, #408c99 5%, #599bb3 100%);
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#408c99', endColorstr='#599bb3',GradientType=0);
-	background-color:#408c99;
-}
-.myButtons:active {
-	position:relative;
-	top:1px;
-} 
- 
-  /*   #ss
-{
-background-color:	#ffc0cb;
-}
-   
-  */
-/*  
-.hidden-scrollbar {
-	overflow: auto;
-	height: 500px;
-} */
 </style>
+
 <script type="text/javascript">
-	
-	$(document).ready(function() {
-		//document.getElementById("btnproject").disabled="true";
-		$('#branchid').val(window.parent.branchid.value); 
-	});
-	</script> 
+    $(document).ready(function() {
+        $('#branchid').val(window.parent.branchid.value); 
+    });
+    
+    function getConfig() {
+        var x = new XMLHttpRequest();
+        x.onreadystatechange = function() {
+            if (x.readyState == 4 && x.status == 200) {
+                var items = x.responseText;
+                items = items.split('####');
+                
+                if (items[0] == 1) {
+                    $('#btncompanysetup').show();
+                    $('#btnbankdetails').show();
+                } else {
+                    $('#btncompanysetup').hide();
+                    $('#btnbankdetails').hide();
+                }
+                
+                if(items[1] == 0){
+                    $('#btnterminationsetup').hide();
+                }
+            } 
+        }
+        x.open("GET", "getConfig.jsp", true);
+        x.send();
+    }    
+</script> 
 </head>
-<body>
-<div class="hidden-scrollbar">
 
-<div  class="row">
- 
-<div class="col-md-1">
+<body onload="getConfig();">
 
+<input type="hidden" id="formName" name="formName" value='000'/>
+<input type="hidden" id="formCode" name="formCode" value='HRM'/>
+<input type="hidden" id="branchid" name="branchid" value=''/>
+<input type="hidden" id="mode" name="mode" />
 
-<input type="button"   class="btn btn-info" value="GENERAL" style="width:180px;outline:none;margin:2px;" onclick='document.getElementById("iframe2").src="<%=contextPath%>/com/humanresource/setup/hrsetup/hrsetupgeneral/hrsetupgeneralmaster.jsp";'>
+<div class="layout-wrapper">
 
-<input type="button"   class="btn btn-info" value="DESIGNATION" style="width:180px;outline:none;margin:2px;" onclick='document.getElementById("iframe2").src="<%=contextPath%>/com/humanresource/setup/hrsetup/designation.jsp";'>
-<input type="button"   class="btn btn-info" value="DEPARTMENT" style="width:180px;outline:none;margin:2px;" onclick='document.getElementById("iframe2").src="<%=contextPath%>/com/humanresource/setup/hrsetup/department.jsp";'>
-<input type="button"   class="btn btn-info" value="PAYROLL CATEGORY" style="width:180px;outline:none;margin:2px;" onclick='document.getElementById("iframe2").src="<%=contextPath%>/com/humanresource/setup/hrsetup/payrollcategory.jsp";'>
-<input type="button"   class="btn btn-info" value="DOCUMENT" style="width:180px;outline:none;margin:2px;" onclick='document.getElementById("iframe2").src="<%=contextPath%>/com/humanresource/setup/hrsetup/document.jsp";'>
-<input type="button"  class="btn btn-info" value="LEAVE" style="width:180px;outline:none;margin:2px;"  onclick='document.getElementById("iframe2").src="<%=contextPath%>/com/humanresource/setup/hrsetup/leave.jsp";'>
+    <div class="sidebar">
+        <input type="button" class="myButton" value="GENERAL" onclick='document.getElementById("iframe2").src="<%=contextPath%>/com/humanresource/setup/hrsetup/hrsetupgeneral/hrsetupgeneralmaster.jsp";'>
+        <input type="button" class="myButton" value="DESIGNATION" onclick='document.getElementById("iframe2").src="<%=contextPath%>/com/humanresource/setup/hrsetup/designation.jsp";'>
+        <input type="button" class="myButton" value="DEPARTMENT" onclick='document.getElementById("iframe2").src="<%=contextPath%>/com/humanresource/setup/hrsetup/department.jsp";'>
+        <input type="button" class="myButton" value="PAYROLL CATEGORY" onclick='document.getElementById("iframe2").src="<%=contextPath%>/com/humanresource/setup/hrsetup/payrollcategory.jsp";'>
+        <input type="button" class="myButton" value="DOCUMENT" onclick='document.getElementById("iframe2").src="<%=contextPath%>/com/humanresource/setup/hrsetup/document.jsp";'>
+        <input type="button" class="myButton" value="LEAVE" onclick='document.getElementById("iframe2").src="<%=contextPath%>/com/humanresource/setup/hrsetup/leave.jsp";'>
+        <input type="button" class="myButton" value="ALLOWANCES" onclick='document.getElementById("iframe2").src="<%=contextPath%>/com/humanresource/setup/hrsetup/allowances.jsp";'>
+        <input type="button" class="myButton" value="STATUTORY DEDUCTIONS" onclick='document.getElementById("iframe2").src="<%=contextPath%>/com/humanresource/setup/hrsetup/statutorydeductions.jsp";'>
+        <input type="button" class="myButton" value="AGENT" onclick='document.getElementById("iframe2").src="<%=contextPath%>/com/humanresource/setup/hrsetup/agent.jsp";'>
+        <input type="button" class="myButton" value="LEAVE SETUP" onclick='document.getElementById("iframe2").src="<%=contextPath%>/com/humanresource/setup/hrsetup/leavesetup/leavesetupmaster.jsp";'>
+        
+        <!-- These IDs matter for your getConfig() function -->
+        <input type="button" id="btncompanysetup" class="myButton" value="COMPANY SETUP" style="display:none;" onclick='document.getElementById("iframe2").src="<%=contextPath%>/com/humanresource/setup/hrsetup/companysetup/companysetup.jsp";'>
+        <input type="button" id="btnbankdetails" class="myButton" value="BANK DETAILS" style="display:none;" onclick='document.getElementById("iframe2").src="<%=contextPath%>/com/humanresource/setup/hrsetup/bankdetails/bankdetails.jsp";'>
+        <input type="button" id="btnterminationsetup" class="myButton" value="TERMINATION SETUP" style="display:none;" onclick='document.getElementById("iframe2").src="<%=contextPath%>/com/humanresource/setup/hrsetup/terminationsetup/terminationsetupmaster.jsp";'>
+    </div>
 
-<input type="button"   class="btn btn-info" value="ALLOWANCES" style="width:180px;outline:none;margin:2px;" onclick='document.getElementById("iframe2").src="<%=contextPath%>/com/humanresource/setup/hrsetup/allowances.jsp";'>
-<input type="button"   class="btn btn-info" value="STATUTORY DEDUCTIONS" style="width:180px;outline:none;margin:2px;" onclick='document.getElementById("iframe2").src="<%=contextPath%>/com/humanresource/setup/hrsetup/statutorydeductions.jsp";'>
- <input type="button"   class="btn btn-info" value="AGENT" style="width:180px;outline:none;margin:2px;" onclick='document.getElementById("iframe2").src="<%=contextPath%>/com/humanresource/setup/hrsetup/agent.jsp";'>
- <input type="button"   class="btn btn-info" value="LEAVE SETUP" style="width:180px;outline:none;margin:2px;" onclick='document.getElementById("iframe2").src="<%=contextPath%>/com/humanresource/setup/hrsetup/leavesetup/leavesetupmaster.jsp";'>
-
-</div>
-
-
-<div class="col-md-11">
-<div id="comiframe">
-	<iframe width="99%" height="100%" id="iframe2" align="right" frameborder="0" marginwidth="100%" scrolling="no" src="<%=contextPath%>/com/humanresource/setup/hrsetup/hrsetupgeneral/hrsetupgeneralmaster.jsp";></iframe>
-</div>
-</div>
-
-<input type="hidden" id="formName" name="formName"  value='000'/>
-<input type="hidden" id="formCode" name="formCode"  value='HRM'/>
-<input type="hidden" id="branchid" name="branchid"  value=''/>
-
-
-<input type="hidden" id="mode" name="mode"   />
-</div>
-
+    <div class="content-area">
+        <iframe id="iframe2" scrolling="yes" src="<%=contextPath%>/com/humanresource/setup/hrsetup/hrsetupgeneral/hrsetupgeneralmaster.jsp"></iframe>
+    </div>
 
 </div>
+
 </body>
 </html>
