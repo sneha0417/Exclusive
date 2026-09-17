@@ -9,14 +9,190 @@
 <title>GatewayERP(i)</title>
 <jsp:include page="../../../../includes.jsp"></jsp:include>
 
+<style>
+/* =========================================================
+SCOPED UI: Modern Layout (Matches Client Master)
+========================================================= */
+body {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    font-family: 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+    color: #222;
+    margin: 0;
+    padding: 24px 0;
+    box-sizing: border-box;
+    overflow-y: auto !important;
+}
+
+#mainBG {
+    background: #fff;
+    border-radius: 16px;
+    padding: 15px;
+    max-width: 100%;
+    margin: 0 auto;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+}
+
+.modern-ui {
+    font-family: Arial, sans-serif; 
+    color: #333;
+    font-size: 12px; 
+    padding: 5px 15px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+/* Master Input Heights - Forced to 24px */
+.modern-ui input[type="text"],
+.modern-ui select { 
+    height: 24px !important; 
+    border: 1px solid #b8c6d8; 
+    border-radius: 3px; 
+    padding: 2px 6px;
+    font-size: 12px;
+    box-sizing: border-box; 
+    background-color: #fff; 
+    color: #333;
+    width: 100%;
+}
+
+.modern-ui input[type="text"]:focus,
+.modern-ui select:focus { 
+    border-color: #007bff; 
+    outline: none;
+}
+
+.modern-ui input[readonly],
+.modern-ui input:disabled,
+.modern-ui select:disabled { 
+    background-color: #f8f9fa; 
+    color: #6b7280;
+}
+
+/* Layout Utilities */
+.modern-ui .field-row { 
+    display: flex;
+    align-items: center; 
+    gap: 8px;
+    margin-bottom: 10px; 
+    flex-wrap: wrap;
+}
+
+.modern-ui .lbl-right { 
+    text-align: right; 
+    color: #444;
+    font-size: 12px; 
+    font-weight: bold;
+    white-space: nowrap; 
+    padding-right: 5px;
+}
+
+/* Middle Section Panels */
+.modern-ui .middle-panel {
+    border: 1px solid #c5d3e0; 
+    padding: 20px 10px 10px 10px; 
+    background: #ffffff; 
+    position: relative; 
+    border-radius: 4px; 
+    margin-bottom: 15px;
+    margin-top: 12px;
+}
+
+.modern-ui .middle-panel-title { 
+    position: absolute; 
+    top: -12px;
+    left: 10px; 
+    background: #ffffff; 
+    padding: 0 8px; 
+    color: #0056b3;
+    font-weight: bold; 
+    font-size: 14px; 
+    border-left: 3px solid #0056b3;
+    z-index: 2; 
+    line-height: normal; 
+}
+
+/* Custom UI Buttons matching 24px height */
+.modern-ui .myButton {
+    height: 24px !important;
+    line-height: 22px !important;
+    padding: 0 12px;
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+    border-radius: 3px;
+    cursor: pointer;
+    text-shadow: none;
+    transition: all 0.2s;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    border: none;
+    background: linear-gradient(135deg, #0b45a2 0%, #2563eb 100%);
+    color: #ffffff;
+    white-space: nowrap;
+}
+.modern-ui .myButton:hover { background: linear-gradient(135deg, #083a8a 0%, #1d4ed8 100%); }
+
+/* Search Icon Wrapper */
+.modern-ui .input-search-container {
+    position: relative;
+    display: flex;
+}
+.modern-ui .input-search-container input {
+    padding-right: 25px !important;
+}
+.modern-ui .magnifier-icon {
+    position: absolute;
+    right: 6px; 
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #64748b; 
+    z-index: 10;
+}
+.modern-ui .magnifier-icon:hover { color: #2563eb; }
+
+/* Grid Wrappers */
+.modern-ui .grid-container {
+    border: 1px solid #c5d3e0;
+    border-radius: 4px;
+    background: #fff;
+    overflow: hidden;
+}
+
+/* Scrollbar Logic */
+.hidden-scrollbar {
+    overflow-y: auto;
+    height: calc(100vh - 150px);
+    padding-right: 5px;
+}
+.hidden-scrollbar::-webkit-scrollbar { width: 6px; }
+.hidden-scrollbar::-webkit-scrollbar-thumb { background: #c5d3e0; border-radius: 3px; }
+</style>
+
 <script type="text/javascript">
 	$(document).ready(function() {
 		
-		 $("#jqxDate").jqxDateTimeInput({ width: '125px', height: '15px', formatString:"dd.MM.yyyy", value: null });
-		 $("#jqxFromDate").jqxDateTimeInput({ width: '125px', height: '15px', formatString:"dd.MM.yyyy"});
-		 $("#jqxToDate").jqxDateTimeInput({ width: '125px', height: '15px', formatString:"dd.MM.yyyy"});
-		 $("#chequedate").jqxDateTimeInput({ width: '125px', height: '15px', formatString:"dd.MM.yyyy"});
-		 $("#checkchequedate").jqxDateTimeInput({ width: '125px', height: '15px', formatString:"dd.MM.yyyy"});
+		 /* Formatted jqxDateTimeInput heights to match modern UI 24px */
+		 $("#jqxDate").jqxDateTimeInput({ width: '120px', height: 24, formatString:"dd.MM.yyyy", value: null, theme: 'energyblue' });
+		 $("#jqxFromDate").jqxDateTimeInput({ width: '120px', height: 24, formatString:"dd.MM.yyyy", theme: 'energyblue'});
+		 $("#jqxToDate").jqxDateTimeInput({ width: '120px', height: 24, formatString:"dd.MM.yyyy", theme: 'energyblue'});
+		 $("#chequedate").jqxDateTimeInput({ width: '120px', height: 24, formatString:"dd.MM.yyyy", theme: 'energyblue'});
+		 $("#checkchequedate").jqxDateTimeInput({ width: '120px', height: 24, formatString:"dd.MM.yyyy", theme: 'energyblue'});
+		 
+		 /* force internal alignment AFTER render */
+		 setTimeout(function () {
+		     $("#jqxDate, #jqxFromDate, #jqxToDate, #chequedate, #checkchequedate").find("input").css({
+		         "margin-top": "0px",
+		         "line-height": "24px",
+                 "font-size": "12px", 
+                 "font-family": "Arial, sans-serif", 
+                 "padding": "0 6px", 
+                 "box-sizing":"border-box"
+		     });
+		     $("#jqxDate, #jqxFromDate, #jqxToDate, #chequedate, #checkchequedate").find(".jqx-action-button").css({
+		         "top": "0px",
+		         "height": "24px"
+		     });
+		 }, 0);
 		 
 		 $('#accountDetailsWindow').jqxWindow({width: '51%', height: '58%',  maxHeight: '70%' ,maxWidth: '51%' , title: 'Accounts Search',position: { x: 300, y: 87 } , theme: 'energyblue', showCloseButton: true, keyboardCloseKey: 27});
 		 $('#accountDetailsWindow').jqxWindow('close');  
@@ -40,57 +216,57 @@
 	}
 	
 	function getPDCAccounts(){
-  		var x = new XMLHttpRequest();
-  		x.onreadystatechange = function() {
-  			if (x.readyState == 4 && x.status == 200) {
-  				var items = x.responseText;
-  				items = items.split('####');
-  				var docNoItems = items[0];
-  				var accountIdItems  = items[1];
-  				var accountItems = items[2];
-  				var accountTypeItems = items[3];
-  				var accountCurIdItems  = items[4];
-  				var accountRateItems = items[5];
-  				var accCurrTypeItems = items[6];
-  			
-  			    $('#txtpdcdocno').val(docNoItems);	
-  			    $('#txtpdcaccid').val(accountIdItems);
-  			    $('#txtpdcaccname').val(accountItems);
-  			  	$('#txtpdcatype').val(accountTypeItems);
+ 		var x = new XMLHttpRequest();
+ 		x.onreadystatechange = function() {
+ 			if (x.readyState == 4 && x.status == 200) {
+ 				var items = x.responseText;
+ 				items = items.split('####');
+ 				var docNoItems = items[0];
+ 				var accountIdItems  = items[1];
+ 				var accountItems = items[2];
+ 				var accountTypeItems = items[3];
+ 				var accountCurIdItems  = items[4];
+ 				var accountRateItems = items[5];
+ 				var accCurrTypeItems = items[6];
+ 			
+ 			    $('#txtpdcdocno').val(docNoItems);	
+ 			    $('#txtpdcaccid').val(accountIdItems);
+ 			    $('#txtpdcaccname').val(accountItems);
+ 			 	$('#txtpdcatype').val(accountTypeItems);
 			    $('#txtpdccurid').val(accountCurIdItems);
 			    $('#txtpdcrate').val(accountRateItems);
 			    $('#txtpdctype').val(accCurrTypeItems);
-  		}
-  		}
-  		x.open("GET", "getPDCAccounts.jsp", true);
-  		x.send();
+ 		}
+ 		}
+ 		x.open("GET", "getPDCAccounts.jsp", true);
+ 		x.send();
     }
 	
 	function getPDCPostAccount(){
-  		var x = new XMLHttpRequest();
-  		x.onreadystatechange = function() {
-  			if (x.readyState == 4 && x.status == 200) {
-  				var items = x.responseText;
-  				items = items.split('####');
-  				var docNoItems = items[0];
-  				var accountIdItems  = items[1];
-  				var accountItems = items[2];
-  				var accountTypeItems = items[3];
-  				var accountCurIdItems  = items[4];
-  				var accountRateItems = items[5];
-  				var accCurrTypeItems = items[6];
-  			
-  			    $('#txtpdcpostdocno').val(docNoItems);	
-  			    $('#txtpdcpostaccid').val(accountIdItems);
-  			    $('#txtpdcpostaccname').val(accountItems);
-  			  	$('#txtpdcpostatype').val(accountTypeItems);
+ 		var x = new XMLHttpRequest();
+ 		x.onreadystatechange = function() {
+ 			if (x.readyState == 4 && x.status == 200) {
+ 				var items = x.responseText;
+ 				items = items.split('####');
+ 				var docNoItems = items[0];
+ 				var accountIdItems  = items[1];
+ 				var accountItems = items[2];
+ 				var accountTypeItems = items[3];
+ 				var accountCurIdItems  = items[4];
+ 				var accountRateItems = items[5];
+ 				var accCurrTypeItems = items[6];
+ 			
+ 			    $('#txtpdcpostdocno').val(docNoItems);	
+ 			    $('#txtpdcpostaccid').val(accountIdItems);
+ 			    $('#txtpdcpostaccname').val(accountItems);
+ 			 	$('#txtpdcpostatype').val(accountTypeItems);
 			    $('#txtpdcpostcurid').val(accountCurIdItems);
 			    $('#txtpdcpostrate').val(accountRateItems);
 			    $('#txtpdcposttype').val(accCurrTypeItems);
-  		}
-  		}
-  		x.open("GET", "getPDCPostAccount.jsp", true);
-  		x.send();
+ 		}
+ 		}
+ 		x.open("GET", "getPDCPostAccount.jsp", true);
+ 		x.send();
    }
 	
 	 function getAcc(event){
@@ -169,10 +345,10 @@
 			  return 0;
 		    }
 		  
-		  	if(document.getElementById("jqxDate").value=="" || document.getElementById("jqxDate").value==null){
+		 	if(document.getElementById("jqxDate").value=="" || document.getElementById("jqxDate").value==null){
 			  document.getElementById("errormsg").innerText="Posting Date is Mandatory.";
 			  return 0;
-		  	}
+		 	}
 			
 			var postdate = $('#jqxDate').jqxDateTimeInput('getDate');
 			var postvaliddate=funDateInPeriod(postdate);
@@ -358,17 +534,17 @@
 	  function dateDisable(){
 			 var posted=$('#cmbcriteria').val();
 	         if(posted==1){
-	        	 $('#jqxFromDate').jqxDateTimeInput({disabled: true}); 
-	        	 $("#pdcPostponedDiv").prop("hidden", true);
-	        	 $("#jqxJournalVoucherApplyingGrid").prop("hidden", false);
+	         	 $('#jqxFromDate').jqxDateTimeInput({disabled: true}); 
+	         	 $("#pdcPostponedDiv").prop("hidden", true);
+	         	 $("#jqxJournalVoucherApplyingGrid").prop("hidden", false);
 	         }else if(posted==4){
-	        	 $('#jqxFromDate').jqxDateTimeInput({disabled: true}); 
-	        	 $("#pdcPostponedDiv").prop("hidden", false);
-	        	 $("#jqxJournalVoucherApplyingGrid").prop("hidden", true);
+	         	 $('#jqxFromDate').jqxDateTimeInput({disabled: true}); 
+	         	 $("#pdcPostponedDiv").prop("hidden", false);
+	         	 $("#jqxJournalVoucherApplyingGrid").prop("hidden", true);
 	         }else{
-	        	 $('#jqxFromDate').jqxDateTimeInput({disabled: false});
-	        	 $("#pdcPostponedDiv").prop("hidden", true);
-	        	 $("#jqxJournalVoucherApplyingGrid").prop("hidden", false);
+	         	 $('#jqxFromDate').jqxDateTimeInput({disabled: false});
+	         	 $("#pdcPostponedDiv").prop("hidden", true);
+	         	 $("#jqxJournalVoucherApplyingGrid").prop("hidden", false);
 	         }
 	 }
 	  
@@ -405,103 +581,142 @@
 	  }
 	  
 </script>
-<style>
-.hidden-scrollbar {
-  overflow: auto;
-  height: 530px;
-}
-</style>
 
 </head>
 <body onload="setValues();headerbtndisable();">
-<div id="mainBG" class="homeContent" data-type="background" >
-<form id="frmPDCPostingReceipt" action="savePDCPostingReceipt" method="post" autocomplete="off">
-<jsp:include page="../../../../header.jsp"></jsp:include><br/>
 
-<div  class='hidden-scrollbar'>
-<fieldset>
-<table width="100%">
-  <tr>
-    <td width="3%" align="right">Criteria</td>
-    <td width="23%"><select id="cmbcriteria" name="cmbcriteria" style="width:97%;" value='<s:property value="cmbcriteria"/>' onchange="dateDisable();getPDCAccounts();getPDCPostAccount();clearClientInfo();">
-    <option value="">--Select--</option><option value="1">PDC to be Posted</option><option value="2">PDC to be Returned</option><option value="3">Posted PDC to be Dishonoured</option>
-    <option value="4">PDC to be Postponed</option><option value="5">Retuned PDC to be Reversed</option><option value="6">Dishourned PDC to be Reversed</option>
-    <option value="7">CDC to be Dishourned</option></select>
-    <input type="hidden" id="hidcmbcriteria" name="hidcmbcriteria" value='<s:property value="hidcmbcriteria"/>'/></td>
-    <td width="3%" align="right">From</td>
-    <td width="3%"><div id="jqxFromDate" name="jqxFromDate" value='<s:property value="jqxFromDate"/>'></div>
-    <input type="hidden" id="hidjqxFromDate" name="hidjqxFromDate" value='<s:property value="hidjqxFromDate"/>'/></td>
-    <td width="2%" align="right">To</td>
-    <td width="3%"><div id="jqxToDate" name="jqxToDate" value='<s:property value="jqxToDate"/>'></div>
-    <input type="hidden" id="hidjqxToDate" name="hidjqxToDate" value='<s:property value="hidjqxToDate"/>'/></td>
-    <td width="4%" align="right">Account</td>
-    <td width="9%"><select id="cmbacctype" name="cmbacctype" style="width:90%;" onchange="clearClientInfo();" value='<s:property value="cmbacctype"/>'>
-    <option value="0">--Select--</option><option value="BANK">Bank</option><option value="AP">AP</option><option value="AR">AR</option></select>
-    <input type="hidden" id="hidcmbacctype" name="hidcmbacctype" value='<s:property value="hidcmbacctype"/>'/></td>
-    <td width="12%"><input type="text" id="txtaccid" name="txtaccid" style="width:85%;" placeholder="Press F3 to Search" value='<s:property value="txtaccid"/>' onkeydown="getAcc(event);"/></td>
-    <td width="24%"><input type="text" id="txtaccname" name="txtaccname" style="width:97%;" value='<s:property value="txtaccname"/>'/>
-    <input type="hidden" id="txtdocno" name="txtdocno" value='<s:property value="txtdocno"/>'/></td>
-    <td width="3%" align="right">Posting</td>
-    <td width="4%"><div id="jqxDate" name="jqxDate" onchange="datechange();" onblur="datechange();" value='<s:property value="jqxDate"/>'></div>
-	<input type="hidden" id="hidjqxDate" name="hidjqxDate" value='<s:property value="hidjqxDate"/>'/></td>
-    <td width="8%" align="center"><button class="myButton" type="button" id="btnview" name="btnview" onclick="funloadgrid();">View</button></td>
-  </tr>
-  </table></fieldset><br/>
-<div id="jqxJournalVoucherGrid"><jsp:include page="journalVoucherGrid.jsp"></jsp:include></div><br/>
-<div id="jqxJournalVoucherApplyingGrid"><jsp:include page="journalVoucherApplyingGrid.jsp"></jsp:include></div>
-<div id="pdcPostponedDiv" hidden="true">
- <fieldset style="background: #ECF8E0;">
- <table width="100%">
-  <tr>
-    <td width="7%" align="right">Bank</td>
-    <td width="14%"><input type="text" id="txtbankaccid" name="txtbankaccid" style="width:80%;" value='<s:property value="txtbankaccid"/>'/></td>
-    <td colspan="2"><input type="text" id="txtbankaccname" name="txtbankaccname" style="width:40%;" value='<s:property value="txtbankaccname"/>'/>
-    <input type="hidden" id="txtbankdocno" name="txtbankdocno" value='<s:property value="txtbankdocno"/>'/></td>
-  </tr>
-  <tr>
-    <td align="right">Cheque No.</td>
-    <td><input type="text" id="txtchequeno" name="txtchequeno" style="width:80%;" value='<s:property value="txtchequeno"/>'/></td>
-    <td width="8%" align="right">Cheque Date</td>
-    <td width="71%"><div id="chequedate" name="chequedate" onchange="checkChequeDate();" value='<s:property value="chequedate"/>'></div>
-	<input type="hidden" id="hidchequedate" name="hidchequedate" value='<s:property value="hidchequedate"/>'/>
-	<div hidden="true" id="checkchequedate" name="checkchequedate" value='<s:property value="checkchequedate"/>'></div></td>
-  </tr>
-</table>
-</fieldset>
- </div>
- 
-<input type="hidden" id="mode" name="mode"/>
-<input type="hidden" id="deleted" name="deleted" value='<s:property value="deleted"/>'/>
-<input type="hidden" id="msg" name="msg"  value='<s:property value="msg"/>'/>
-<input type="hidden" id="txtpdcdocno" name="txtpdcdocno"  value='<s:property value="txtpdcdocno"/>'/>
-<input type="hidden" id="txtpdcaccid" name="txtpdcaccid"  value='<s:property value="txtpdcaccid"/>'/>
-<input type="hidden" id="txtpdcaccname" name="txtpdcaccname"  value='<s:property value="txtpdcaccname"/>'/>
-<input type="hidden" id="txtpdcatype" name="txtpdcatype"  value='<s:property value="txtpdcatype"/>'/>
-<input type="hidden" id="txtpdccurid" name="txtpdccurid"  value='<s:property value="txtpdccurid"/>'/>
-<input type="hidden" id="txtpdcrate" name="txtpdcrate"  value='<s:property value="txtpdcrate"/>'/>
-<input type="hidden" id="txtpdctype" name="txtpdctype"  value='<s:property value="txtpdctype"/>'/>
-<input type="hidden" id="txtpdcpostdocno" name="txtpdcpostdocno"  value='<s:property value="txtpdcpostdocno"/>'/>
-<input type="hidden" id="txtpdcpostaccid" name="txtpdcpostaccid"  value='<s:property value="txtpdcpostaccid"/>'/>
-<input type="hidden" id="txtpdcpostaccname" name="txtpdcpostaccname"  value='<s:property value="txtpdcpostaccname"/>'/>
-<input type="hidden" id="txtpdcpostatype" name="txtpdcpostatype"  value='<s:property value="txtpdcpostatype"/>'/>
-<input type="hidden" id="txtpdcpostcurid" name="txtpdcpostcurid"  value='<s:property value="txtpdcpostcurid"/>'/>
-<input type="hidden" id="txtpdcpostrate" name="txtpdcpostrate"  value='<s:property value="txtpdcpostrate"/>'/>
-<input type="hidden" id="txtpdcposttype" name="txtpdcposttype"  value='<s:property value="txtpdcposttype"/>'/>
-<input type="hidden" id="txtchqno" name="txtchqno" value='<s:property value="txtchqno"/>'/>
-<input type="hidden" id="txtgriddocno" name="txtgriddocno" value='<s:property value="txtgriddocno"/>'/>
-<input type="hidden" id="txtrowno" name="txtrowno" value='<s:property value="txtrowno"/>'/>
-<input type="hidden" id="txttrno" name="txttrno" value='<s:property value="txttrno"/>'/>
-<input type="hidden" id="txtposttrno" name="txtposttrno"  value='<s:property value="txtposttrno"/>'/>
-<input type="hidden" id="txtdtype" name="txtdtype" value='<s:property value="txtdtype"/>'/>
-<input type="hidden" id="txtchequevalidation" name="txtchequevalidation"  value='<s:property value="txtchequevalidation"/>'/>
-<input type="hidden" id="gridlength" name="gridlength"/>
+<div id="mainBG" class="homeContent" data-type="background">
+<form id="frmPDCPostingReceipt" action="savePDCPostingReceipt" method="post" autocomplete="off">
+<jsp:include page="../../../../header.jsp"></jsp:include>
+
+<div class='modern-ui hidden-scrollbar'>
+
+    <div class="middle-panel">
+        <span class="middle-panel-title">Filter Criteria</span>
+        
+        <div class="field-row">
+            <label class="lbl-right" style="width:80px;">Criteria</label>
+            <select id="cmbcriteria" name="cmbcriteria" style="width:200px;" value='<s:property value="cmbcriteria"/>' onchange="dateDisable();getPDCAccounts();getPDCPostAccount();clearClientInfo();">
+                <option value="">--Select--</option>
+                <option value="1">PDC to be Posted</option>
+                <option value="2">PDC to be Returned</option>
+                <option value="3">Posted PDC to be Dishonoured</option>
+                <option value="4">PDC to be Postponed</option>
+                <option value="5">Retuned PDC to be Reversed</option>
+                <option value="6">Dishourned PDC to be Reversed</option>
+                <option value="7">CDC to be Dishourned</option>
+            </select>
+            <input type="hidden" id="hidcmbcriteria" name="hidcmbcriteria" value='<s:property value="hidcmbcriteria"/>'/>
+            
+            <label class="lbl-right" style="width:80px; margin-left:15px;">From</label>
+            <div style="width: 120px;">
+                <div id="jqxFromDate" name="jqxFromDate" value='<s:property value="jqxFromDate"/>'></div>
+                <input type="hidden" id="hidjqxFromDate" name="hidjqxFromDate" value='<s:property value="hidjqxFromDate"/>'/>
+            </div>
+            
+            <label class="lbl-right" style="width:80px; margin-left:15px;">To</label>
+            <div style="width: 120px;">
+                <div id="jqxToDate" name="jqxToDate" value='<s:property value="jqxToDate"/>'></div>
+                <input type="hidden" id="hidjqxToDate" name="hidjqxToDate" value='<s:property value="hidjqxToDate"/>'/>
+            </div>
+        </div>
+
+        <div class="field-row">
+            <label class="lbl-right" style="width:80px;">Account Type</label>
+            <select id="cmbacctype" name="cmbacctype" style="width:120px;" onchange="clearClientInfo();" value='<s:property value="cmbacctype"/>'>
+                <option value="0">--Select--</option>
+                <option value="BANK">Bank</option>
+                <option value="AP">AP</option>
+                <option value="AR">AR</option>
+            </select>
+            <input type="hidden" id="hidcmbacctype" name="hidcmbacctype" value='<s:property value="hidcmbacctype"/>'/>
+
+            <label class="lbl-right" style="width:80px; margin-left:15px;">Account</label>
+            <div class="input-search-container" style="width: 120px;">
+                <input type="text" id="txtaccid" name="txtaccid" placeholder="Press F3" value='<s:property value="txtaccid"/>' onkeydown="getAcc(event);"/>
+                <svg class="magnifier-icon" onclick="accountSearchContent('clientAccountDetailsSearch.jsp?atype='+$('#cmbacctype').val());" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </div>
+            <input type="text" id="txtaccname" name="txtaccname" style="flex:1; max-width: 250px;" value='<s:property value="txtaccname"/>' tabindex="-1" readonly/>
+            <input type="hidden" id="txtdocno" name="txtdocno" value='<s:property value="txtdocno"/>'/>
+
+            <label class="lbl-right" style="width:80px; margin-left:auto;">Posting</label>
+            <div style="width: 120px;">
+                <div id="jqxDate" name="jqxDate" onchange="datechange();" onblur="datechange();" value='<s:property value="jqxDate"/>'></div>
+                <input type="hidden" id="hidjqxDate" name="hidjqxDate" value='<s:property value="hidjqxDate"/>'/>
+            </div>
+            
+            <button class="myButton" type="button" id="btnview" name="btnview" style="margin-left: 15px;" onclick="funloadgrid();">View</button>
+        </div>
+    </div>
+
+    <div class="middle-panel">
+        <span class="middle-panel-title">PDC Details</span>
+        <div id="jqxJournalVoucherGrid" class="grid-container">
+            <jsp:include page="journalVoucherGrid.jsp"></jsp:include>
+        </div>
+    </div>
+    
+    <div id="jqxJournalVoucherApplyingGrid" class="middle-panel" style="margin-top: 15px;">
+        <span class="middle-panel-title">Applying Details</span>
+        <div class="grid-container">
+            <jsp:include page="journalVoucherApplyingGrid.jsp"></jsp:include>
+        </div>
+    </div>
+
+    <div id="pdcPostponedDiv" class="middle-panel" hidden="true" style="margin-top: 15px;">
+        <span class="middle-panel-title">Postponed Details</span>
+        <div class="field-row">
+            <label class="lbl-right" style="width:80px;">Bank</label>
+            <input type="text" id="txtbankaccid" name="txtbankaccid" style="width:120px;" value='<s:property value="txtbankaccid"/>'/>
+            <input type="text" id="txtbankaccname" name="txtbankaccname" style="flex:1; max-width:300px;" value='<s:property value="txtbankaccname"/>' tabindex="-1" readonly/>
+            <input type="hidden" id="txtbankdocno" name="txtbankdocno" value='<s:property value="txtbankdocno"/>'/>
+
+            <label class="lbl-right" style="width:80px; margin-left:15px;">Cheque No.</label>
+            <input type="text" id="txtchequeno" name="txtchequeno" style="width:120px;" value='<s:property value="txtchequeno"/>'/>
+
+            <label class="lbl-right" style="width:80px; margin-left:15px;">Cheque Date</label>
+            <div style="width: 120px;">
+                <div id="chequedate" name="chequedate" onchange="checkChequeDate();" value='<s:property value="chequedate"/>'></div>
+                <input type="hidden" id="hidchequedate" name="hidchequedate" value='<s:property value="hidchequedate"/>'/>
+                <!-- Hidden validation field inside flow -->
+                <div hidden="true" id="checkchequedate" name="checkchequedate" value='<s:property value="checkchequedate"/>'></div>
+            </div>
+        </div>
+    </div>
+
+    <div style="display:none;">
+        <input type="hidden" id="mode" name="mode"/>
+        <input type="hidden" id="deleted" name="deleted" value='<s:property value="deleted"/>'/>
+        <input type="hidden" id="msg" name="msg"  value='<s:property value="msg"/>'/>
+        <input type="hidden" id="txtpdcdocno" name="txtpdcdocno"  value='<s:property value="txtpdcdocno"/>'/>
+        <input type="hidden" id="txtpdcaccid" name="txtpdcaccid"  value='<s:property value="txtpdcaccid"/>'/>
+        <input type="hidden" id="txtpdcaccname" name="txtpdcaccname"  value='<s:property value="txtpdcaccname"/>'/>
+        <input type="hidden" id="txtpdcatype" name="txtpdcatype"  value='<s:property value="txtpdcatype"/>'/>
+        <input type="hidden" id="txtpdccurid" name="txtpdccurid"  value='<s:property value="txtpdccurid"/>'/>
+        <input type="hidden" id="txtpdcrate" name="txtpdcrate"  value='<s:property value="txtpdcrate"/>'/>
+        <input type="hidden" id="txtpdctype" name="txtpdctype"  value='<s:property value="txtpdctype"/>'/>
+        <input type="hidden" id="txtpdcpostdocno" name="txtpdcpostdocno"  value='<s:property value="txtpdcpostdocno"/>'/>
+        <input type="hidden" id="txtpdcpostaccid" name="txtpdcpostaccid"  value='<s:property value="txtpdcpostaccid"/>'/>
+        <input type="hidden" id="txtpdcpostaccname" name="txtpdcpostaccname"  value='<s:property value="txtpdcpostaccname"/>'/>
+        <input type="hidden" id="txtpdcpostatype" name="txtpdcpostatype"  value='<s:property value="txtpdcpostatype"/>'/>
+        <input type="hidden" id="txtpdcpostcurid" name="txtpdcpostcurid"  value='<s:property value="txtpdcpostcurid"/>'/>
+        <input type="hidden" id="txtpdcpostrate" name="txtpdcpostrate"  value='<s:property value="txtpdcpostrate"/>'/>
+        <input type="hidden" id="txtpdcposttype" name="txtpdcposttype"  value='<s:property value="txtpdcposttype"/>'/>
+        <input type="hidden" id="txtchqno" name="txtchqno" value='<s:property value="txtchqno"/>'/>
+        <input type="hidden" id="txtgriddocno" name="txtgriddocno" value='<s:property value="txtgriddocno"/>'/>
+        <input type="hidden" id="txtrowno" name="txtrowno" value='<s:property value="txtrowno"/>'/>
+        <input type="hidden" id="txttrno" name="txttrno" value='<s:property value="txttrno"/>'/>
+        <input type="hidden" id="txtposttrno" name="txtposttrno"  value='<s:property value="txtposttrno"/>'/>
+        <input type="hidden" id="txtdtype" name="txtdtype" value='<s:property value="txtdtype"/>'/>
+        <input type="hidden" id="txtchequevalidation" name="txtchequevalidation"  value='<s:property value="txtchequevalidation"/>'/>
+        <input type="hidden" id="gridlength" name="gridlength"/>
+    </div>
+
 </div>
 </form>
-			
-<div id="accountDetailsWindow">
-	<div></div><div></div>
-</div>  
-	
+            
+<div id="accountDetailsWindow"><div></div><div></div></div>  
+    
 </div>
 </body>
 </html>
